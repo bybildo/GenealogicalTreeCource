@@ -3,9 +3,15 @@ D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCou
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\GenealogicalTreeCource.runtimeconfig.json
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\GenealogicalTreeCource.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\GenealogicalTreeCource.pdb
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\AdministrationPage.g.cs
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\MainWindow.g.cs
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\PersonTree.g.cs
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\App.g.cs
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource_MarkupCompile.cache
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource_MarkupCompile.lref
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\AdministrationPage.baml
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\MainWindow.baml
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\PersonTree.baml
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.g.resources
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.GeneratedMSBuildEditorConfig.editorconfig
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.AssemblyInfoInputs.cache
@@ -17,9 +23,5 @@ D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCou
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.pdb
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.genruntimeconfig.cache
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\ref\GenealogicalTreeCource.dll
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\Xaml\AddPerson.g.cs
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\Xaml\MainWindow.g.cs
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\Xaml\PersonTree.g.cs
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\Xaml\AddPerson.baml
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\Xaml\MainWindow.baml
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\Xaml\PersonTree.baml
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\OperationWithPerson.g.cs
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\OperationWithPerson.baml

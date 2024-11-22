@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\App.xaml
-3-1779367045
+4-130119781
 
-8213216563
+101773696923
 198-688555687
-Xaml\AddPerson.xaml;Xaml\MainWindow.xaml;Xaml\PersonTree.xaml;
+View\AdministrationPage.xaml;View\MainWindow.xaml;View\OperationWithPerson.xaml;View\PersonTree.xaml;
 
 False
 

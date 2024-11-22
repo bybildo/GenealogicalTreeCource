@@ -18,4 +18,10 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="View\MainWindow.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+
 </Project>

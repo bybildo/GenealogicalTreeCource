@@ -7,33 +7,27 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Xaml\AddPerson.xaml.cs">
+    <Compile Update="View\OperationWithPerson.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Xaml\AdministrationPage.xaml.cs">
+    <Compile Update="View\AdministrationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Xaml\EditPersonWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Xaml\PersonTree.xaml.cs">
+    <Compile Update="View\PersonTree.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Xaml\AddPerson.xaml">
+    <Page Update="View\OperationWithPerson.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Xaml\AdministrationPage.xaml">
+    <Page Update="View\AdministrationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Xaml\EditPersonWindow.xaml">
+    <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Xaml\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Xaml\PersonTree.xaml">
+    <Page Update="View\PersonTree.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
