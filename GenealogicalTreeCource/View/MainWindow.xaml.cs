@@ -1,5 +1,7 @@
-﻿using GenealogicalTreeCource.Model.Enum;
+﻿using GenealogicalTreeCource.Class;
+using GenealogicalTreeCource.Model.Enum;
 using GenealogicalTreeCource.Xaml;
+using System.Printing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,9 +17,12 @@ namespace GenealogicalTreeCource
 {
     public partial class MainWindow : Window
     {
+        private PersonTree myPersonTree = new PersonTree();
         public MainWindow()
         {
             InitializeComponent();
+            myPersonTree.LoadFromFile();
+            DataContext = myPersonTree;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -27,16 +32,21 @@ namespace GenealogicalTreeCource
 
         private void TreeButton_Click(object sender, RoutedEventArgs e)
         {
-            SetWindow.Navigate(new PersonTree());
+            SetWindow.Navigate(new ViewPersonTree());
         }
+        
         private void AdministratorButton_Click(object sender, RoutedEventArgs e)
         {
             SetWindow.Navigate(new AdministrationPage());
         }
-
+        
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            SetWindow.Navigate(null);
+            try
+            {
+                SetWindow.GoBack();
+            }
+            catch { SetWindow.Navigate(null); }
         }
     }
 }

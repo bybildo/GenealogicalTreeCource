@@ -1,10 +1,13 @@
 ﻿using GenealogicalTreeCource.Enum;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using System.Xml.Linq;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -19,7 +22,7 @@ namespace GenealogicalTreeCource.Class
         private DateOnly? _DeathDate;
         private Person? _father;
         private Person? _mother;
-        private List<Person> _wives = new List<Person>();
+        private List<Person> _wifes = new List<Person>();
         private List<Person> _children = new List<Person>();
 
         private string Name
@@ -29,7 +32,7 @@ namespace GenealogicalTreeCource.Class
             {
                 if (value == "" || value == null) _name = "*невідомо*";
                 if (value.Length > 20) throw new Exception("Ім'я завелике");
-                if (Regex.IsMatch(value, @"^[A-Za-zА-ЩЬЮЯЄІЇа-щьюяєії]+$"))
+                if (Regex.IsMatch(value, pattern))
                 {
                     _name = value;
                     return;
@@ -38,18 +41,27 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        private string Surname
+        private const string pattern = @"^[А-ЯІЄЇҐа-яієїґ' -]+$";
+        public string Surname
         {
             get { return _surname; }
-            set
+            private set
             {
-                if (value == "" || value == null) _surname = "*невідомо*";
-                if (value.Length > 20) throw new Exception("Прізвище завелике");
-                if (Regex.IsMatch(value, @"^[A-Za-zА-ЩЬЮЯЄІЇа-щьюяєії]+$"))
+                if (string.IsNullOrEmpty(value))
+                {
+                    _surname = "*невідомо*";
+                    return;
+                }
+
+                if (value.Length > 20)
+                    throw new Exception("Прізвище завелике");
+
+                if (Regex.IsMatch(value, pattern))
                 {
                     _surname = value;
                     return;
                 }
+
                 throw new Exception("Прізвище не відповідає вимогам");
             }
         }
@@ -59,21 +71,31 @@ namespace GenealogicalTreeCource.Class
             get { return _fathername; }
             set
             {
-                if (value == "" || value == null) _fathername = "*невідомо*";
-                if (value.Length > 20) throw new Exception("По батькові завелике");
-                if (Regex.IsMatch(value, @"^[A-Za-zА-ЩЬЮЯЄІЇа-щьюяєії]+$"))
+                if (value == null || value == "")
+                {
+                    _fathername = "*невідомо*";
+                    return;
+                }
+
+                if (value.Length > 20)
+                {
+                    throw new Exception("По батькові завелике");
+                }
+
+                if (Regex.IsMatch(value, pattern))
                 {
                     _fathername = value;
                     return;
                 }
+
                 throw new Exception("По батькові не відповідає вимогам");
             }
         }
 
-        private Gender GenderPerson
+        public Gender GenderPerson
         {
             get { return _gender; }
-            set { _gender = value; }
+            private set { _gender = value; }
         }
 
         private string Photo
@@ -88,26 +110,26 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        private DateOnly? BirthdayDate
+        public DateOnly? BirthdayDate
         {
             get
             {
                 return _birthdayDate ?? new DateOnly(0, 0, 0);
             }
-            set
+            private set
             {
                 if (value != null && value < new DateOnly(1500, 1, 1)) throw new Exception("Дата народження не коректна");
                 _birthdayDate = value;
             }
         }
 
-        private DateOnly? DeathDate
+        public DateOnly? DeathDate
         {
             get
             {
-                return _DeathDate ?? new DateOnly(0, 0, 0);
+                return _DeathDate ?? DateOnly.MinValue;
             }
-            set
+            private set
             {
                 if (_DeathDate != null && _birthdayDate != null && _birthdayDate > value) throw new Exception("Дата смерті не може бути раніше дати народження");
                 if (_DeathDate != null && value > DateOnly.FromDateTime(DateTime.Today)) throw new Exception("Дата смерті не може бути в майбутньому");
@@ -119,7 +141,7 @@ namespace GenealogicalTreeCource.Class
         {
             get
             {
-                return _father ?? new Person(); //ович, йович, івна, ївна жінка діти
+                return _father ?? new Person();
             }
             set
             {
@@ -139,17 +161,34 @@ namespace GenealogicalTreeCource.Class
             }
         } //
 
-        private List<Person> Wives
+        public List<Person> Wifes
         {
-            get { return _wives; }
-        } //
+            get { return _wifes; }
+            private set { _wifes = value; }
+        }
 
         private List<Person> Children
         {
-            get { return Children; }
-        } //
+            get { return _children; }
+            set { _children = value; }
+        }
 
         public Person() { }
+
+        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother, List<Person> wives, List<Person> children) : this(name, surname, fathername, genderPerson, photo, birthdayDate, deathDate, father, mother)
+        {
+            Name = name;
+            Surname = surname;
+            Fathername = fathername;
+            GenderPerson = genderPerson;
+            Photo = photo;
+            BirthdayDate = birthdayDate;
+            DeathDate = deathDate;
+            Father = father;
+            Mother = mother;
+            Wifes = wives;
+            Children = children;
+        }
 
         public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother)
         {
@@ -175,9 +214,63 @@ namespace GenealogicalTreeCource.Class
             Mother = mother;
         }
 
-        public string GetFullName()
+        public string ForSearch()
         {
-            return $"{_surname} {_name} {_fathername}";
+            return $"{_surname} {_name} {_fathername} {BirthdayDate}";
+        }
+
+        /// <summary>
+        /// Оновлення виконується відразу для 2 осіб
+        /// </summary>
+        /// <param name="person"></param>
+        public void UpdateWife(Person person)
+        {
+            Wifes.Add(person);
+            person.Wifes.Add(this);
+        }
+
+        public void UpdatePearents(Person firstPerson, Person secondPerson)
+        {
+            if (firstPerson.GenderPerson == Gender.male)
+            {
+                Father = firstPerson;
+                Mother = secondPerson;
+            }
+            else
+            {
+                Mother = firstPerson;
+                Father = secondPerson;
+            }
+
+            switch (GenderPerson)
+            {
+                case Gender.female:
+                    {
+                        if (Name.EndsWith("й"))
+                        {
+                            _fathername = Father.Name.Substring(0, Name.Length - 1) + "ївна";
+                        }
+                        else
+                        {
+                            _fathername = Father.Name + "івна";
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        _fathername = Father.Name + "ович";
+                        break;
+                    }
+            }
+        }
+
+        public void AddWifes(List<Person> newWifes)
+        {
+            Wifes.AddRange(newWifes);
+        }
+        public void AddChildren(List<Person> newChildren)
+        {
+            Wifes.AddRange(newChildren);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -13,7 +13,7 @@
     <Compile Update="View\AdministrationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\PersonTree.xaml.cs">
+    <Compile Update="View\ViewPersonTree.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -27,7 +27,7 @@
     <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\PersonTree.xaml">
+    <Page Update="View\ViewPersonTree.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
