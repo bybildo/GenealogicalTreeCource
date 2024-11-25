@@ -7,7 +7,7 @@
         mc:Ignorable="d" ResizeMode="NoResize"
         Title="MainWindow" Height="640" Width="1000">
     <Grid>
-        <Button Content="ПОДВИТИСЬ" FontSize="30" HorizontalAlignment="Left" Margin="202,364,0,0" VerticalAlignment="Top" Height="122" Width="243" Click="TreeButton_Click"/>
+        <Button x:Name="ggg" Content="ПОДВИТИСЬ" FontSize="30" HorizontalAlignment="Left" Margin="202,364,0,0" VerticalAlignment="Top" Height="122" Width="243" Click="TreeButton_Click"/>
         <Button Content="ДОДАТИ"  FontSize="30" HorizontalAlignment="Left" Margin="560,365,0,0" VerticalAlignment="Top" Height="122" Width="243" Click="AddButton_Click"/>
         <Button Content="АДМІНІСТРАТОР" HorizontalAlignment="Left" Margin="888,23,0,0" VerticalAlignment="Top" Height="65" Width="80" Click="AdministratorButton_Click"/>
         <Border Margin="10">

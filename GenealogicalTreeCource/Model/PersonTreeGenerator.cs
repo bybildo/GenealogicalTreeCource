@@ -36,7 +36,7 @@ namespace GenealogicalTreeCource.Model
                 gender = (Gender)random.Next(1, 3);
             }
 
-            string surname = SurnameGenerated();
+            string surname;
             string name = NameGenerated(gender);
 
             DateOnly? birthdayDate = null;
@@ -44,7 +44,11 @@ namespace GenealogicalTreeCource.Model
 
             if (me != null)
             {
-               
+                if (gender == Gender.male)
+                    surname = me.Surname;
+                else
+                    surname = SurnameGenerated();
+
                 int childYear = ((DateOnly)me.BirthdayDate).Year;
                 birthdayDate = BirthdayGenerated(childYear);
                 deathDate = DeathGenerated(childYear, ((DateOnly)birthdayDate).Year);
@@ -52,7 +56,10 @@ namespace GenealogicalTreeCource.Model
                 children.Add(me);
             }
             else
+            {
                 birthdayDate = BirthdayGenerated();
+                surname = SurnameGenerated();
+            }
 
             Person TempMe = new Person(name, surname, "", gender, null, birthdayDate, deathDate, null, null, wifes, children);
 
@@ -62,6 +69,18 @@ namespace GenealogicalTreeCource.Model
                 Person mother = NormalGeneratedTree(knees, curentKnees + 1, TempMe, Gender.female);
                 father.UpdateWife(mother);
                 TempMe.UpdatePearents(father, mother);
+            }
+            else
+            {
+                if (TempMe.GenderPerson == Gender.male)
+                    TempMe.Name = NameGenerated(Gender.male);
+                else
+                    TempMe.Name = "*невідомо*";
+                TempMe.Fathername = "*невідомо*";
+                if (TempMe.GenderPerson == Gender.male)
+                    TempMe.Surname = me.Surname;
+                else
+                    TempMe.Surname = "*невідомо*";
             }
 
             if (me != null)
@@ -74,6 +93,8 @@ namespace GenealogicalTreeCource.Model
             }
 
             persons.Add(TempMe);
+            TempMe.Id = (persons.Count - 1, -1, -1, new List<int>(), new List<int>());
+            UpdateID(TempMe);
             return TempMe;
         }
 
@@ -108,6 +129,8 @@ namespace GenealogicalTreeCource.Model
             }
 
             persons.Add(TempMe);
+            TempMe.Id = (persons.Count - 1, -1, -1, new List<int>(), new List<int>());
+            UpdateID(TempMe);
             return TempMe;
         }
 
@@ -143,7 +166,25 @@ namespace GenealogicalTreeCource.Model
             }
 
             persons.Add(TempMe);
+            TempMe.Id = (persons.Count - 1, -1, -1, new List<int>(), new List<int>());
+            UpdateID(TempMe);
             return TempMe;
+        }
+
+        private void UpdateID(Person me)
+        {
+            int fatherID = me.Father.Id.FatherId;
+            int motherID = me.Father.Id.MotherId;
+            List<int> wifeID = new List<int>();
+            List<int> childrenID = new List<int>();
+
+            for (int i = 0; i < me.Wifes.Count; i++)
+                wifeID.Add(me.Wifes[i].Id.MyId);
+
+            for (int i = 0; i < me.Children.Count; i++)
+                childrenID.Add(me.Children[i].Id.MyId);
+
+            me.Id = new(me.Id.MyId, fatherID, motherID, wifeID, childrenID);
         }
 
         private DateOnly? BirthdayGenerated(int childBirthdayYear, bool forChildrenGenerated = false)

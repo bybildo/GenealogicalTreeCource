@@ -14,7 +14,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <TextBox Text="{Binding Filter}" />
-        <ListBox ItemsSource="{Binding Search}" Grid.Row="1" />
+        <TextBox Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <ListBox ItemsSource="{Binding Path=Search, Mode=OneWay}" Grid.Row="1" />
     </Grid>
 </Page>

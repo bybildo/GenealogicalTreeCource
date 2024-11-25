@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenealogicalTreeCource.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace GenealogicalTreeCource
     /// </summary>
     public partial class ViewPersonTree : Page
     {
-        public ViewPersonTree()
+        public ViewPersonTree(PersonTree personTree)
         {
             InitializeComponent();
+            DataContext = personTree;
         }
     }
 }

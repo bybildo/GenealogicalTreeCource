@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics.Metrics;
 using System.IO;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -24,8 +25,9 @@ namespace GenealogicalTreeCource.Class
         private Person? _mother;
         private List<Person> _wifes = new List<Person>();
         private List<Person> _children = new List<Person>();
+        private (int MyIdml, int FatherId, int MotherId, List<int> WifesId, List<int> ChildrenId) _id = (-1, -1, -1, new List<int>(), new List<int>());
 
-        private string Name
+        public string Name
         {
             get { return _name; }
             set
@@ -41,11 +43,11 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        private const string pattern = @"^[А-ЯІЄЇҐа-яієїґ' -]+$";
+        private const string pattern = @"^[А-ЯІЄЇҐа-яієїґ' -*]+$";
         public string Surname
         {
             get { return _surname; }
-            private set
+            set
             {
                 if (string.IsNullOrEmpty(value))
                 {
@@ -58,7 +60,18 @@ namespace GenealogicalTreeCource.Class
 
                 if (Regex.IsMatch(value, pattern))
                 {
-                    _surname = value;
+                    if ( GenderPerson == Gender.male)
+                    {
+                        if (value.EndsWith("а"))
+                            _surname = value.Substring(0, value.Length - 1) + "ий";
+                        else _surname = value;
+                    }
+                    else
+                    {
+                        if (value.EndsWith("ий"))
+                            _surname = value.Substring(0, value.Length - 2) + "а";
+                        else _surname = value;
+                    }
                     return;
                 }
 
@@ -66,7 +79,7 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        private string Fathername
+        public string Fathername
         {
             get { return _fathername; }
             set
@@ -98,12 +111,12 @@ namespace GenealogicalTreeCource.Class
             private set { _gender = value; }
         }
 
-        private string Photo
+        public string Photo
         {
             get { return _photo; }
             set
             {
-                if (value == null) return;
+                if (value == null || value == "Image/PersonPhoto/absent.jpg") return;
                 string filePath = $"Image/PersonPhoto/{value}.jpg";
                 if (!File.Exists(filePath)) throw new Exception("Фото не коректне");
                 _photo = filePath;
@@ -114,9 +127,9 @@ namespace GenealogicalTreeCource.Class
         {
             get
             {
-                return _birthdayDate ?? new DateOnly(0, 0, 0);
+                return _birthdayDate ?? DateOnly.MinValue;
             }
-            private set
+            set
             {
                 if (value != null && value < new DateOnly(1500, 1, 1)) throw new Exception("Дата народження не коректна");
                 _birthdayDate = value;
@@ -129,7 +142,7 @@ namespace GenealogicalTreeCource.Class
             {
                 return _DeathDate ?? DateOnly.MinValue;
             }
-            private set
+            set
             {
                 if (_DeathDate != null && _birthdayDate != null && _birthdayDate > value) throw new Exception("Дата смерті не може бути раніше дати народження");
                 if (_DeathDate != null && value > DateOnly.FromDateTime(DateTime.Today)) throw new Exception("Дата смерті не може бути в майбутньому");
@@ -137,7 +150,8 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        private Person? Father
+        [JsonIgnore]
+        public Person? Father
         {
             get
             {
@@ -149,7 +163,8 @@ namespace GenealogicalTreeCource.Class
             }
         } //
 
-        private Person? Mother
+        [JsonIgnore]
+        public Person? Mother
         {
             get
             {
@@ -161,16 +176,24 @@ namespace GenealogicalTreeCource.Class
             }
         } //
 
+        [JsonIgnore]
         public List<Person> Wifes
         {
             get { return _wifes; }
-            private set { _wifes = value; }
+            set { _wifes = value; }
         }
 
-        private List<Person> Children
+        [JsonIgnore]
+        public List<Person> Children
         {
             get { return _children; }
             set { _children = value; }
+        }
+
+        public (int MyId, int FatherId, int MotherId, List<int> WifesId, List<int> ChildrenId) Id
+        {
+            get { return _id; }
+            set { _id = value; }
         }
 
         public Person() { }
@@ -216,7 +239,7 @@ namespace GenealogicalTreeCource.Class
 
         public string ForSearch()
         {
-            return $"{_surname} {_name} {_fathername} {BirthdayDate}";
+            return $"{_surname} {_name} {_fathername} {((DateOnly)BirthdayDate).Year}";
         }
 
         /// <summary>
@@ -241,6 +264,14 @@ namespace GenealogicalTreeCource.Class
                 Mother = firstPerson;
                 Father = secondPerson;
             }
+
+            if (Father.Name == "*невідомо*")
+            {
+                _fathername = "*невідомо*";
+                return;
+            }
+
+            Mother.Surname = Father.Surname;
 
             switch (GenderPerson)
             {

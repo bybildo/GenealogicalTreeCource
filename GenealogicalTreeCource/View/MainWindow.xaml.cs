@@ -21,6 +21,8 @@ namespace GenealogicalTreeCource
         public MainWindow()
         {
             InitializeComponent();
+            //myPersonTree.Generate(5);
+            //myPersonTree.SaveToFile();
             myPersonTree.LoadFromFile();
             DataContext = myPersonTree;
         }
@@ -32,7 +34,7 @@ namespace GenealogicalTreeCource
 
         private void TreeButton_Click(object sender, RoutedEventArgs e)
         {
-            SetWindow.Navigate(new ViewPersonTree());
+            SetWindow.Navigate(new ViewPersonTree(myPersonTree));
         }
         
         private void AdministratorButton_Click(object sender, RoutedEventArgs e)

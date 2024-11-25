@@ -13,15 +13,16 @@ using Newtonsoft.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace GenealogicalTreeCource.Class
 {
-    public class PersonTree : INotifyPropertyChanged // додай публічні методи, чомусь прізвще це дивні символи
+    public class PersonTree : INotifyPropertyChanged 
     {
         private List<Person> _persons = new List<Person>();
 
-        private string _filter;
-        private ObservableCollection<Person> _search = new ObservableCollection<Person>();
+        private string _filter = "";
+        private ObservableCollection<string> _search = new ObservableCollection<string>();
 
         public string Filter
         {
@@ -37,7 +38,7 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        public ObservableCollection<Person> Search
+        public ObservableCollection<string> Search
         {
             get { return _search; }
             private set
@@ -52,15 +53,34 @@ namespace GenealogicalTreeCource.Class
 
         public void FilterPersons(string searchText)
         {
+            int? searchYear = null;
+            string textForSearch = searchText?.Trim();
+
+            var yearMatch = Regex.Match(textForSearch, @"\b(\d{4})\b");
+
+            if (yearMatch.Success)
+            {
+                if (int.TryParse(yearMatch.Value, out var year))
+                {
+                    searchYear = year;
+                    textForSearch = textForSearch.Replace(yearMatch.Value, "").Trim();
+                }
+            }
+            else searchYear = DateTime.Now.Year;
+
+
             var filteredPersons = _persons
-                .Where(p => string.IsNullOrEmpty(searchText) || p.ForSearch().Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
+                            (string.IsNullOrEmpty(textForSearch) || p.ForSearch().Contains(textForSearch, StringComparison.OrdinalIgnoreCase)))
+                .Reverse()
+                .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear.Value ?? 0))
                 .Take(5)
                 .ToList();
 
-            Search.Clear();
+            _search.Clear();
             foreach (var person in filteredPersons)
             {
-                Search.Add(person);
+                _search.Add(person.ForSearch());
             }
         }
 
@@ -95,6 +115,18 @@ namespace GenealogicalTreeCource.Class
                 };
                 _persons = JsonConvert.DeserializeObject<List<Person>>(json, settings) ?? new List<Person>();
             }
+        }
+
+        public string ForSearch(int id = 0)
+        {
+            if (id > -1 && id < _persons.Count)
+                return _persons[id].ForSearch();
+            return "Поза межою діапазону";
+        }
+
+        public int NumberOfLastElement()
+        {
+            return _persons.Count - 1;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
