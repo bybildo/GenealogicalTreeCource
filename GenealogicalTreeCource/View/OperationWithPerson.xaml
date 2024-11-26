@@ -1,13 +1,19 @@
 ﻿<Page x:Class="GenealogicalTreeCource.OperationWithPerson"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:GenealogicalTreeCource"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Background="White"
-      Title="AddPerson">
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+          xmlns:local="clr-namespace:GenealogicalTreeCource.ViewModel"
+          mc:Ignorable="d" 
+          d:DesignHeight="450" d:DesignWidth="800" Background="White"
+          Title="AddPerson">
     <Page.Resources>
+        <local:GenderToBooleanConverter x:Key="GenderToBooleanConverter"/>
+        <local:DateOnlyToDateTimeConverter x:Key="DateOnlyConverter" />
+        <local:PersonToCollectionConverter x:Key="PersonToCollectionConverter"/>
+        <local:LastElementCollectionToCollectionConverter x:Key="LastElementCollectionToCollectionConverter"/>
+        <local:CollectionToStringCollectionConverter x:Key="CollectionToStringCollectionConverter"/>
+
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -15,6 +21,10 @@
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Height" Value="27"/>
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <EventSetter Event="PreviewMouseDoubleClick" Handler="ViewPerson"/>
         </Style>
     </Page.Resources>
 
@@ -28,7 +38,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <Image Source="/Image/PersonPhoto/absent.jpg"/>
         <Grid Margin="10" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -43,16 +53,17 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Ім'я" Grid.Row="0"/>
-            <TextBox Grid.Row="1"/>
+            <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Grid.Row="1"/>
 
             <TextBlock Text="Прізвище" Grid.Row="2"/>
-            <TextBox Grid.Row="3"/>
+            <TextBox Text="{Binding Path=Surname, Mode=TwoWay}" Grid.Row="3"/>
 
             <TextBlock Text="По батькові" Grid.Row="4"/>
-            <TextBox Grid.Row="5"/>
+            <TextBox Text="{Binding Path=Fathername, Mode=TwoWay}" Grid.Row="5"/>
 
             <TextBlock Text="Батько" Grid.Row="6"/>
-            <TextBox Grid.Row="7"/>
+            <ListBox ItemsSource="{Binding Path=Father, Converter={StaticResource PersonToCollectionConverter}}" Grid.Row="7"/>
+
         </Grid>
 
         <Grid Margin="10" Grid.Column="2">
@@ -68,19 +79,20 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Стать" Grid.Row="0"/>
-            <ComboBox Grid.Row="1">
-                <ComboBoxItem Content="Чоловіча"/>
-                <ComboBoxItem Content="Жіноча"/>
+            <ComboBox Grid.Row="1" SelectedItem="{Binding GenderPerson, Mode=TwoWay}">
+                <ComboBoxItem Content="Чоловіча" IsSelected="{Binding GenderPerson, Converter={StaticResource GenderToBooleanConverter}, ConverterParameter=Male}"/>
+                <ComboBoxItem Content="Жіноча" IsSelected="{Binding GenderPerson, Converter={StaticResource GenderToBooleanConverter}, ConverterParameter=Female}"/>
             </ComboBox>
 
+
             <TextBlock Text="Дата народження" Grid.Row="2"/>
-            <DatePicker SelectedDate="{x:Static sys:DateTime.Today}" Grid.Row="3" xmlns:sys="clr-namespace:System;assembly=mscorlib"/>
+            <DatePicker SelectedDate="{Binding Path=BirthdayDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Grid.Row="3"/>
 
             <TextBlock Text="Дата смерті" Grid.Row="4"/>
-            <DatePicker SelectedDate="{x:Static sys:DateTime.Today}" Grid.Row="5" xmlns:sys="clr-namespace:System;assembly=mscorlib"/>
+            <DatePicker SelectedDate="{Binding Path=DeathDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Grid.Row="5"/>
 
             <TextBlock Text="Мати" Grid.Row="6"/>
-            <TextBox Grid.Row="7"/>
+            <ListBox ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}" Grid.Row="7"/>
         </Grid>
 
         <Grid Margin="10" Grid.Column="1" Grid.Row="1">
@@ -92,9 +104,10 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Шлюб з" Grid.Row="0"/>
-            <TextBox Grid.Row="1"/>
+            <ListBox ItemsSource="{Binding Path=Wifes, Converter={StaticResource LastElementCollectionToCollectionConverter}}" Grid.Row="1"/>
+
             <TextBlock Text="Попередні шлюби" Grid.Row="2"/>
-            <ComboBox Grid.Row="3"/>
+            <ComboBox ItemsSource="{Binding Path=Wifes, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Grid.Row="3"/>
         </Grid>
 
         <Grid Margin="10" Grid.Column="2" Grid.Row="1">
@@ -104,7 +117,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Діти" Grid.Row="0"/>
-            <ListBox Grid.Row="1"/>
+            <ListBox ItemsSource="{Binding Children, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Page>

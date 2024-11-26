@@ -9,20 +9,23 @@ namespace GenealogicalTreeCource.ViewModel
 {
     public class RelayCommand : ICommand
     {
-        private Action _execute;
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
 
-        public RelayCommand(Action execute)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute;
+            _canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
 
-        public bool CanExecute(object parameter) => true;
+        public void Execute(object parameter) => _execute(parameter);
 
-        public void Execute(object parameter)
+        public event EventHandler CanExecuteChanged
         {
-            _execute();
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
     }
 }

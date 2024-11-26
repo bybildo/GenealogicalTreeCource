@@ -17,11 +17,11 @@ namespace GenealogicalTreeCource
 {
     public partial class MainWindow : Window
     {
-        private PersonTree myPersonTree = new PersonTree();
+        public static PersonTree myPersonTree = new PersonTree();
         public MainWindow()
         {
             InitializeComponent();
-            //myPersonTree.Generate(5);
+            //myPersonTree.Generate();
             //myPersonTree.SaveToFile();
             myPersonTree.LoadFromFile();
             DataContext = myPersonTree;
@@ -29,12 +29,12 @@ namespace GenealogicalTreeCource
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            SetWindow.Navigate(new OperationWithPerson(TypeOperation.Add));
+            SetWindow.Navigate(new OperationWithPerson(new Person(), TypeOperation.Add));
         }
 
         private void TreeButton_Click(object sender, RoutedEventArgs e)
         {
-            SetWindow.Navigate(new ViewPersonTree(myPersonTree));
+            SetWindow.Navigate(new ViewPersonTree());
         }
         
         private void AdministratorButton_Click(object sender, RoutedEventArgs e)

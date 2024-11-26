@@ -1,17 +1,19 @@
 ﻿using GenealogicalTreeCource.Enum;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Metrics;
 using System.IO;
 using System.Reflection;
-using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Xml.Linq;
+using Newtonsoft.Json;
 
 namespace GenealogicalTreeCource.Class
 {
+
     public class Person : INotifyPropertyChanged
     {
         private string _name = "*невідомо*";
@@ -25,8 +27,52 @@ namespace GenealogicalTreeCource.Class
         private Person? _mother;
         private List<Person> _wifes = new List<Person>();
         private List<Person> _children = new List<Person>();
-        private (int MyIdml, int FatherId, int MotherId, List<int> WifesId, List<int> ChildrenId) _id = (-1, -1, -1, new List<int>(), new List<int>());
+        private PersonId _id = new PersonId(-1, -1, -1, new List<int>(), new List<int>());
 
+        #region Конструктори
+        public Person() { }
+
+        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother, List<Person> wives, List<Person> children) : this(name, surname, fathername, genderPerson, photo, birthdayDate, deathDate, father, mother)
+        {
+            Name = name;
+            Surname = surname;
+            Fathername = fathername;
+            GenderPerson = genderPerson;
+            Photo = photo;
+            BirthdayDate = birthdayDate;
+            DeathDate = deathDate;
+            Father = father;
+            Mother = mother;
+            Wifes = wives;
+            Children = children;
+        }
+
+        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother)
+        {
+            Name = name;
+            Surname = surname;
+            Fathername = fathername;
+            GenderPerson = genderPerson;
+            Photo = photo;
+            BirthdayDate = birthdayDate;
+            DeathDate = deathDate;
+            Father = father;
+            Mother = mother;
+        }
+
+        public Person(string name, string surname, string fathername, Gender genderPerson, DateOnly? birthdayDate, Person? father, Person? mother)
+        {
+            Name = name;
+            Surname = surname;
+            Fathername = fathername;
+            GenderPerson = genderPerson;
+            BirthdayDate = birthdayDate;
+            Father = father;
+            Mother = mother;
+        }
+        #endregion
+
+        #region Публічні властивості
         public string Name
         {
             get { return _name; }
@@ -60,7 +106,7 @@ namespace GenealogicalTreeCource.Class
 
                 if (Regex.IsMatch(value, pattern))
                 {
-                    if ( GenderPerson == Gender.male)
+                    if (GenderPerson == Gender.male)
                     {
                         if (value.EndsWith("а"))
                             _surname = value.Substring(0, value.Length - 1) + "ий";
@@ -108,7 +154,7 @@ namespace GenealogicalTreeCource.Class
         public Gender GenderPerson
         {
             get { return _gender; }
-            private set { _gender = value; }
+            set { _gender = value; }
         }
 
         public string Photo
@@ -161,20 +207,32 @@ namespace GenealogicalTreeCource.Class
             {
                 _father = value;
             }
-        } //
+        }
+
+        [JsonIgnore]
+        public List<string> GetFather
+        {
+            get { return _father != null ? new List<string> { _father.ForSearch() } : new List<string>() { "" }; }
+        }
 
         [JsonIgnore]
         public Person? Mother
         {
             get
             {
-                return _mother ?? new Person(); //чоловік
+                return _mother ?? new Person();
             }
             set
             {
                 _mother = value;
             }
-        } //
+        }
+
+        [JsonIgnore]
+        public List<string> GetMother
+        {
+            get { return _mother != null ? new List<string> { _mother.ForSearch() } : new List<string>() { "" }; }
+        }
 
         [JsonIgnore]
         public List<Person> Wifes
@@ -190,58 +248,15 @@ namespace GenealogicalTreeCource.Class
             set { _children = value; }
         }
 
-        public (int MyId, int FatherId, int MotherId, List<int> WifesId, List<int> ChildrenId) Id
+        [JsonProperty]
+        public PersonId Id
         {
             get { return _id; }
             set { _id = value; }
         }
+        #endregion
 
-        public Person() { }
-
-        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother, List<Person> wives, List<Person> children) : this(name, surname, fathername, genderPerson, photo, birthdayDate, deathDate, father, mother)
-        {
-            Name = name;
-            Surname = surname;
-            Fathername = fathername;
-            GenderPerson = genderPerson;
-            Photo = photo;
-            BirthdayDate = birthdayDate;
-            DeathDate = deathDate;
-            Father = father;
-            Mother = mother;
-            Wifes = wives;
-            Children = children;
-        }
-
-        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother)
-        {
-            Name = name;
-            Surname = surname;
-            Fathername = fathername;
-            GenderPerson = genderPerson;
-            Photo = photo;
-            BirthdayDate = birthdayDate;
-            DeathDate = deathDate;
-            Father = father;
-            Mother = mother;
-        }
-
-        public Person(string name, string surname, string fathername, Gender genderPerson, DateOnly? birthdayDate, Person? father, Person? mother)
-        {
-            Name = name;
-            Surname = surname;
-            Fathername = fathername;
-            GenderPerson = genderPerson;
-            BirthdayDate = birthdayDate;
-            Father = father;
-            Mother = mother;
-        }
-
-        public string ForSearch()
-        {
-            return $"{_surname} {_name} {_fathername} {((DateOnly)BirthdayDate).Year}";
-        }
-
+        #region Методи для оновлення типів посилань
         /// <summary>
         /// Оновлення виконується відразу для 2 осіб
         /// </summary>
@@ -254,6 +269,12 @@ namespace GenealogicalTreeCource.Class
 
         public void UpdatePearents(Person firstPerson, Person secondPerson)
         {
+            if (!firstPerson.Children.Contains(this))
+                firstPerson.Children.Add(this);
+
+            if (!secondPerson.Children.Contains(this))
+                secondPerson.Children.Add(this);
+
             if (firstPerson.GenderPerson == Gender.male)
             {
                 Father = firstPerson;
@@ -283,13 +304,13 @@ namespace GenealogicalTreeCource.Class
                         }
                         else
                         {
-                            _fathername = Father.Name + "івна";
+                            _fathername = (_fathername.EndsWith("о") || _fathername.EndsWith("а")) ? _fathername.Substring(0, _fathername.Length - 1) + "івна" : Father.Name + "івна";
                         }
                         break;
                     }
                 default:
                     {
-                        _fathername = Father.Name + "ович";
+                        _fathername = (_fathername.EndsWith("о") || _fathername.EndsWith("а")) ? _fathername.Substring(0, _fathername.Length - 1) + "ович" : Father.Name + "ович";
                         break;
                     }
             }
@@ -303,11 +324,27 @@ namespace GenealogicalTreeCource.Class
         {
             Wifes.AddRange(newChildren);
         }
+        #endregion
+
+        #region Методи виводу
+        public string ForSearch()
+        {
+            return $"{_surname} {_name} {_fathername} {((DateOnly)BirthdayDate).Year}";
+        }
+
+        public override string ToString()
+        {
+            return $"{_surname} {_name} {_fathername}";
+        }
+        #endregion
+
+        #region Забезпечення Binding
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

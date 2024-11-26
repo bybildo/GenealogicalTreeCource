@@ -93,13 +93,17 @@ namespace GenealogicalTreeCource.Model
             }
 
             persons.Add(TempMe);
-            TempMe.Id = (persons.Count - 1, -1, -1, new List<int>(), new List<int>());
-            UpdateID(TempMe);
+            TempMe.Id = new PersonId(persons.Count - 1, -1, -1, new List<int>(), new List<int>());
             return TempMe;
         }
 
         private Person WifeGeneratedTree(int knees, int curentKnees, Person FirstWife)
         {
+            if (FirstWife.Wifes.Count > 0 && FirstWife.Wifes[FirstWife.Wifes.Count - 1] == FirstWife)
+            {
+                FirstWife.AddWifes(new List<Person> { new Person() });
+            }
+
             List<Person> children = new List<Person>() { };
             List<Person> wives = new List<Person>() { FirstWife };
 
@@ -129,8 +133,7 @@ namespace GenealogicalTreeCource.Model
             }
 
             persons.Add(TempMe);
-            TempMe.Id = (persons.Count - 1, -1, -1, new List<int>(), new List<int>());
-            UpdateID(TempMe);
+            TempMe.Id = new PersonId(persons.Count - 1, -1, -1, new List<int>(), new List<int>());
             return TempMe;
         }
 
@@ -166,25 +169,8 @@ namespace GenealogicalTreeCource.Model
             }
 
             persons.Add(TempMe);
-            TempMe.Id = (persons.Count - 1, -1, -1, new List<int>(), new List<int>());
-            UpdateID(TempMe);
+            TempMe.Id = new PersonId(persons.Count - 1, -1, -1, new List<int>(), new List<int>());
             return TempMe;
-        }
-
-        private void UpdateID(Person me)
-        {
-            int fatherID = me.Father.Id.FatherId;
-            int motherID = me.Father.Id.MotherId;
-            List<int> wifeID = new List<int>();
-            List<int> childrenID = new List<int>();
-
-            for (int i = 0; i < me.Wifes.Count; i++)
-                wifeID.Add(me.Wifes[i].Id.MyId);
-
-            for (int i = 0; i < me.Children.Count; i++)
-                childrenID.Add(me.Children[i].Id.MyId);
-
-            me.Id = new(me.Id.MyId, fatherID, motherID, wifeID, childrenID);
         }
 
         private DateOnly? BirthdayGenerated(int childBirthdayYear, bool forChildrenGenerated = false)

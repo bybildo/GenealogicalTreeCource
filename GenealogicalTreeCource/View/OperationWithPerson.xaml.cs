@@ -1,4 +1,5 @@
-﻿using GenealogicalTreeCource.Model.Enum;
+﻿using GenealogicalTreeCource.Class;
+using GenealogicalTreeCource.Model.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,12 @@ namespace GenealogicalTreeCource
         /// <para>Edit - Вікно редагування</para>
         /// </summary>
 
-        public OperationWithPerson(TypeOperation option)
+        public OperationWithPerson(Person person, TypeOperation option)
         {
             InitializeComponent();
-            switch(option)
+            DataContext = person;
+            switch (option)
+
             {
                 case TypeOperation.Add:
                     {
@@ -42,6 +45,17 @@ namespace GenealogicalTreeCource
                         break;
                     }
             }
+        }
+
+        private void ViewPerson(object sender, MouseButtonEventArgs e)
+        {
+            var listBoxItem = sender as ListBoxItem;
+            string forSearch = listBoxItem.DataContext as string;
+
+            var selectedPerson = MainWindow.myPersonTree.GetPersonFromSearch(forSearch);
+
+            if (selectedPerson != null)
+                NavigationService.Navigate(new OperationWithPerson(selectedPerson, TypeOperation.View));
         }
     }
 }

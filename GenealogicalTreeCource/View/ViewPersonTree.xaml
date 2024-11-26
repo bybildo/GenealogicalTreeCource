@@ -15,6 +15,13 @@
         </Grid.RowDefinitions>
 
         <TextBox Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <ListBox ItemsSource="{Binding Path=Search, Mode=OneWay}" Grid.Row="1" />
+        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search, Mode=OneWay}" Grid.Row="1">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter Event="MouseDoubleClick" 
+                         Handler="ViewPerson" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
     </Grid>
 </Page>
