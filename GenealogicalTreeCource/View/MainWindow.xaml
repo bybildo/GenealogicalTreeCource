@@ -4,15 +4,110 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenealogicalTreeCource"
-        mc:Ignorable="d" ResizeMode="NoResize"
-        Title="MainWindow" Height="640" Width="1000">
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="Генеалогічне Дерево"
+        Height="640" Width="1000"
+        Background="White"
+        WindowStyle="None">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <md:BundledTheme BaseTheme="Light" PrimaryColor="Green" SecondaryColor="LightGreen" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="36" />
+                <Setter Property="Height" Value="80" />
+                <Setter Property="Width" Value="300" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="Margin" Value="0,0,0,20" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#4CAF50" Offset="0.0" />
+                            <GradientStop Color="#124213" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="15" ShadowDepth="5" Opacity="0.4" Color="Black" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}" CornerRadius="40">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0.8" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
-        <Button x:Name="ggg" Content="ПОДВИТИСЬ" FontSize="30" HorizontalAlignment="Left" Margin="202,364,0,0" VerticalAlignment="Top" Height="122" Width="243" Click="TreeButton_Click"/>
-        <Button Content="ДОДАТИ"  FontSize="30" HorizontalAlignment="Left" Margin="560,365,0,0" VerticalAlignment="Top" Height="122" Width="243" Click="AddButton_Click"/>
-        <Button Content="АДМІНІСТРАТОР" HorizontalAlignment="Left" Margin="888,23,0,0" VerticalAlignment="Top" Height="65" Width="80" Click="AdministratorButton_Click"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Image/MainWindow/tree_background.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+
+        <Rectangle Fill="Black" Opacity="0.4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+        <TextBlock Text="Розроби своє власне генеалогічне дерево"
+                   FontSize="36" FontWeight="Bold" Foreground="LightGreen"
+                   FontFamily="Comic Sans MS"  
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Margin="151,20,0,0" TextWrapping="Wrap"
+                   TextAlignment="Left" LineHeight="40">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Button Content="ТВОЄ ДЕРЕВО" Click="TreeButton_Click" />
+
+            <Button Content="ДОДАТИ" Click="AddButton_Click" />
+        </StackPanel>
+
+        <Button Content="АДМІНІСТРАТОР" FontSize="20" Height="50" Width="163"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,548,10,0"
+                Click="AdministratorButton_Click" Opacity="0.5">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#66BB6A" Offset="0.0" />
+                    <GradientStop Color="#124213" Offset="1.0" />
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.5" Color="Black" />
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Opacity" Value="0.5" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="1" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Border Margin="10">
             <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
         </Border>
-        <Button Content="Назад" Margin="893,566,16,16" Click="BackButton_Click" Visibility="{Binding ElementName=SetWindow}"/>
     </Grid>
 </Window>
