@@ -21,7 +21,7 @@ namespace GenealogicalTreeCource
         public MainWindow()
         {
             InitializeComponent();
-            //myPersonTree.Generate();
+            //myPersonTree.Generate(7);
             //myPersonTree.SaveToFile();
             myPersonTree.LoadFromFile();
             DataContext = myPersonTree;

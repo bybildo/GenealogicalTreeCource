@@ -14,9 +14,9 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <!--<ResourceDictionary.MergedDictionaries>
                 <md:BundledTheme BaseTheme="Light" PrimaryColor="Green" SecondaryColor="LightGreen" />
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>-->
 
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="36" />
