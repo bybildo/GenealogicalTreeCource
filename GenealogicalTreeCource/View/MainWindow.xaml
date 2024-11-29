@@ -106,7 +106,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Border Margin="10">
+        <Border Margin="0">
             <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
         </Border>
     </Grid>
