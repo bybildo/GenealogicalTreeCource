@@ -5,25 +5,48 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GenealogicalTreeCource.Xaml"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdministrationPage" Background="white">
-
-    <Page.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="25"/>
-        </Style>
-    </Page.Resources>
+      Title="Register" Background="#5ba854"
+      Height="640" Width="1000">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
-        <StackPanel>
-            <TextBlock Text="Переглянути додавання користувача"/>
-            <TextBlock Text="Переглянути редагування інформації"/>
-            <TextBlock Text="!Сформувати дерево!"/>
-        </StackPanel>
+        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-        <Frame x:Name="SetWindow" Grid.Row="1" Margin="10" NavigationUIVisibility="Hidden"/>
+        <Border Background="#bff5ba" Opacity="0.8" CornerRadius="15" HorizontalAlignment="Left" VerticalAlignment="Center" Width="692" Height="584" Margin="285,0,0,0" />
+
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Width="692" Height="584" Margin="285,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock Text="INFORMATION " FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Margin="269,0,0,543" Grid.Row="0" Grid.RowSpan="2" Width="177" />
+
+            <!-- Форма -->
+            <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Height="517" Width="652" Margin="0,41,0,0">
+                <!--<Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
+                    <TextBox Margin="-1,0,-1,0" VerticalContentAlignment="Center" Text="First Name" Height="30" FontSize="14" Foreground="#7E57C2" BorderThickness="0" Background="Transparent" />
+                    <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#7E57C2" Text="First Name" Background="Transparent" BorderThickness="0" Width="171" Margin="-1,0,-1,0" />
+                </Border>-->
+
+                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
+                    <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#7E57C2" Text="Last Name" Background="Transparent" BorderThickness="0" Margin="-1,0,-1,0" />
+                </Border>
+
+                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
+                    <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#7E57C2" Text="Email" Background="Transparent" BorderThickness="0" />
+                </Border>
+
+                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
+                    <PasswordBox Height="30" FontSize="14" Foreground="#7E57C2" Background="Transparent" BorderThickness="0" />
+                </Border>
+
+                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
+                    <PasswordBox Height="30" FontSize="14" Foreground="#7E57C2" Background="Transparent" BorderThickness="0" />
+                </Border>
+            </StackPanel>
+
+           </Grid>
+        <Border Background="#bff5ba" Opacity="0.8" CornerRadius="15" VerticalAlignment="Top" Height="190" Margin="18,422,737,0" />
+        <!--<Border Background="" Opacity="0.8" CornerRadius="15" VerticalAlignment="Top" Height="372" Margin="18,28,737,0" />-->
     </Grid>
 </Page>
