@@ -85,7 +85,7 @@ namespace GenealogicalTreeCource
                 {
                     DrawUpArrow(Xfirst, Yfirst, posX + 410, posY);
                     DrawRectangle(person.Children[i].ToString(), posX + 250, posY);
-                    DrawOneArrow(posX + 110 - 250, posY+60, posX + 110 - 250, posY + 80);
+                    DrawOneArrow(posX + 110 + 250, posY+60, posX + 110 + 250, posY + 80);
                     DrawRectangle(person.Children[i].Mother.ToString(), posX + 250, posY + 80);
                     DrawUpTree(person.Children[i], NumOfKnees - 1, posX + 250, posY);
                     posX += horizontalSpacing;
