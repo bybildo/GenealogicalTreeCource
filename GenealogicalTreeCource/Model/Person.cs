@@ -70,6 +70,14 @@ namespace GenealogicalTreeCource.Class
             Father = father;
             Mother = mother;
         }
+
+        public Person(string ForVoidPerson)
+        {
+            _name = "";
+            _surname = "";
+            _fathername = "";
+            _gender = Gender.unknown;
+        }
         #endregion
 
         #region Публічні властивості
@@ -350,7 +358,7 @@ namespace GenealogicalTreeCource.Class
         }
         #endregion
 
-        public int GetKness()
+        public int GetDownKness()
         {
             return GetGenerationsDepth(this);
 
@@ -368,6 +376,27 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
+        public int GetUpKness()
+        {
+            return GetGenerationsDepthUp(this);
+
+            int GetGenerationsDepthUp(Person person)
+            {
+                if (person.Children.Count == 0)
+                {
+                    return 0;
+                }
+
+                int maxDepth = 0;
+                foreach (var child in person.Children)
+                {
+                    int childDepth = GetGenerationsDepthUp(child);
+                    maxDepth = Math.Max(maxDepth, childDepth);
+                }
+
+                return 1 + maxDepth;
+            }
+        }
         #region Забезпечення Binding
 
         public event PropertyChangedEventHandler? PropertyChanged;

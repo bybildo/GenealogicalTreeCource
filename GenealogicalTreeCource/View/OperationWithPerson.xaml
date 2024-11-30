@@ -3,12 +3,13 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+          xmlns:enum="clr-namespace:GenealogicalTreeCource.Enum"
           xmlns:local="clr-namespace:GenealogicalTreeCource.ViewModel"
           mc:Ignorable="d" 
           d:DesignHeight="450" d:DesignWidth="800" Background="White"
           Title="AddPerson">
     <Page.Resources>
-        <local:GenderToBooleanConverter x:Key="GenderToBooleanConverter"/>
+        <local:GenderToStringConverter x:Key="GenderToStringConverter"/>
         <local:DateOnlyToDateTimeConverter x:Key="DateOnlyConverter" />
         <local:PersonToCollectionConverter x:Key="PersonToCollectionConverter"/>
         <local:LastElementCollectionToCollectionConverter x:Key="LastElementCollectionToCollectionConverter"/>
@@ -80,16 +81,24 @@
 
             <TextBlock Text="Стать" Grid.Row="0"/>
             <ComboBox Grid.Row="1" SelectedItem="{Binding GenderPerson, Mode=TwoWay}">
-                <ComboBoxItem Content="Чоловіча" IsSelected="{Binding GenderPerson, Converter={StaticResource GenderToBooleanConverter}, ConverterParameter=Male}"/>
-                <ComboBoxItem Content="Жіноча" IsSelected="{Binding GenderPerson, Converter={StaticResource GenderToBooleanConverter}, ConverterParameter=Female}"/>
+                <ComboBox.ItemsSource>
+                    <x:Array Type="{x:Type enum:Gender}">
+                        <enum:Gender>male</enum:Gender>
+                        <enum:Gender>female</enum:Gender>
+                    </x:Array>
+                </ComboBox.ItemsSource>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource GenderToStringConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
-
 
             <TextBlock Text="Дата народження" Grid.Row="2"/>
             <DatePicker SelectedDate="{Binding Path=BirthdayDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Grid.Row="3"/>
 
-            <TextBlock Text="Дата смерті" Grid.Row="4"/>
-            <DatePicker SelectedDate="{Binding Path=DeathDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Grid.Row="5"/>
+            <TextBlock Tag="edit" Text="Дата смерті" Grid.Row="4"/>
+            <DatePicker Tag="edit" SelectedDate="{Binding Path=DeathDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Grid.Row="5"/>
 
             <TextBlock Text="Мати" Grid.Row="6"/>
             <ListBox ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}" Grid.Row="7"/>
@@ -103,11 +112,11 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Шлюб з" Grid.Row="0"/>
-            <ListBox ItemsSource="{Binding Path=Wifes, Converter={StaticResource LastElementCollectionToCollectionConverter}}" Grid.Row="1"/>
+            <TextBlock Tag="edit" Text="Шлюб з" Grid.Row="0"/>
+            <ListBox Tag="edit" ItemsSource="{Binding Path=Wifes, Converter={StaticResource LastElementCollectionToCollectionConverter}}" Grid.Row="1"/>
 
-            <TextBlock Text="Попередні шлюби" Grid.Row="2"/>
-            <ComboBox ItemsSource="{Binding Path=Wifes, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Grid.Row="3"/>
+            <TextBlock Tag="edit"  Text="Попередні шлюби" Grid.Row="2"/>
+            <ComboBox Tag="edit" ItemsSource="{Binding Path=Wifes, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Grid.Row="3"/>
         </Grid>
 
         <Grid Margin="10" Grid.Column="2" Grid.Row="1">
@@ -116,8 +125,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Діти" Grid.Row="0"/>
-            <ListBox ItemsSource="{Binding Children, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Grid.Row="1"/>
+            <TextBlock Tag="edit" Text="Діти" Grid.Row="0"/>
+            <ListBox Tag="edit" ItemsSource="{Binding Children, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Page>

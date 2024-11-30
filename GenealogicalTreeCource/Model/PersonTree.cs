@@ -21,6 +21,7 @@ namespace GenealogicalTreeCource.Class
     public class PersonTree : INotifyPropertyChanged
     {
         private List<Person> _persons = new List<Person>();
+        private List<Person> _addPerson = new List<Person>();
 
         #region Пошук mvvm
         private string _filter = "";
@@ -212,6 +213,12 @@ namespace GenealogicalTreeCource.Class
         public void Generate(int knees = 5)
         {
             _persons = new PersonTreeGenerator().GetPersons(knees);
+        }
+
+        public Person GetVoidPerson()
+        {
+            _addPerson.Add(new Person("void"));
+            return _addPerson[_addPerson.Count - 1];
         }
 
         #region Забезпечення Binding
