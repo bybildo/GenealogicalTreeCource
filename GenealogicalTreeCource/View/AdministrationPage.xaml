@@ -8,45 +8,173 @@
       Title="Register" Background="#5ba854"
       Height="640" Width="1000">
     <Grid>
-        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="103*"/>
+            <RowDefinition Height="57*"/>
+        </Grid.RowDefinitions>
 
-        <Border Background="#bff5ba" Opacity="0.8" CornerRadius="15" HorizontalAlignment="Left" VerticalAlignment="Center" Width="692" Height="584" Margin="285,0,0,0" />
+        <Canvas Grid.RowSpan="2"/>
 
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Width="692" Height="584" Margin="285,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Image Source="/Image/leaf.png" Margin="460,357,294,160" Grid.RowSpan="2"/>
+        <Image Source="/Image/leaf.png" Margin="883,-23,-81,344" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-122.199"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="861,165,-107,-60" Grid.Row="1"/>
+        <Image Source="/Image/leaf.png" Margin="736,144,18,144" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="37.739"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="839,369,52,203" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-85.087"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="513,147,312,182" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-215.642"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="-3,183,928,12" Grid.Row="1"/>
+        <Image Source="/Image/leaf.png" Margin="428,173,326,-68" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="220.269"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="574,-70,180,359" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-166.737"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="337,279,587,71" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="253.579"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="-64,-11,818,300" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="127.846"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="142,52,612,52" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-186.024"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="189,8,565,281" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-49.883"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="270,346,690,24" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="302.248"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="723,73,201,93" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="99.457"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="56,346,868,4" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="253.579"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="137,185,788,194" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="41.095"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="845,141,80,54" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="41.095"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
 
-            <!-- Заголовок -->
-            <TextBlock Text="INFORMATION " FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Margin="269,0,0,543" Grid.Row="0" Grid.RowSpan="2" Width="177" />
 
-            <!-- Форма -->
-            <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Height="517" Width="652" Margin="0,41,0,0">
-                <!--<Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
-                    <TextBox Margin="-1,0,-1,0" VerticalContentAlignment="Center" Text="First Name" Height="30" FontSize="14" Foreground="#7E57C2" BorderThickness="0" Background="Transparent" />
-                    <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#7E57C2" Text="First Name" Background="Transparent" BorderThickness="0" Width="171" Margin="-1,0,-1,0" />
-                </Border>-->
+        <Border Background="White" Opacity="0.3" CornerRadius="15" VerticalAlignment="Top" Height="190" Margin="18,10,737,0" Grid.Row="1" />
+        <Border Background="White" Opacity="0.3" CornerRadius="15" VerticalAlignment="Top" Height="367" Margin="18,28,737,0" />
+        <Border Background="white" Opacity="0.3" CornerRadius="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" Height="584" Margin="287,28,0,0" Grid.RowSpan="2" />
 
-                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
-                    <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#7E57C2" Text="Last Name" Background="Transparent" BorderThickness="0" Margin="-1,0,-1,0" />
-                </Border>
-
-                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
-                    <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#7E57C2" Text="Email" Background="Transparent" BorderThickness="0" />
-                </Border>
-
-                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
-                    <PasswordBox Height="30" FontSize="14" Foreground="#7E57C2" Background="Transparent" BorderThickness="0" />
-                </Border>
-
-                <Border Background="White" Margin="5" BorderBrush="#D1C4E9" BorderThickness="1" CornerRadius="10" Width="185">
-                    <PasswordBox Height="30" FontSize="14" Foreground="#7E57C2" Background="Transparent" BorderThickness="0" />
-                </Border>
-            </StackPanel>
-
-           </Grid>
-        <Border Background="#bff5ba" Opacity="0.8" CornerRadius="15" VerticalAlignment="Top" Height="190" Margin="18,422,737,0" />
-        <!--<Border Background="" Opacity="0.8" CornerRadius="15" VerticalAlignment="Top" Height="372" Margin="18,28,737,0" />-->
+        <!--<Border Background="#bff5ba" Opacity="0.5" CornerRadius="15" VerticalAlignment="Top" Height="367" Margin="18,28,737,0" />-->
     </Grid>
 </Page>
+

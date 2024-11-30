@@ -9,14 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\leaf.png" />
+    <None Remove="Image\MainWindow\tree_background.jpg" />
     <None Remove="Image\PersonPhoto\absent.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Image\leaf.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainWindow\tree_background.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Image\PersonPhoto\absent.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

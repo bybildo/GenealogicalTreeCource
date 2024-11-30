@@ -90,6 +90,7 @@ namespace GenealogicalTreeCource.Class
         }
 
         private const string pattern = @"^[А-ЯІЄЇҐа-яієїґ' -*]+$";
+        [JsonProperty(Order = 2)]
         public string Surname
         {
             get { return _surname; }
@@ -151,6 +152,7 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
+        [JsonProperty(Order = 1)]
         public Gender GenderPerson
         {
             get { return _gender; }
@@ -206,6 +208,35 @@ namespace GenealogicalTreeCource.Class
             set
             {
                 _father = value;
+                _father = value;
+
+                if (_father != null)
+                {
+                    switch (GenderPerson)
+                    {
+                        case Gender.female:
+                            {
+                                if (Name.EndsWith("й"))
+                                {
+                                    _fathername = Father.Name.Substring(0, Father.Name.Length - 1) + "ївна";
+                                }
+                                else
+                                {
+                                    _fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
+                                        ? Father.Name.Substring(0, Father.Name.Length - 1) + "івна"
+                                        : Father.Name + "івна";
+                                }
+                                break;
+                            }
+                        default:
+                            {
+                                _fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
+                                    ? Father.Name.Substring(0, Father.Name.Length - 1) + "ович"
+                                    : Father.Name + "ович";
+                                break;
+                            }
+                    }
+                }
             }
         }
 
@@ -293,27 +324,6 @@ namespace GenealogicalTreeCource.Class
             }
 
             Mother.Surname = Father.Surname;
-
-            switch (GenderPerson)
-            {
-                case Gender.female:
-                    {
-                        if (Name.EndsWith("й"))
-                        {
-                            _fathername = Father.Name.Substring(0, Name.Length - 1) + "ївна";
-                        }
-                        else
-                        {
-                            _fathername = (_fathername.EndsWith("о") || _fathername.EndsWith("а")) ? _fathername.Substring(0, _fathername.Length - 1) + "івна" : Father.Name + "івна";
-                        }
-                        break;
-                    }
-                default:
-                    {
-                        _fathername = (_fathername.EndsWith("о") || _fathername.EndsWith("а")) ? _fathername.Substring(0, _fathername.Length - 1) + "ович" : Father.Name + "ович";
-                        break;
-                    }
-            }
         }
 
         public void AddWifes(List<Person> newWifes)
@@ -334,9 +344,29 @@ namespace GenealogicalTreeCource.Class
 
         public override string ToString()
         {
-            return $"{_surname} {_name} {_fathername}";
+            if (this.DeathDate == DateOnly.MinValue)
+                return $"{_surname} {_name} {_fathername}\n{((DateOnly)BirthdayDate).Year}";
+            return $"{_surname} {_name} {_fathername}\n{((DateOnly)BirthdayDate).Year}-{((DateOnly)DeathDate).Year}";
         }
         #endregion
+
+        public int GetKness()
+        {
+            return GetGenerationsDepth(this);
+
+            int GetGenerationsDepth(Person? person)
+            {
+                if (person.Fathername == "*невідомо*")
+                {
+                    return 0;
+                }
+
+                return 1 + Math.Max(
+                    GetGenerationsDepth(person.Father),
+                    GetGenerationsDepth(person.Mother)
+                );
+            }
+        }
 
         #region Забезпечення Binding
 
@@ -348,3 +378,5 @@ namespace GenealogicalTreeCource.Class
         #endregion
     }
 }
+
+

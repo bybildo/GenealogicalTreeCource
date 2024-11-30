@@ -184,6 +184,10 @@ namespace GenealogicalTreeCource.Class
         {
             return _persons.Find(p => p.ForSearch() == forSearch);
         }
+        public Person GetPersonFromToString(string toString)
+        {
+            return _persons.Find(p => p.ToString() == toString);
+        }
 
         public Person GetPersonFromID(int id)
         {
