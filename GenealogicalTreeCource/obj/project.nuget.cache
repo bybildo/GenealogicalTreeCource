@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "uwvMVZOZN5TRNqylKukINFQfbbezVxBPwzhTflYd8F4ga3XAsoGzXxT2SjgIYVqKmO2cNy5QYSlkk8+ngR5jdA==",
+  "dgSpecHash": "0zwWghQ85ew1qN2MjbIFz0qQ6llbkGZYgK5z0gsYt9w/Ch5/6qWR2oftEslJ9Z0LjnP5b1U/FJnHJQvXreNROA==",
   "success": true,
   "projectFilePath": "D:\\Desktop\\ЛH №1 Міняйло Марк\\3 семестр\\GenealogicalTreeCource\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mpro2\\.nuget\\packages\\materialdesigncolors\\3.1.0\\materialdesigncolors.3.1.0.nupkg.sha512",
+    "C:\\Users\\mpro2\\.nuget\\packages\\materialdesignthemes\\5.1.0\\materialdesignthemes.5.1.0.nupkg.sha512",
+    "C:\\Users\\mpro2\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
     "C:\\Users\\mpro2\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []

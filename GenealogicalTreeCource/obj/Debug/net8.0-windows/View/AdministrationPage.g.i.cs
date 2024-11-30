@@ -53,7 +53,7 @@ namespace GenealogicalTreeCource.Xaml {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GenealogicalTreeCource;V1.0.0.0;component/view/administrationpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GenealogicalTreeCource;component/view/administrationpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\AdministrationPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
