@@ -254,13 +254,5 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-
-        <Button Content="Назад" FontSize="20" Height="39" Width="118"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="831,137,0,0"
-                Click="BackButton_Click" Grid.Row="1">
-
-        </Button>
-
-
     </Grid>
 </Page>
