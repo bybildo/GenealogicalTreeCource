@@ -75,14 +75,14 @@
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
-            <Button Content="ТВОЄ ДЕРЕВО" Click="TreeButton_Click" />
+            <Button Content="ТВОЄ ДЕРЕВО" Click="TreeButton_Click" FontWeight="Bold"/>
 
-            <Button Content="ДОДАТИ" Click="AddButton_Click" />
+            <Button Content="ДОДАТИ" Click="AddButton_Click" FontWeight="Bold"/>
         </StackPanel>
 
-        <Button Content="АДМІНІСТРАТОР" FontSize="20" Height="50" Width="163"
+        <Button Content="АДМІНІСТРАТОР" FontSize="20" Height="50" Width="173" FontWeight="Bold"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,548,10,0"
-                Click="AdministratorButton_Click" Opacity="0.5">
+                Click="AdministratorButton_Click" Opacity="0.5" Name="AdministratorButton">
             <Button.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#66BB6A" Offset="0.0" />
@@ -103,10 +103,13 @@
                 </Style>
             </Button.Style>
         </Button>
+        <Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
+         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,570,0,0"
+         Click="BackButton_Click"/>
 
 
-        <Border Margin="0">
+        <!--<Border Margin="0">
             <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
-        </Border>
+        </Border>-->
     </Grid>
 </Window>
