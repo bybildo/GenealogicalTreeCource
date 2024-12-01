@@ -2,14 +2,11 @@
 using GenealogicalTreeCource.Enum;
 using GenealogicalTreeCource.Model.Enum;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace GenealogicalTreeCource
@@ -21,15 +18,11 @@ namespace GenealogicalTreeCource
             InitializeComponent();
             DataContext = MainWindow.myPersonTree;
 
-            GenealogyCanvas.MouseWheel += GenealogyCanvas_MouseWheel;
-            GenealogyCanvas.MouseDown += GenealogyCanvas_MouseDown;
-            GenealogyCanvas.MouseMove += GenealogyCanvas_MouseMove;
-            GenealogyCanvas.MouseUp += GenealogyCanvas_MouseUp;
-
-            ScaleTransform.ScaleX = 0.5;
-            ScaleTransform.ScaleY = 0.5;
+            ForPer();
         }
 
+        #region Методи створення графу
+        //Створив окремий клас для цього, але працювало все окрім переміщення, прийшлось перемістити сюди задля коректної роботи створення графа
         private void ViewPerson(object sender, MouseButtonEventArgs e)
         {
             if (sender is ListBoxItem listBoxItem)
@@ -40,7 +33,8 @@ namespace GenealogicalTreeCource
                 if (selectedPerson != null)
                 {
                     GenealogyCanvas.Children.Clear();
-                    DrawDownTree(selectedPerson, selectedPerson.GetKness());
+                    DrawUpTree(selectedPerson, selectedPerson.GetUpKness());
+                    DrawDownTree(selectedPerson, selectedPerson.GetDownKness());
                 }
             }
         }
@@ -50,32 +44,69 @@ namespace GenealogicalTreeCource
             if (person == null || NumOfKnees == 0)
                 return false;
 
-            DrawRectangle(person.ToString(), NumOfKnees, posX, posY);
+            DrawRectangle(person.ToString(), posX, posY);
 
             double horizontalSpacing = 100 * Math.Pow(2, NumOfKnees - 1);
             double verticalSpacing = Math.Min(100 + ((NumOfKnees - 1) * 30), 300);
 
-            if (!person.Father.Fathername.Contains("*невідомо*") || person.Father != null)
+            if (person.Father != null && !person.Father.Fathername.Contains("*невідомо*"))
             {
                 if (DrawDownTree(person.Father, NumOfKnees - 1, posX - horizontalSpacing, posY + verticalSpacing))
-                    DrawArrow(posX, posY, posX - horizontalSpacing + 110, posY + verticalSpacing);
+                    DrawDownArrow(posX, posY, posX - horizontalSpacing + 110, posY + verticalSpacing);
             }
 
-            if (!person.Mother.Fathername.Contains("*невідомо*") || person.Mother != null)
+            if (person.Mother != null && !person.Mother.Fathername.Contains("*невідомо*"))
             {
                 if (DrawDownTree(person.Mother, NumOfKnees - 1, posX + horizontalSpacing, posY + verticalSpacing))
-                    DrawArrow(posX, posY, posX + horizontalSpacing + 110, posY + verticalSpacing);
+                    DrawDownArrow(posX, posY, posX + horizontalSpacing + 110, posY + verticalSpacing);
             }
 
             return true;
         }
 
-        private void DrawUpTree(Person person, int NumOfKnees, double posX = 375, double posY = 60)
+        private void DrawUpTree(Person person, int NumOfKnees, double posX = 375, double posY = 130)
         {
+            if (person == null || NumOfKnees == 0)
+                return;
 
+
+            double horizontalSpacing = 250 * Math.Pow(2, NumOfKnees - 1);
+            double verticalSpacing = Math.Min((Math.Max(NumOfKnees, 2)) * 80, 480);
+            double Xfirst = posX;
+            double Yfirst = posY;
+            if (Yfirst == 130) Yfirst -= 30;
+
+            posY -= verticalSpacing;
+
+            if (person.GenderPerson == Gender.male)
+            {
+                int numOfChild = person.Children.Count;
+                for (int i = 0; i < numOfChild; i++)
+                {
+                    DrawUpArrow(Xfirst, Yfirst, posX + 410, posY);
+                    DrawRectangle(person.Children[i].ToString(), posX + 250, posY);
+                    DrawOneArrow(posX + 110 + 250, posY+60, posX + 110 + 250, posY + 80);
+                    DrawRectangle(person.Children[i].Mother.ToString(), posX + 250, posY + 80);
+                    DrawUpTree(person.Children[i], NumOfKnees - 1, posX + 250, posY);
+                    posX += horizontalSpacing;
+                }
+            }
+            else
+            {
+                int numOfChild = person.Children.Count;
+                for (int i = 0; i < numOfChild; i++)
+                {
+                    DrawUpArrow(Xfirst, Yfirst, posX - 30, posY);
+                    DrawRectangle(person.Children[i].ToString(), posX - 250, posY);
+                    DrawOneArrow(posX + 110 -250, posY+60, posX + 110 - 250, posY + 80);
+                    DrawRectangle(person.Children[i].Father.ToString(), posX - 250, posY + 80);
+                    DrawUpTree(person.Children[i], NumOfKnees - 1, posX - 250, posY);
+                    posX -= horizontalSpacing;
+                }
+            }
         }
 
-        private void DrawRectangle(string text, int NumFoKnees, double x, double y)
+        private void DrawRectangle(string text, double x, double y)
         {
             Rectangle rect = new Rectangle
             {
@@ -116,7 +147,37 @@ namespace GenealogicalTreeCource
             GenealogyCanvas.Children.Add(tb);
         }
 
-        private void DrawArrow(double Xpoint, double Ypoint, double Xend, double Yend)
+        private void DrawUpArrow(double Xpoint, double Ypoint, double Xend, double Yend)
+        {
+            double height = Ypoint - Yend;
+
+            Line line1 = new Line
+            {
+                X1 = Xpoint + 110,
+                Y1 = Ypoint,
+                X2 = Xpoint + 110,
+                Y2 = Yend + 30,
+                Stroke = Brushes.Black,
+                StrokeThickness = 2,
+                StrokeEndLineCap = PenLineCap.Triangle
+            };
+
+            Line line2 = new Line
+            {
+                X1 = line1.X2,
+                Y1 = line1.Y2,
+                X2 = Xend,
+                Y2 = line1.Y2,
+                Stroke = Brushes.Black,
+                StrokeThickness = 2,
+                StrokeEndLineCap = PenLineCap.Triangle
+            };
+
+            GenealogyCanvas.Children.Insert(0, line1);
+            GenealogyCanvas.Children.Insert(0, line2);
+        }
+
+        private void DrawDownArrow(double Xpoint, double Ypoint, double Xend, double Yend)
         {
             double height = Yend - (Ypoint + 60);
 
@@ -158,7 +219,33 @@ namespace GenealogicalTreeCource
             GenealogyCanvas.Children.Add(line3);
         }
 
+        private void DrawOneArrow(double Xpoint, double Ypoint, double Xend, double Yend)
+        {
+            Line line1 = new Line
+            {
+                X1 = Xpoint,
+                Y1 = Ypoint,
+                X2 = Xend,
+                Y2 = Yend,
+                Stroke = Brushes.Black,
+                StrokeThickness = 2,
+                StrokeEndLineCap = PenLineCap.Triangle
+            };
+            GenealogyCanvas.Children.Add(line1);
+        }
+
         #region Переміщення на полотні
+        private void ForPer()
+        {
+            GenealogyCanvas.MouseWheel += GenealogyCanvas_MouseWheel;
+            GenealogyCanvas.MouseDown += GenealogyCanvas_MouseDown;
+            GenealogyCanvas.MouseMove += GenealogyCanvas_MouseMove;
+            GenealogyCanvas.MouseUp += GenealogyCanvas_MouseUp;
+
+            ScaleTransform.ScaleX = 0.5;
+            ScaleTransform.ScaleY = 0.5;
+        }
+
         private bool isDragging = false;
         private Point lastMousePosition;
 
@@ -219,6 +306,7 @@ namespace GenealogicalTreeCource
                 GenealogyCanvas.ReleaseMouseCapture();
             }
         }
+        #endregion
         #endregion
     }
 }

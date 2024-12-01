@@ -21,7 +21,7 @@ namespace GenealogicalTreeCource
         public MainWindow()
         {
             InitializeComponent();
-            //myPersonTree.Generate();
+            //myPersonTree.Generate(6);
             //myPersonTree.SaveToFile();
             myPersonTree.LoadFromFile();
             DataContext = myPersonTree;
@@ -29,7 +29,7 @@ namespace GenealogicalTreeCource
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            SetWindow.Navigate(new OperationWithPerson(new Person(), TypeOperation.Add));
+            SetWindow.Navigate(new OperationWithPerson(myPersonTree.GetVoidPerson(), TypeOperation.Add));
         }
 
         private void TreeButton_Click(object sender, RoutedEventArgs e)
@@ -49,6 +49,27 @@ namespace GenealogicalTreeCource
                 SetWindow.GoBack();
             }
             catch { SetWindow.Navigate(null); }
+        }
+
+        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            AdministratorButton.Visibility = Visibility.Visible;
+        }
+
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            AdministratorButton.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            {
+                try
+                {
+                    SetWindow.GoBack();
+                }
+                catch { SetWindow.Navigate(null); }
+            }
         }
     }
 }

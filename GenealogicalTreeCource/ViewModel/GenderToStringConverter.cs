@@ -4,26 +4,20 @@ using System.Windows.Data;
 
 namespace GenealogicalTreeCource.ViewModel
 {
-    public class GenderToBooleanConverter : IValueConverter
+    public class GenderToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || parameter == null) return false;
+            if (value == null)
+                return string.Empty;
 
             var gender = (Gender)value;
-            var genderParameter = (string)parameter;
-
-            return gender.ToString().Equals(genderParameter, StringComparison.OrdinalIgnoreCase);
+            return gender == Gender.male ? "Чоловіча" : "Жіноча";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isSelected && isSelected)
-            {
-                var genderParameter = (string)parameter;
-                return genderParameter.Equals("Male", StringComparison.OrdinalIgnoreCase) ? Gender.male : Gender.female;
-            }
-            return Gender.unknown;
+            return value.ToString().ToLower() == "чоловіча" ? Gender.male : Gender.female;
         }
     }
 }
