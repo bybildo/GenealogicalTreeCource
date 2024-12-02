@@ -13,7 +13,8 @@
     <SourceRoot Include="C:\Users\mpro2\.nuget\packages\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgMicrosoft_Xaml_Behaviors_Wpf Condition=" '$(PkgMicrosoft_Xaml_Behaviors_Wpf)' == '' ">C:\Users\mpro2\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.39</PkgMicrosoft_Xaml_Behaviors_Wpf>
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\mpro2\.nuget\packages\microsoft.codeanalysis.analyzers\1.1.0</PkgMicrosoft_CodeAnalysis_Analyzers>
+    <PkgMicrosoft_Xaml_Behaviors_Wpf Condition=" '$(PkgMicrosoft_Xaml_Behaviors_Wpf)' == '' ">C:\Users\mpro2\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.135</PkgMicrosoft_Xaml_Behaviors_Wpf>
     <PkgMaterialDesignThemes Condition=" '$(PkgMaterialDesignThemes)' == '' ">C:\Users\mpro2\.nuget\packages\materialdesignthemes\5.1.0</PkgMaterialDesignThemes>
   </PropertyGroup>
 </Project>

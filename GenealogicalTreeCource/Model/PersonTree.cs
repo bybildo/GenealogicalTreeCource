@@ -18,6 +18,8 @@ namespace GenealogicalTreeCource.Class
     {
         private List<Person> _persons = new List<Person>();
         private List<Person> _addPerson = new List<Person>();
+        private List<Person> _editPerson = new List<Person>();
+
 
         private int _choosePersonId;
         public int ChoosePersonaId
@@ -36,6 +38,23 @@ namespace GenealogicalTreeCource.Class
                     SaveChoosePersonId();
                     OnPropertyChanged(nameof(ChoosePersonaId));
                 }
+            }
+        }
+
+        public Person ChooseAdd
+        {
+            get
+            {
+                _addPerson.Add(new Person("void"));
+                return _addPerson[_addPerson.Count - 1];
+            }
+        }
+        public Person ChooseEdit
+        {
+            get
+            {
+                _editPerson.Add(new Person("void"));
+                return _editPerson[_addPerson.Count - 1];
             }
         }
 
@@ -300,7 +319,6 @@ namespace GenealogicalTreeCource.Class
 
         private void OpenAddPerson()
         {
-            ChoosePersonaId = 200;
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
                 mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Add));
@@ -319,10 +337,10 @@ namespace GenealogicalTreeCource.Class
 
         public void OpenViewPerson(string personForSearch = "*")
         {
-            //if (personForSearch != "*")
-            //    ChoosePersonaId = _persons.FindIndex(p => p.ForSearch() == personForSearch);
+            if (personForSearch.Contains("*невідомо*")) return;
+            if (personForSearch != "*")
+                ChoosePersonaId = _persons.FindIndex(p => p.ForSearch() == personForSearch);
 
-            ChoosePersonaId = 100;
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
                 mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.View));
@@ -341,11 +359,8 @@ namespace GenealogicalTreeCource.Class
 
         private void OpenAdministration()
         {
-            if (Application.Current.MainWindow is MainWindow mainWindow)
-            {
-                mainWindow.SetWindow.Navigate(new AdministrationPage());
-            }
-            else throw new Exception("Ви видалили frame");
+          AdministrationPage window = new AdministrationPage();
+            window.ShowDialog();  
         }
 
         private void BackFrame()

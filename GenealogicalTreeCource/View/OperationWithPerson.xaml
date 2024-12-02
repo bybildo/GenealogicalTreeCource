@@ -7,7 +7,7 @@
       xmlns:Convert="clr-namespace:GenealogicalTreeCource.ViewModel"
       xmlns:enum="clr-namespace:GenealogicalTreeCource.Enum"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      xmlns:cmd="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+      xmlns:cmd="http://www.galasoft.ch/mvvmlight"
       mc:Ignorable="d" 
       Title="Register" Background="#1d521f"
       Height="640" Width="1000">
@@ -230,12 +230,12 @@
 
         <Border Background="White" Opacity="0.6" CornerRadius="15" VerticalAlignment="Top" Height="190" Margin="18,10,737,0" Grid.Row="1">
             <StackPanel Margin="10">
-                <TextBlock Text="Ім'я:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox Name="FirstNameTextBox" Height="30" Margin="0,0,0,10" Text="{Binding Path=Name, Mode=TwoWay}" />
+                <TextBlock Text="Ім'я:" FontWeight="Bold" Margin="0,0,0,2"/>
+                <TextBox Height="30" Margin="0,0,0,10" Text="{Binding Path=Name, Mode=TwoWay}" />
                 <TextBlock Text="Прізвище:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox Name="LastNameTextBox" Height="30" Margin="0,0,0,10" Text="{Binding Path=Surname, Mode=TwoWay}"/>
+                <TextBox Height="30" Margin="0,0,0,10" Text="{Binding Path=Surname, Mode=TwoWay}"/>
                 <TextBlock Text="По-батькові:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox Name="PatronymicTextBox" Height="30" Text="{Binding Path=Fathername, Mode=TwoWay}" />
+                <TextBox Height="30" Text="{Binding Path=Fathername, Mode=TwoWay}" />
             </StackPanel>
         </Border>
 
@@ -245,15 +245,44 @@
 
 
         <Border Background="white" Opacity="0.6" CornerRadius="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" Height="584" Margin="287,28,0,0" Grid.RowSpan="2">
-            <StackPanel Margin="10">
+            <StackPanel Name="Family" Margin="10">
                 <TextBlock Text="Батько:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Name="FatherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Father, Converter={StaticResource PersonToCollectionConverter}}"/>
+
+                <ListBox Name="FatherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Father, Converter={StaticResource PersonToCollectionConverter}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=FatherListBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+
                 <TextBlock Text="Мати:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Name="MotherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}"></ListBox>
-                <TextBlock Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Name="MarriageListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Wifes, Converter={StaticResource LastElementCollectionToCollectionConverter}}"/>
-                <TextBlock Text="Діти:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Name="ChildrenListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Children, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" />
+                <ListBox Name="MotherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MotherListBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+
+                <TextBlock Tag="View" Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ListBox Tag="View" Name="MarriageListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Wifes, Converter={StaticResource LastElementCollectionToCollectionConverter}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MarriageListBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+
+                <TextBlock Tag="View" Text="Діти:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ListBox Tag="View" Name="ChildrenListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Children, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=ChildrenListBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Стать:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
                     <ComboBox Name="GenderComboBox" Width="169" Margin="0,0,10,0" SelectedItem="{Binding GenderPerson, Mode=TwoWay}">
@@ -275,10 +304,26 @@
                     <DatePicker Name="BirthDatePicker" SelectedDate="{Binding Path=BirthdayDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Дата смерті:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="DeathDatePicker" SelectedDate="{Binding Path=DeathDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Width="393"/>
+                    <TextBlock Tag="View" Text="Дата смерті:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                    <DatePicker Tag="View" x:Name="DeathDatePicker" SelectedDate="{Binding Path=DeathDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Width="393"/>
                 </StackPanel>
             </StackPanel>
         </Border>
+
+        <Button Name="Back" Width="100" Height="20" Margin="29,44,871,348">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding BackPage, Source={StaticResource MyPersonTree}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+
+        <Button Name="Edit"  Width="100" Height="20" Margin="28,153,872,239" RenderTransformOrigin="0.862,1.96">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding EditPersonPage, Source={StaticResource MyPersonTree}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
     </Grid>
 </Page>

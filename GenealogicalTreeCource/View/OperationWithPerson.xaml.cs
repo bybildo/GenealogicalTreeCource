@@ -28,20 +28,40 @@ namespace GenealogicalTreeCource
         public OperationWithPerson(TypeOperation option)
         {
             InitializeComponent();
-    
-            switch (option)
+            PersonTree myPersonTree = DataContext as PersonTree;
+            var elements = (Grid)this.FindName("Elements");
 
+            switch (option)
             {
                 case TypeOperation.Add:
                     {
+                        var binding = new Binding("ChooseAdd")
+                        {
+                            Source = myPersonTree
+                        };
+
+                        elements.SetBinding(Grid.DataContextProperty, binding);
+
+                        ForAdd(Elements);
+
                         break;
                     }
                 case TypeOperation.View:
                     {
+                        var binding = new Binding("ChoosePersonaId")
+                        {
+                            Source = myPersonTree,
+                            Converter = (IValueConverter)Resources["IdToPersonConverter"]
+                        };
+
+                        elements.SetBinding(Grid.DataContextProperty, binding);
+
+                        ForView(Elements);
                         break;
                     }
                 default:
                     {
+                        ForView(Elements);
                         break;
                     }
             }
@@ -56,6 +76,74 @@ namespace GenealogicalTreeCource
 
             if (selectedPerson != null)
                 NavigationService.Navigate(new OperationWithPerson(TypeOperation.View));
+        }
+
+        private void ForAdd(UIElement element)
+        {
+            if (element == null)
+                return;
+
+            if (element is Panel panel)
+            {
+                foreach (UIElement child in panel.Children)
+                {
+                    ForAdd(child);
+                }
+            }
+            else if (element is ContentControl contentControl && contentControl.Content is UIElement content)
+            {
+                ForAdd(content);
+            }
+            else if (element is Decorator decorator && decorator.Child is UIElement childElement)
+            {
+                ForAdd(childElement);
+            }
+            else if (element is FrameworkElement frameworkElement && frameworkElement.Tag?.ToString() == "View")
+            {
+                frameworkElement.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ForView(UIElement element)
+        {
+            if (element == null)
+                return;
+
+            if (element is Panel panel)
+            {
+                foreach (UIElement child in panel.Children)
+                {
+                    ForView(child);
+                }
+            }
+            else if (element is ContentControl contentControl && contentControl.Content is UIElement content)
+            {
+                ForView(content);
+            }
+            else if (element is Decorator decorator && decorator.Child is UIElement childElement)
+            {
+                ForView(childElement);
+            }
+            else if (element is FrameworkElement frameworkElement)
+            {
+                if (frameworkElement is TextBox textBox)
+                {
+                    textBox.IsEnabled = false;
+                }
+                else if (frameworkElement is ComboBox comboBox)
+                {
+                    comboBox.IsEnabled = false;
+                }
+                else if (frameworkElement is DatePicker datePicker)
+                {
+                    datePicker.IsEnabled = false;
+                }
+            }
+        }
+
+        private void ForEdit(UIElement element)
+        {
+
         }
     }
 }

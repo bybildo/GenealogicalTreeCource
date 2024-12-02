@@ -12,10 +12,14 @@
     <None Remove="Image\leaf.png" />
     <None Remove="Image\MainWindow\tree_background.jpg" />
     <None Remove="Image\PersonPhoto\absent.jpg" />
+    <None Remove="Image\PersonPhoto\adminButton.png" />
+    <None Remove="Image\PersonPhoto\ph1.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
@@ -27,6 +31,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\PersonPhoto\absent.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\adminButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\PersonPhoto\ph1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

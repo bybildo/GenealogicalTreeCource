@@ -18,7 +18,7 @@ namespace GenealogicalTreeCource.Xaml
     /// <summary>
     /// Interaction logic for AdministrationPage.xaml
     /// </summary>
-    public partial class AdministrationPage : Page
+    public partial class AdministrationPage : Window
     {
         public AdministrationPage()
         {

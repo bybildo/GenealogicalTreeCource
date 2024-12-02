@@ -1,14 +1,15 @@
-﻿<Page x:Class="GenealogicalTreeCource.Xaml.AdministrationPage"
+﻿<Window x:Class="GenealogicalTreeCource.Xaml.AdministrationPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GenealogicalTreeCource.Xaml"
       mc:Ignorable="d" 
-      d:DesignHeight="640" d:DesignWidth="1000"
+      Height="600" Width="800"
+      ResizeMode="NoResize"
       Title="AdministrationPage" Background="#1d521f">
 
-    <Page.Resources>
+    <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="Foreground" Value="White"/>
@@ -53,8 +54,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-    </Page.Resources>
-
+    </Window.Resources>
 
     <Grid>
 
@@ -223,16 +223,14 @@
 
         </Canvas>
 
-
-        <TextBlock Text="Переглянути додавання користувача" Margin="483,390,10,190" FontWeight="Bold" Grid.RowSpan="2"/>
         <Button Content="Переглянути додавання" Width="NaN" Margin="490,42,66,106" Grid.Row="1"/>
-        <TextBlock Text="Переглянути редагування інформації" Margin="491,195,7,171" FontWeight="Bold"/>
         <Button Content="Переглянути редагування"  Width="NaN" Margin="490,272,66,60"/>
-        <TextBlock Text="Сформувати дерево" Margin="583,20,159,351" FontWeight="Bold" />
-        <Button Content="Дерево" Margin="567,84,133,248" />
+        <Button Content="Сформувати дерево" Margin="567,84,133,248" />
 
         <Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="852,159,0,0"
         Command="{Binding BackPage}" Grid.Row="1"/>
+
+        <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
     </Grid>
-</Page>
+</Window>
