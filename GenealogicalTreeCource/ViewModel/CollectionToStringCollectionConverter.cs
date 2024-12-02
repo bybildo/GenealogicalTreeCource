@@ -28,7 +28,7 @@ namespace GenealogicalTreeCource.ViewModel
             {
                 var personList = list.Select(el =>
                 {
-                    var person = MainWindow.myPersonTree.GetPersonFromSearch(el);
+                    var person = new PersonTree().GetPersonFromSearch(el);
                     if (person == null)
                     {
                         // Логіка обробки, коли особа не знайдена

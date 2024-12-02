@@ -1,18 +1,9 @@
-﻿using GenealogicalTreeCource.Enum;
-using GenealogicalTreeCource.Model;
-using System;
-using System.Collections.Generic;
+﻿using GenealogicalTreeCource.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics.Metrics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Data;
 using GenealogicalTreeCource.Model.Enum;
@@ -27,6 +18,26 @@ namespace GenealogicalTreeCource.Class
     {
         private List<Person> _persons = new List<Person>();
         private List<Person> _addPerson = new List<Person>();
+
+        private int _choosePersonId;
+        public int ChoosePersonaId
+        {
+            get
+            {
+                LoadChoosePersonId();
+                return _choosePersonId;
+            }
+            set
+            {
+                if (_choosePersonId != value)
+                {
+                    _choosePersonId = value;
+
+                    SaveChoosePersonId();
+                    OnPropertyChanged(nameof(ChoosePersonaId));
+                }
+            }
+        }
 
         public PersonTree()
         {
@@ -114,9 +125,6 @@ namespace GenealogicalTreeCource.Class
                     IgnoreSerializableAttribute = false
                 }
             };
-
-            string json = JsonConvert.SerializeObject(_persons, settings);
-            File.WriteAllText(FilePath, json);
         }
 
         public void LoadFromFile()
@@ -134,6 +142,42 @@ namespace GenealogicalTreeCource.Class
             }
             UpdateRefernces();
         }
+
+        private void SaveChoosePersonId()
+        {
+            try
+            {
+                var json = System.Text.Json.JsonSerializer.Serialize(new { ChoosePersonaId = _choosePersonId });
+                File.WriteAllText("ChoosePersonId.json", json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void LoadChoosePersonId()
+        {
+            try
+            {
+                if (File.Exists("ChoosePersonId.json"))
+                {
+                    var json = File.ReadAllText("ChoosePersonId.json");
+                    using (var doc = System.Text.Json.JsonDocument.Parse(json))
+                    {
+                        if (doc.RootElement.TryGetProperty("ChoosePersonaId", out var element))
+                        {
+                            _choosePersonId = element.GetInt32();
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+
         #endregion
 
         #region Оновлення id
@@ -207,6 +251,10 @@ namespace GenealogicalTreeCource.Class
                 return _persons[id];
             return null;
         }
+        public int GetIdFromToString(string toString)
+        {
+            return _persons.FindIndex(p => p.ToString() == toString);
+        }
         #endregion
 
         public int NumberOfLastElement()
@@ -243,7 +291,7 @@ namespace GenealogicalTreeCource.Class
         private void InitializeCommands()
         {
             AddPersonPage = new RelayCommand(_ => OpenAddPerson());
-            ViewPersonPage = new RelayCommand(_ => OpenViewPerson());
+            ViewPersonPage = new RelayCommand<string>(OpenViewPerson);
             EditPersonPage = new RelayCommand(_ => OpenEditPerson());
             GraphPage = new RelayCommand(_ => OpenGraphPerson());
             AdministrationPage = new RelayCommand(_ => OpenAdministration());
@@ -252,9 +300,10 @@ namespace GenealogicalTreeCource.Class
 
         private void OpenAddPerson()
         {
+            ChoosePersonaId = 200;
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
-                mainWindow.SetWindow.Navigate(new OperationWithPerson(GetVoidPerson(), TypeOperation.Add));
+                mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Add));
             }
             else throw new Exception("Ви видалили frame");
         }
@@ -263,16 +312,20 @@ namespace GenealogicalTreeCource.Class
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
-                mainWindow.SetWindow.Navigate(new OperationWithPerson(GetVoidPerson(), TypeOperation.Edit));
+                mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Edit));
             }
             else throw new Exception("Ви видалили frame");
         }
 
-        private void OpenViewPerson()
+        public void OpenViewPerson(string personForSearch = "*")
         {
+            //if (personForSearch != "*")
+            //    ChoosePersonaId = _persons.FindIndex(p => p.ForSearch() == personForSearch);
+
+            ChoosePersonaId = 100;
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
-                mainWindow.SetWindow.Navigate(new OperationWithPerson(GetVoidPerson(), TypeOperation.View));
+                mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.View));
             }
             else throw new Exception("Ви видалили frame");
         }

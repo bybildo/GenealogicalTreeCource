@@ -112,10 +112,6 @@
                 </Button.Style>
             </Button>
         </Border>
-        <!--<Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,570,0,0"
-            Click="BackButton_Click"/>-->
-
         <Border Margin="0">
             <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
         </Border>

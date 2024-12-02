@@ -20,7 +20,7 @@ namespace GenealogicalTreeCource.ViewModel
             if (value is List<string> list && list.Count > 0)
             {
                 string forSearch = list[0];
-                return MainWindow.myPersonTree.GetPersonFromSearch(forSearch);
+                return new PersonTree().GetPersonFromSearch(forSearch);
             }
 
             return null;

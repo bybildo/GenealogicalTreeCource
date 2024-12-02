@@ -3,6 +3,9 @@ D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCou
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\GenealogicalTreeCource.runtimeconfig.json
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\GenealogicalTreeCource.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\GenealogicalTreeCource.pdb
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\MaterialDesignColors.dll
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\MaterialDesignThemes.Wpf.dll
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.csproj.AssemblyReference.cache
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\AdministrationPage.g.cs
@@ -29,6 +32,3 @@ D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCou
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.pdb
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.genruntimeconfig.cache
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\ref\GenealogicalTreeCource.dll
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\MaterialDesignColors.dll
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\MaterialDesignThemes.Wpf.dll
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll

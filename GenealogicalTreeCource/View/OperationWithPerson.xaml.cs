@@ -25,10 +25,10 @@ namespace GenealogicalTreeCource
         /// <para>Edit - Вікно редагування</para>
         /// </summary>
 
-        public OperationWithPerson(Person person, TypeOperation option)
+        public OperationWithPerson(TypeOperation option)
         {
             InitializeComponent();
-            DataContext = person;
+    
             switch (option)
 
             {
@@ -52,10 +52,10 @@ namespace GenealogicalTreeCource
             var listBoxItem = sender as ListBoxItem;
             string forSearch = listBoxItem.DataContext as string;
 
-            var selectedPerson = MainWindow.myPersonTree.GetPersonFromSearch(forSearch);
+            var selectedPerson = new PersonTree().GetPersonFromSearch(forSearch);
 
             if (selectedPerson != null)
-                NavigationService.Navigate(new OperationWithPerson(selectedPerson, TypeOperation.View));
+                NavigationService.Navigate(new OperationWithPerson(TypeOperation.View));
         }
     }
 }

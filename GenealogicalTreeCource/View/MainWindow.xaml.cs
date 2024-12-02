@@ -6,7 +6,6 @@ namespace GenealogicalTreeCource
 {
     public partial class MainWindow : Window
     {
-        public static PersonTree myPersonTree = new PersonTree();
         public MainWindow()
         {
             InitializeComponent();

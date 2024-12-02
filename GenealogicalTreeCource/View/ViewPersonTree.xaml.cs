@@ -13,12 +13,12 @@ namespace GenealogicalTreeCource
 {
     public partial class ViewPersonTree : Page
     {
+        private PersonTree myPersonTree;
         public ViewPersonTree()
         {
             InitializeComponent();
-            DataContext = MainWindow.myPersonTree;
-
-            ForPer();
+            myPersonTree = DataContext as PersonTree;
+            ForMove();
         }
 
         #region Методи створення графу
@@ -28,7 +28,7 @@ namespace GenealogicalTreeCource
             if (sender is ListBoxItem listBoxItem)
             {
                 var forSearch = listBoxItem.DataContext as string;
-                var selectedPerson = MainWindow.myPersonTree.GetPersonFromSearch(forSearch);
+                var selectedPerson = myPersonTree.GetPersonFromSearch(forSearch);
 
                 if (selectedPerson != null)
                 {
@@ -85,7 +85,7 @@ namespace GenealogicalTreeCource
                 {
                     DrawUpArrow(Xfirst, Yfirst, posX + 410, posY);
                     DrawRectangle(person.Children[i].ToString(), posX + 250, posY);
-                    DrawOneArrow(posX + 110 + 250, posY+60, posX + 110 + 250, posY + 80);
+                    DrawOneArrow(posX + 110 + 250, posY + 60, posX + 110 + 250, posY + 80);
                     DrawRectangle(person.Children[i].Mother.ToString(), posX + 250, posY + 80);
                     DrawUpTree(person.Children[i], NumOfKnees - 1, posX + 250, posY);
                     posX += horizontalSpacing;
@@ -98,7 +98,7 @@ namespace GenealogicalTreeCource
                 {
                     DrawUpArrow(Xfirst, Yfirst, posX - 30, posY);
                     DrawRectangle(person.Children[i].ToString(), posX - 250, posY);
-                    DrawOneArrow(posX + 110 -250, posY+60, posX + 110 - 250, posY + 80);
+                    DrawOneArrow(posX + 110 - 250, posY + 60, posX + 110 - 250, posY + 80);
                     DrawRectangle(person.Children[i].Father.ToString(), posX - 250, posY + 80);
                     DrawUpTree(person.Children[i], NumOfKnees - 1, posX - 250, posY);
                     posX -= horizontalSpacing;
@@ -138,10 +138,8 @@ namespace GenealogicalTreeCource
             {
                 if (args.ClickCount == 2)
                 {
-                    var selectedPerson = MainWindow.myPersonTree.GetPersonFromToString(tb.Text.ToString());
-
-                    if (selectedPerson != null)
-                        NavigationService.Navigate(new OperationWithPerson(selectedPerson, TypeOperation.View));
+                    myPersonTree.ChoosePersonaId = myPersonTree.GetIdFromToString(text);
+                    myPersonTree.OpenViewPerson();
                 }
             };
             GenealogyCanvas.Children.Add(tb);
@@ -235,7 +233,7 @@ namespace GenealogicalTreeCource
         }
 
         #region Переміщення на полотні
-        private void ForPer()
+        private void ForMove()
         {
             GenealogyCanvas.MouseWheel += GenealogyCanvas_MouseWheel;
             GenealogyCanvas.MouseDown += GenealogyCanvas_MouseDown;
