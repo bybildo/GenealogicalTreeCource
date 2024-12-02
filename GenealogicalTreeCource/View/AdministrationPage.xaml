@@ -63,8 +63,8 @@
             <RowDefinition Height="57*"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/Image/leaf.png" Margin="460,357,294,160" Grid.RowSpan="2"/>
-        <Image Source="/Image/leaf.png" Margin="883,-23,-81,344" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="460,357,294,160" Grid.RowSpan="2" Opacity="0.3"/>
+        <Image Source="/Image/leaf.png" Margin="883,-23,-81,344" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -74,8 +74,8 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="861,165,-107,-60" Grid.Row="1"/>
-        <Image Source="/Image/leaf.png" Margin="736,144,18,144" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="861,165,-107,-60" Grid.Row="1" Opacity="0.3"/>
+        <Image Source="/Image/leaf.png" Margin="736,144,18,144" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -85,7 +85,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="839,369,52,203" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="839,369,52,203" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -95,7 +95,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="513,147,312,182" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="513,147,312,182" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -105,8 +105,8 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="-3,183,928,12" Grid.Row="1"/>
-        <Image Source="/Image/leaf.png" Margin="428,173,326,-68" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="-3,183,928,12" Grid.Row="1" Opacity="0.3"/>
+        <Image Source="/Image/leaf.png" Margin="428,173,326,-68" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -116,7 +116,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="574,-70,180,359" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="574,-70,180,359" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -126,7 +126,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="337,279,587,71" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="337,279,587,71" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -136,7 +136,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="-64,-11,818,300" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="-64,-11,818,300" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -146,7 +146,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="142,52,612,52" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="142,52,612,52" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -156,7 +156,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="189,8,565,281" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="189,8,565,281" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -166,7 +166,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="270,346,690,24" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="270,346,690,24" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -176,7 +176,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="723,73,201,93" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+        <Image Source="/Image/leaf.png" Margin="723,73,201,93" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -186,7 +186,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="56,346,868,4" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="56,346,868,4" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -196,7 +196,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="137,185,788,194" RenderTransformOrigin="0.5,0.5">
+        <Image Source="/Image/leaf.png" Margin="137,185,788,194" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -206,7 +206,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="845,141,80,54" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+        <Image Source="/Image/leaf.png" Margin="845,141,80,54" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Opacity="0.3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -217,18 +217,18 @@
             </Image.RenderTransform>
         </Image>
         <Canvas Grid.RowSpan="2" Margin="2,0,-2,0">
-            <Border Background="White" Opacity="0.7" CornerRadius="15" VerticalAlignment="Top" Height="518" Canvas.Left="72" Canvas.Top="62" Width="369" HorizontalAlignment="Center"/>
-            <TextBlock Text="АДМІНІСТРАТОР" Canvas.Left="109" Canvas.Top="79"  FontSize="36" FontWeight="Bold" Foreground="#256e28" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Height="388" Canvas.Left="92" Canvas.Top="160" Width="329" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Border Background="White" Opacity="0.7" CornerRadius="15" VerticalAlignment="Top" Height="411" Canvas.Left="72" Canvas.Top="133" Width="358" HorizontalAlignment="Left"/>
+            <TextBlock Text="АДМІНІСТРАТОР" Canvas.Left="142" Canvas.Top="160"  FontSize="26" FontWeight="Bold" Foreground="#256e28" HorizontalAlignment="Left" VerticalAlignment="Top" Height="53" Width="218"/>
+            <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Height="260" Canvas.Left="125" Canvas.Top="228" Width="252" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         </Canvas>
 
 
-        <TextBlock Text="Переглянути додавання користувача" Margin="484,8,9,160" Grid.Row="1" FontWeight="Bold"/>
+        <!--<TextBlock Text="Переглянути додавання користувача" Margin="484,8,9,160" Grid.Row="1" FontWeight="Bold"/>
         <Button Content="Переглянути додавання" Click="OnAddUserClick" Width="NaN" Margin="500,85,56,63" Grid.Row="1"/>
         <TextBlock Text="Переглянути редагування інформації" Margin="484,218,14,148" FontWeight="Bold"/>
         <Button Content="Переглянути редагування" Click="OnEditUserClick" Width="NaN" Margin="500,302,56,30"/>
         <TextBlock Text="Сформувати дерево" Margin="589,48,153,323" FontWeight="Bold" />
-        <Button Content="Сформувати дерево" Click="OnGenerateTreeClick" Width="NaN" Margin="500,104,56,228" />
+        <Button Content="Сформувати дерево" Click="OnGenerateTreeClick" Width="NaN" Margin="500,104,56,228" />-->
     </Grid>
 </Page>

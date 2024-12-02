@@ -1,17 +1,6 @@
 ﻿using GenealogicalTreeCource.Class;
-using GenealogicalTreeCource.Model.Enum;
-using GenealogicalTreeCource.Xaml;
-using System.Printing;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GenealogicalTreeCource
 {
@@ -21,34 +10,6 @@ namespace GenealogicalTreeCource
         public MainWindow()
         {
             InitializeComponent();
-            //myPersonTree.Generate(6);
-            //myPersonTree.SaveToFile();
-            myPersonTree.LoadFromFile();
-            DataContext = myPersonTree;
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetWindow.Navigate(new OperationWithPerson(myPersonTree.GetVoidPerson(), TypeOperation.Add));
-        }
-
-        private void TreeButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetWindow.Navigate(new ViewPersonTree());
-        }
-        
-        private void AdministratorButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetWindow.Navigate(new AdministrationPage());
-        }
-        
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                SetWindow.GoBack();
-            }
-            catch { SetWindow.Navigate(null); }
         }
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
@@ -59,17 +20,6 @@ namespace GenealogicalTreeCource
         private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
             AdministratorButton.Visibility = Visibility.Hidden;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            {
-                try
-                {
-                    SetWindow.GoBack();
-                }
-                catch { SetWindow.Navigate(null); }
-            }
         }
     }
 }

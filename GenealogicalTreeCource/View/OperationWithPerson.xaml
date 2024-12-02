@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GenealogicalTreeCource.Xaml"
       mc:Ignorable="d" 
-      Title="Register" Background="#5ba854"
+      Title="Register" Background="#1d521f"
       Height="640" Width="1000">
     <Page.Resources>
         <ResourceDictionary>

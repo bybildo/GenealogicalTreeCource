@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GenealogicalTreeCource"
+        xmlns:local="clr-namespace:GenealogicalTreeCource.Class"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         ResizeMode="NoResize"
@@ -14,6 +14,7 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <local:PersonTree x:Key="MyPersonTree" />
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="36" />
                 <Setter Property="Height" Value="80" />
@@ -54,6 +55,10 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <Window.DataContext>
+        <StaticResource ResourceKey="MyPersonTree" />
+    </Window.DataContext>
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Image/MainWindow/tree_background.jpg" Stretch="UniformToFill" />
@@ -75,41 +80,46 @@
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
-            <Button Content="ТВОЄ ДЕРЕВО" Click="TreeButton_Click" FontWeight="Bold"/>
-
-            <Button Content="ДОДАТИ" Click="AddButton_Click" FontWeight="Bold"/>
+            <Button Content="ТВОЄ ДЕРЕВО" Command="{Binding GraphPage}" />
+            <Button Content="ДОДАТИ" Command="{Binding AddPersonPage}" />
         </StackPanel>
 
-        <Button Content="АДМІНІСТРАТОР" FontSize="20" Height="50" Width="173" FontWeight="Bold"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,548,10,0"
-                Click="AdministratorButton_Click" Opacity="0.5" Name="AdministratorButton">
-            <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#66BB6A" Offset="0.0" />
-                    <GradientStop Color="#124213" Offset="1.0" />
-                </LinearGradientBrush>
-            </Button.Background>
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.5" Color="Black" />
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Opacity" Value="0.5" />
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="1" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
-         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,570,0,0"
-         Click="BackButton_Click"/>
 
 
-        <!--<Border Margin="0">
+        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,548,10,0"
+        Width="163" Height="50" Background="Transparent"
+        MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+            <Button Name="AdministratorButton" Content="АДМІНІСТРАТОР" Visibility="Hidden" FontSize="20" Height="50" Width="163"
+            HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding AdministrationPage}">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#66BB6A" Offset="0.0" />
+                        <GradientStop Color="#124213" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.5" Color="Black" />
+                </Button.Effect>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Opacity" Value="0.5" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Border>
+        <!--<Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,570,0,0"
+            Click="BackButton_Click"/>-->
+
+        <Border Margin="0">
             <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
-        </Border>-->
-    </Grid>
+        </Border>
+        </Grid>
 </Window>
+
+        
