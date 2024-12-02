@@ -217,18 +217,22 @@
             </Image.RenderTransform>
         </Image>
         <Canvas Grid.RowSpan="2" Margin="2,0,-2,0">
-            <Border Background="White" Opacity="0.7" CornerRadius="15" VerticalAlignment="Top" Height="411" Canvas.Left="72" Canvas.Top="133" Width="358" HorizontalAlignment="Left"/>
-            <TextBlock Text="АДМІНІСТРАТОР" Canvas.Left="142" Canvas.Top="160"  FontSize="26" FontWeight="Bold" Foreground="#256e28" HorizontalAlignment="Left" VerticalAlignment="Top" Height="53" Width="218"/>
-            <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Height="260" Canvas.Left="125" Canvas.Top="228" Width="252" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Border Background="White" Opacity="0.8" CornerRadius="15" VerticalAlignment="Top" Height="411" Canvas.Left="72" Canvas.Top="103" Width="358" HorizontalAlignment="Center"/>
+            <TextBlock Text="АДМІНІСТРАТОР" Canvas.Left="142" Canvas.Top="136"  FontSize="26" FontWeight="Bold" Foreground="#256e28" HorizontalAlignment="Left" VerticalAlignment="Top" Height="53" Width="218"/>
+            <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Height="260" Canvas.Left="125" Canvas.Top="194" Width="252" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
         </Canvas>
 
 
-        <!--<TextBlock Text="Переглянути додавання користувача" Margin="484,8,9,160" Grid.Row="1" FontWeight="Bold"/>
-        <Button Content="Переглянути додавання" Click="OnAddUserClick" Width="NaN" Margin="500,85,56,63" Grid.Row="1"/>
-        <TextBlock Text="Переглянути редагування інформації" Margin="484,218,14,148" FontWeight="Bold"/>
-        <Button Content="Переглянути редагування" Click="OnEditUserClick" Width="NaN" Margin="500,302,56,30"/>
-        <TextBlock Text="Сформувати дерево" Margin="589,48,153,323" FontWeight="Bold" />
-        <Button Content="Сформувати дерево" Click="OnGenerateTreeClick" Width="NaN" Margin="500,104,56,228" />-->
+        <TextBlock Text="Переглянути додавання користувача" Margin="483,390,10,190" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Button Content="Переглянути додавання" Width="NaN" Margin="490,42,66,106" Grid.Row="1"/>
+        <TextBlock Text="Переглянути редагування інформації" Margin="491,195,7,171" FontWeight="Bold"/>
+        <Button Content="Переглянути редагування"  Width="NaN" Margin="490,272,66,60"/>
+        <TextBlock Text="Сформувати дерево" Margin="583,20,159,351" FontWeight="Bold" />
+        <Button Content="Дерево" Margin="567,84,133,248" />
+
+        <Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
+        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="852,159,0,0"
+        Command="{Binding BackPage}" Grid.Row="1"/>
     </Grid>
 </Page>
