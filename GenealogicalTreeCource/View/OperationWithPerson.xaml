@@ -247,8 +247,7 @@
         <Border Background="white" Opacity="0.6" CornerRadius="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" Height="584" Margin="287,28,0,0" Grid.RowSpan="2">
             <StackPanel Name="Family" Margin="10">
                 <TextBlock Text="Батько:" FontWeight="Bold" Margin="0,0,0,5"/>
-
-                <ListBox Name="FatherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Father, Converter={StaticResource PersonToCollectionConverter}}">
+                <ListBox Tag="ListBox" Name="FatherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Father, Converter={StaticResource PersonToCollectionConverter}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=FatherListBox}"/>
@@ -256,13 +255,31 @@
                     </i:Interaction.Triggers>
                 </ListBox>
 
+                <TextBox Tag="TextBox" Text="{Binding Path=Filter2, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Collapsed" />
+                <ListBox Tag="TextBox" ItemsSource="{Binding Path=Search2, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2"  Visibility="Collapsed">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                
                 <TextBlock Text="Мати:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Name="MotherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}">
+                <ListBox Tag="ListBox" Name="MotherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MotherListBox}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+                </ListBox>
+
+                <TextBox Tag="TextBox" Text="{Binding Path=Filter1, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Collapsed"/>
+                <ListBox Tag="TextBox" ItemsSource="{Binding Path=Search1, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2"  Visibility="Collapsed">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                 </ListBox>
 
                 <TextBlock Tag="View" Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>

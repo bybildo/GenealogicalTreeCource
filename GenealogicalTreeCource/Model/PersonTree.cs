@@ -19,6 +19,7 @@ namespace GenealogicalTreeCource.Class
         private List<Person> _persons = new List<Person>();
         private List<Person> _addPerson = new List<Person>();
         private List<Person> _editPerson = new List<Person>();
+        public List<Person> GetPersons { get => _persons; }
 
 
         private int _choosePersonId;
@@ -65,66 +66,121 @@ namespace GenealogicalTreeCource.Class
         }
 
         #region Пошук mvvm
-        private string _filter = "";
-        private ObservableCollection<string> _search = new ObservableCollection<string>();
+        private string _filter1 = "";
+        private string _filter2 = "";
+        private ObservableCollection<string> _search1 = new ObservableCollection<string>();
+        private ObservableCollection<string> _search2 = new ObservableCollection<string>();
 
-        public string Filter
+        public string Filter1
         {
-            get { return _filter; }
+            get { return _filter1; }
             set
             {
-                if (_filter != value)
+                if (_filter1 != value)
                 {
-                    _filter = value;
-                    FilterPersons(_filter);
-                    OnPropertyChanged(nameof(Filter));
+                    _filter1 = value;
+                    FilterPersons();
+                    OnPropertyChanged(nameof(Filter1));
                 }
             }
         }
 
-        public ObservableCollection<string> Search
+        public string Filter2
         {
-            get { return _search; }
+            get { return _filter2; }
+            set
+            {
+                if (_filter2 != value)
+                {
+                    _filter2 = value;
+                    FilterPersons();
+                    OnPropertyChanged(nameof(Filter2));
+                }
+            }
+        }
+
+        public ObservableCollection<string> Search1
+        {
+            get { return _search1; }
             private set
             {
-                if (_search != value)
+                if (_search1 != value)
                 {
-                    _search = value;
-                    OnPropertyChanged(nameof(Search));
+                    _search1 = value;
+                    OnPropertyChanged(nameof(Search1));
                 }
             }
         }
 
-        public void FilterPersons(string searchText)
+        public ObservableCollection<string> Search2
         {
-            int? searchYear = null;
-            string textForSearch = searchText?.Trim();
-
-            var yearMatch = Regex.Match(textForSearch, @"\b(\d{4})\b");
-
-            if (yearMatch.Success)
+            get { return _search2; }
+            private set
             {
-                if (int.TryParse(yearMatch.Value, out var year))
+                if (_search2 != value)
                 {
-                    searchYear = year;
-                    textForSearch = textForSearch.Replace(yearMatch.Value, "").Trim();
+                    _search2 = value;
+                    OnPropertyChanged(nameof(Search2));
                 }
             }
-            else searchYear = DateTime.Now.Year;
+        }
 
+        public void FilterPersons()
+        {
+            int? searchYear1 = null;
+            int? searchYear2 = null;
+            string textForSearch1 = Filter1?.Trim();
+            string textForSearch2 = Filter2?.Trim();
 
-            var filteredPersons = _persons
+            var yearMatch1 = Regex.Match(textForSearch1, @"\b(\d{4})\b");
+            var yearMatch2 = Regex.Match(textForSearch2, @"\b(\d{4})\b");
+
+            if (yearMatch1.Success)
+            {
+                if (int.TryParse(yearMatch1.Value, out var year))
+                {
+                    searchYear1 = year;
+                    textForSearch1 = textForSearch1.Replace(yearMatch1.Value, "").Trim();
+                }
+            }
+            else searchYear1 = DateTime.Now.Year;
+
+            if (yearMatch2.Success)
+            {
+                if (int.TryParse(yearMatch2.Value, out var year))
+                {
+                    searchYear2 = year;
+                    textForSearch2 = textForSearch2.Replace(yearMatch2.Value, "").Trim();
+                }
+            }
+            else searchYear2 = DateTime.Now.Year;
+
+            var filteredPersons1 = _persons
                 .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
-                            (string.IsNullOrEmpty(textForSearch) || p.ForSearch().Contains(textForSearch, StringComparison.OrdinalIgnoreCase)))
+                            (string.IsNullOrEmpty(textForSearch1) || p.ForSearch().Contains(textForSearch1, StringComparison.OrdinalIgnoreCase)))
                 .Reverse()
-                .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear.Value ?? 0))
+                .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear1.Value ?? 0))
                 .Take(5)
                 .ToList();
 
-            _search.Clear();
-            foreach (var person in filteredPersons)
+            var filteredPersons2 = _persons
+                .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
+                            (string.IsNullOrEmpty(textForSearch2) || p.ForSearch().Contains(textForSearch2, StringComparison.OrdinalIgnoreCase)))
+                .Reverse()
+                .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear2.Value ?? 0))
+                .Take(5)
+                .ToList();
+
+            _search1.Clear();
+            foreach (var person in filteredPersons1)
             {
-                _search.Add(person.ForSearch());
+                _search1.Add(person.ForSearch());
+            }
+
+            _search2.Clear();
+            foreach (var person in filteredPersons2)
+            {
+                _search2.Add(person.ForSearch());
             }
         }
         #endregion

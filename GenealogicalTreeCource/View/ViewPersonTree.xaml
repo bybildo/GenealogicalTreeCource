@@ -186,9 +186,9 @@
         </Image>
 
 
-        <TextBox Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2" />
+        <TextBox Text="{Binding Path=Filter1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2" />
 
-        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2">
+        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search1, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />

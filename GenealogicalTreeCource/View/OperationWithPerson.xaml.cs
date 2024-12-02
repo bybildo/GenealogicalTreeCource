@@ -98,9 +98,16 @@ namespace GenealogicalTreeCource
             {
                 ForAdd(childElement);
             }
-            else if (element is FrameworkElement frameworkElement && frameworkElement.Tag?.ToString() == "View")
+            else if (element is FrameworkElement frameworkElement)
             {
-                frameworkElement.Visibility = Visibility.Collapsed;
+                if (frameworkElement.Tag?.ToString() == "View")
+                    frameworkElement.Visibility = Visibility.Collapsed;
+
+                if (frameworkElement.Tag?.ToString() == "TextBox")
+                    frameworkElement.Visibility = Visibility.Visible;
+
+                if (frameworkElement.Tag?.ToString() == "ListBox")
+                    frameworkElement.Visibility = Visibility.Collapsed;
             }
         }
 
