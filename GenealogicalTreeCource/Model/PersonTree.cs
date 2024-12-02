@@ -68,8 +68,10 @@ namespace GenealogicalTreeCource.Class
         #region Пошук mvvm
         private string _filter1 = "";
         private string _filter2 = "";
+        private string _filter3 = "";
         private ObservableCollection<string> _search1 = new ObservableCollection<string>();
         private ObservableCollection<string> _search2 = new ObservableCollection<string>();
+        private ObservableCollection<string> _search3 = new ObservableCollection<string>();
 
         public string Filter1
         {
@@ -79,7 +81,7 @@ namespace GenealogicalTreeCource.Class
                 if (_filter1 != value)
                 {
                     _filter1 = value;
-                    FilterPersons();
+                    FilterPersons1();
                     OnPropertyChanged(nameof(Filter1));
                 }
             }
@@ -93,8 +95,22 @@ namespace GenealogicalTreeCource.Class
                 if (_filter2 != value)
                 {
                     _filter2 = value;
-                    FilterPersons();
+                    FilterPersons2();
                     OnPropertyChanged(nameof(Filter2));
+                }
+            }
+        }
+
+        public string Filter3
+        {
+            get { return _filter3; }
+            set
+            {
+                if (_filter3 != value)
+                {
+                    _filter3 = value;
+                    FilterPersons3();
+                    OnPropertyChanged(nameof(Filter3));
                 }
             }
         }
@@ -125,15 +141,25 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        public void FilterPersons()
+        public ObservableCollection<string> Search3
+        {
+            get { return _search3; }
+            private set
+            {
+                if (_search3 != value)
+                {
+                    _search3 = value;
+                    OnPropertyChanged(nameof(Search3));
+                }
+            }
+        }
+
+        public void FilterPersons1()
         {
             int? searchYear1 = null;
-            int? searchYear2 = null;
             string textForSearch1 = Filter1?.Trim();
-            string textForSearch2 = Filter2?.Trim();
 
             var yearMatch1 = Regex.Match(textForSearch1, @"\b(\d{4})\b");
-            var yearMatch2 = Regex.Match(textForSearch2, @"\b(\d{4})\b");
 
             if (yearMatch1.Success)
             {
@@ -145,6 +171,28 @@ namespace GenealogicalTreeCource.Class
             }
             else searchYear1 = DateTime.Now.Year;
 
+            var filteredPersons1 = _persons
+                .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
+                            (string.IsNullOrEmpty(textForSearch1) || p.ForSearch().Contains(textForSearch1, StringComparison.OrdinalIgnoreCase)))
+                .Reverse()
+                .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear1.Value ?? 0))
+                .Take(5)
+                .ToList();
+
+            _search1.Clear();
+            foreach (var person in filteredPersons1)
+            {
+                _search1.Add(person.ForSearch());
+            }
+        }
+
+        public void FilterPersons2()
+        {
+            int? searchYear2 = null;
+            string textForSearch2 = Filter2?.Trim();
+
+            var yearMatch2 = Regex.Match(textForSearch2, @"\b(\d{4})\b");
+
             if (yearMatch2.Success)
             {
                 if (int.TryParse(yearMatch2.Value, out var year))
@@ -155,32 +203,52 @@ namespace GenealogicalTreeCource.Class
             }
             else searchYear2 = DateTime.Now.Year;
 
-            var filteredPersons1 = _persons
-                .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
-                            (string.IsNullOrEmpty(textForSearch1) || p.ForSearch().Contains(textForSearch1, StringComparison.OrdinalIgnoreCase)))
-                .Reverse()
-                .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear1.Value ?? 0))
-                .Take(5)
-                .ToList();
-
             var filteredPersons2 = _persons
                 .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
+                            p.GenderPerson == Enum.Gender.male &&
                             (string.IsNullOrEmpty(textForSearch2) || p.ForSearch().Contains(textForSearch2, StringComparison.OrdinalIgnoreCase)))
                 .Reverse()
                 .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear2.Value ?? 0))
                 .Take(5)
                 .ToList();
 
-            _search1.Clear();
-            foreach (var person in filteredPersons1)
-            {
-                _search1.Add(person.ForSearch());
-            }
-
             _search2.Clear();
             foreach (var person in filteredPersons2)
             {
                 _search2.Add(person.ForSearch());
+            }
+        }
+
+        public void FilterPersons3()
+        {
+            int? searchYear3 = null;
+            string textForSearch3 = Filter3?.Trim();
+
+            var yearMatch3 = Regex.Match(textForSearch3, @"\b(\d{4})\b");
+
+            if (yearMatch3.Success)
+            {
+                if (int.TryParse(yearMatch3.Value, out var year))
+                {
+                    searchYear3 = year;
+                    textForSearch3 = textForSearch3.Replace(yearMatch3.Value, "").Trim();
+                }
+            }
+            else searchYear3 = DateTime.Now.Year;
+
+            var filteredPersons3 = _persons
+                .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
+                            p.GenderPerson == Enum.Gender.female &&
+                            (string.IsNullOrEmpty(textForSearch3) || p.ForSearch().Contains(textForSearch3, StringComparison.OrdinalIgnoreCase)))
+                .Reverse()
+                .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear3.Value ?? 0))
+                .Take(5)
+                .ToList();
+
+            _search3.Clear();
+            foreach (var person in filteredPersons3)
+            {
+                _search3.Add(person.ForSearch());
             }
         }
         #endregion
