@@ -15,6 +15,11 @@ using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Data;
+using GenealogicalTreeCource.Model.Enum;
+using System.Windows;
+using System.Windows.Input;
+using GenealogicalTreeCource.ViewModel;
+using GenealogicalTreeCource.Xaml;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -22,6 +27,12 @@ namespace GenealogicalTreeCource.Class
     {
         private List<Person> _persons = new List<Person>();
         private List<Person> _addPerson = new List<Person>();
+
+        public PersonTree()
+        {
+            InitializeCommands();
+            LoadFromFile();
+        }
 
         #region Пошук mvvm
         private string _filter = "";
@@ -220,6 +231,84 @@ namespace GenealogicalTreeCource.Class
             _addPerson.Add(new Person("void"));
             return _addPerson[_addPerson.Count - 1];
         }
+
+        #region команди mvvm
+        public ICommand AddPersonPage { get; private set; }
+        public ICommand ViewPersonPage { get; private set; }
+        public ICommand EditPersonPage { get; private set; }
+        public ICommand GraphPage { get; private set; }
+        public ICommand AdministrationPage { get; private set; }
+        public ICommand BackPage { get; private set; }
+
+        private void InitializeCommands()
+        {
+            AddPersonPage = new RelayCommand(_ => OpenAddPerson());
+            ViewPersonPage = new RelayCommand(_ => OpenViewPerson());
+            EditPersonPage = new RelayCommand(_ => OpenEditPerson());
+            GraphPage = new RelayCommand(_ => OpenGraphPerson());
+            AdministrationPage = new RelayCommand(_ => OpenAdministration());
+            BackPage = new RelayCommand(_ => BackFrame());
+        }
+
+        private void OpenAddPerson()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SetWindow.Navigate(new OperationWithPerson(GetVoidPerson(), TypeOperation.Add));
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
+        private void OpenEditPerson()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SetWindow.Navigate(new OperationWithPerson(GetVoidPerson(), TypeOperation.Edit));
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
+        private void OpenViewPerson()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SetWindow.Navigate(new OperationWithPerson(GetVoidPerson(), TypeOperation.View));
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
+        private void OpenGraphPerson()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SetWindow.Navigate(new ViewPersonTree());
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
+        private void OpenAdministration()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SetWindow.Navigate(new AdministrationPage());
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
+        private void BackFrame()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SetWindow.Navigate(new AdministrationPage());
+                try
+                {
+                    mainWindow.SetWindow.GoBack();
+                }
+                catch { mainWindow.SetWindow.Navigate(null); }
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+        #endregion
 
         #region Забезпечення Binding
         public event PropertyChangedEventHandler? PropertyChanged;

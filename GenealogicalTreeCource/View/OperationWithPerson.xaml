@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GenealogicalTreeCource.Xaml"
       mc:Ignorable="d" 
-      Title="Register" Background="#173b18"
-      Height="641" Width="1000">
+      Title="Register" Background="#5ba854"
+      Height="640" Width="1000">
     <Page.Resources>
         <ResourceDictionary>
             <Style TargetType="Button">
@@ -49,12 +49,13 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="103*"/>
             <RowDefinition Height="57*"/>
         </Grid.RowDefinitions>
-       
+
+        <Canvas Grid.RowSpan="2"/>
+
         <Image Source="/Image/leaf.png" Margin="460,357,294,160" Grid.RowSpan="2"/>
         <Image Source="/Image/leaf.png" Margin="883,-23,-81,344" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
@@ -223,39 +224,35 @@
 
         <Border Background="White" Opacity="0.6" CornerRadius="15" VerticalAlignment="Top" Height="367" Margin="18,28,737,0">
         </Border>
-        <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Margin="18,30,737,0"/>
+        <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Margin="18,30,737,19"/>
 
 
         <Border Background="white" Opacity="0.6" CornerRadius="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" Height="584" Margin="287,28,0,0" Grid.RowSpan="2">
             <StackPanel Margin="10">
                 <TextBlock Text="Батько:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Name="FatherListBox" Height="50" Margin="0,0,0,10" IsEnabled="{Binding CanEditLogicalFields}" Width="675"/>
+                <ListBox Name="FatherListBox" Height="50" Margin="0,0,0,10" IsEnabled="{Binding CanEditLogicalFields}"/>
                 <TextBlock Text="Мати:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Name="MotherListBox" Height="50" Margin="0,0,0,10" IsEnabled="{Binding CanEditLogicalFields}" Width="674"/>
+                <ListBox Name="MotherListBox" Height="50" Margin="0,0,0,10" IsEnabled="{Binding CanEditLogicalFields}"/>
                 <TextBlock Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>
                 <ListBox Name="MarriageListBox" Height="50" Margin="0,0,0,10" IsEnabled="{Binding CanEditLogicalFields}"/>
                 <TextBlock Text="Діти:" FontWeight="Bold" Margin="0,0,0,5"/>
                 <ListBox Name="ChildrenListBox" Height="50" Margin="0,0,0,10" IsEnabled="{Binding CanEditLogicalFields}"/>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="78" Width="725">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Стать:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <ComboBox Name="GenderComboBox" Width="334" Margin="0,0,10,0" IsEnabled="{Binding CanEditLogicalFields}">
+                    <ComboBox Name="GenderComboBox" Width="169" Margin="0,0,10,0" IsEnabled="{Binding CanEditLogicalFields}">
                         <ComboBoxItem Content="Чоловіча"/>
                         <ComboBoxItem Content="Жіноча"/>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="43" Width="666">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Дата нарождення:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <DatePicker Name="BirthDatePicker" IsEnabled="{Binding IsEditMode}" Width="475"/>
+                    <DatePicker Name="BirthDatePicker" IsEnabled="{Binding IsEditMode}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="43" Width="667">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Дата смерті:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="DeathDatePicker" IsEnabled="{Binding CanEditLogicalFields}" Width="511"/>
+                    <DatePicker x:Name="DeathDatePicker" IsEnabled="{Binding CanEditLogicalFields}" Width="393"/>
                 </StackPanel>
             </StackPanel>
         </Border>
-
-
-
-
     </Grid>
 </Page>
