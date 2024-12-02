@@ -14,9 +14,9 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <local:PersonTree x:Key="MyPersonTree" />
+            <local:PersonTree x:Key="MyPersonTree"/>
             <Style TargetType="Button">
-                <Setter Property="FontSize" Value="36" />
+                <Setter Property="FontSize" Value="36"  />
                 <Setter Property="Height" Value="80" />
                 <Setter Property="Width" Value="300" />
                 <Setter Property="Foreground" Value="White" />
@@ -80,7 +80,7 @@
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
-            <Button Content="ТВОЄ ДЕРЕВО" Command="{Binding GraphPage}" />
+            <Button Content="ТВОЄ ДЕРЕВО"  Command="{Binding GraphPage}" />
             <Button Content="ДОДАТИ" Command="{Binding AddPersonPage}" />
         </StackPanel>
 
@@ -112,14 +112,13 @@
                 </Button.Style>
             </Button>
         </Border>
-        <!--<Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,570,0,0"
-            Click="BackButton_Click"/>-->
+        <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Height="45" Canvas.Left="125" Canvas.Top="194" Width="46" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="941,577,0,0"/>
+
 
         <Border Margin="0">
             <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
         </Border>
-        </Grid>
+    </Grid>
 </Window>
 
         

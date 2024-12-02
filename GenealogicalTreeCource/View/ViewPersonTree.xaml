@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="640" d:DesignWidth="1000"
       Title="PersonTree" Background="#1d521f">
-   
+
     <Page.Resources>
         <!--<Style TargetType="TextBox">
             <Setter Property="FontSize" Value="20"/>
@@ -37,7 +37,9 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#a8d5ba"/>
-                    --><!-- Легкий зелений відтінок на наведення --><!--
+                    -->
+        <!-- Легкий зелений відтінок на наведення -->
+        <!--
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
             </Style.Triggers>
@@ -55,16 +57,133 @@
     </Page.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="397*"/>
+            <ColumnDefinition Width="103*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="49*"/>
             <RowDefinition Height="98*"/>
             <RowDefinition Height="60*"/>
             <RowDefinition Height="432*"/>
         </Grid.RowDefinitions>
+        <Image Source="/Image/leaf.png" Margin="509,300,104,-34" Opacity="0.3" Grid.Row="3"/>
+        <Image Source="/Image/leaf.png" Margin="67,7,-107,426" Grid.Row="3" Opacity="0.3" Grid.Column="1"/>
+        <Image Source="/Image/leaf.png" Margin="-35,284,583,-66" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="3">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="37.739"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="94,127,-64,191" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="3" Grid.Column="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-215.642"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="56,-7,-96,50" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2" Grid.Column="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="220.269"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="587,-40,167,97" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-166.737"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="370,57,348,382" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="2" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="253.579"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="-119,83,667,242" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="3">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="144.798"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="-111,-29,659,33" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-218.819"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="201,-20,347,21" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-35.167"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="645,40,73,41" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Opacity="0.3" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="99.457"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="108,36,611,384" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2" Grid.Row="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="122.519"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="17,28,114,367" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Opacity="0.3" Grid.RowSpan="2" Grid.Column="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="41.095"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
 
-        <TextBox Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,9,14,49" Grid.Row="1" />
 
-        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search, Mode=OneWay}" Height="110" VerticalAlignment="Top" Grid.Row="1" Margin="10,57,10,0" Grid.RowSpan="3">
+        <TextBox Text="{Binding Path=Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2" />
+
+        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />
@@ -72,8 +191,9 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="3" Margin="10,17,10,10">
-            <Canvas x:Name="GenealogyCanvas" Background="FloralWhite" Focusable="True" FocusManager.IsFocusScope="True" Height="350" Width="900">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="3" Margin="26,27,25,26" Grid.ColumnSpan="2">
+            <Canvas x:Name="GenealogyCanvas" Background="FloralWhite" Height="350" Width="900">
+                <!--Focusable="True" FocusManager.IsFocusScope="True"-->
                 <Canvas.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform x:Name="ScaleTransform" />
@@ -82,5 +202,15 @@
                 </Canvas.RenderTransform>
             </Canvas>
         </ScrollViewer>
+        <TextBlock Text="Твоє генеалогічне дерево"
+           FontSize="36" FontWeight="Bold" Foreground="LightGreen"
+           FontFamily="Comic Sans MS"  
+           HorizontalAlignment="Left" VerticalAlignment="Top"
+           Margin="273,12,0,0" TextWrapping="Wrap"
+           TextAlignment="Left" LineHeight="40" Grid.RowSpan="2">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
+            </TextBlock.Effect>
+        </TextBlock>
     </Grid>
 </Page>
