@@ -4,12 +4,53 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GenealogicalTreeCource.Class"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+      
       mc:Ignorable="d" 
       d:DesignHeight="640" d:DesignWidth="1000"
       Title="PersonTree" Background="#1d521f">
 
     <Page.Resources>
-       
+
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Margin" Value="0,0,0,20" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#4CAF50" Offset="0.0" />
+                        <GradientStop Color="#124213" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="5" Opacity="0.4" Color="Black" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="40">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
 
         <Style TargetType="ScrollViewer">
             <Setter Property="Margin" Value="5"/>
@@ -22,7 +63,7 @@
         </Style>
         <local:PersonTree x:Key="MyPersonTree" />
     </Page.Resources>
-    
+
     <Page.DataContext>
         <StaticResource ResourceKey="MyPersonTree" />
     </Page.DataContext>
@@ -38,6 +79,7 @@
             <RowDefinition Height="60*"/>
             <RowDefinition Height="432*"/>
         </Grid.RowDefinitions>
+
         <Image Source="/Image/leaf.png" Margin="509,300,104,-34" Opacity="0.3" Grid.Row="3"/>
         <Image Source="/Image/leaf.png" Margin="67,7,-107,426" Grid.Row="3" Opacity="0.3" Grid.Column="1"/>
         <Image Source="/Image/leaf.png" Margin="-35,284,583,-66" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="3">
@@ -152,9 +194,9 @@
         </Image>
 
 
-        <TextBox Text="{Binding Path=Filter1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2" />
+        <TextBox Text="{Binding Path=Filter1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,31,25,27" Grid.Row="1" Grid.ColumnSpan="2" />
 
-        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search1, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2">
+        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search1, Mode=OneWay}" Height="60" VerticalAlignment="Top" Grid.Row="1" Margin="26,80,25,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />
@@ -162,7 +204,7 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="3" Margin="26,27,25,26" Grid.ColumnSpan="2">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2" Margin="26,51,25,62" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Canvas x:Name="GenealogyCanvas" Background="FloralWhite" Height="350" Width="900">
                 <!--Focusable="True" FocusManager.IsFocusScope="True"-->
                 <Canvas.RenderTransform>
@@ -183,5 +225,14 @@
                 <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
             </TextBlock.Effect>
         </TextBlock>
+
+        <Button Name="Back" Content="Назад"  Margin="59,376,27,7" Grid.Row="3" Grid.Column="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding BackPage, Source={StaticResource MyPersonTree}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+
     </Grid>
 </Page>
