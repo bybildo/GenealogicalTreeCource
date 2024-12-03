@@ -254,6 +254,6 @@
             </Image.RenderTransform>
         </Image>
 
-        <!--<Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>-->
+        <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

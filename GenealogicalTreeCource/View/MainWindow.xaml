@@ -67,13 +67,13 @@
         </Grid.Background>
 
 
-        <Rectangle Fill="Black" Opacity="0.3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Rectangle Fill="Black" Opacity="0.4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
         <TextBlock Text="Розроби своє власне генеалогічне дерево"
                    FontSize="36" FontWeight="Bold" Foreground="LightGreen"
                    FontFamily="Comic Sans MS"  
-                   HorizontalAlignment="Left" VerticalAlignment="Top"
-                   Margin="151,20,0,0" TextWrapping="Wrap"
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Margin="0,123,0,0" TextWrapping="Wrap"
                    TextAlignment="Left" LineHeight="40">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
@@ -88,11 +88,12 @@
 
 
 
-        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,548,10,0"
-        Width="163" Height="50" Background="Transparent"
+        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,527,54,0"
+        Width="100" Height="70" Background="Transparent"
         MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
-            <Image x:Name="AdministratorButton" Source="/Image/adminButton.png" Width="163" Height="50"
-           HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Hidden">
+            <Image x:Name="AdministratorButton" Source="/Image/adminButton.png" Width="82" Height="70"
+           HorizontalAlignment="Center" VerticalAlignment="Center"  Visibility="Hidden">
+
                 <Image.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.5" Color="Black" />
                 </Image.Effect>
@@ -115,7 +116,9 @@
         </Border>
 
         <Border Margin="0">
-            <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
+            
+        <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
+        
         </Border>
     </Grid>
 </Window>
