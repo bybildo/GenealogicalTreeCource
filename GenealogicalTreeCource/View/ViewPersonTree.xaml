@@ -9,41 +9,7 @@
       Title="PersonTree" Background="#1d521f">
 
     <Page.Resources>
-        <!--<Style TargetType="TextBox">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="Background" Value="#e0f2e9"/>
-            <Setter Property="BorderBrush" Value="#4CAF50"/>
-            <Setter Property="BorderThickness" Value="2"/>
-        </Style>
-
-        <Style TargetType="ListBox">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Background" Value="#f4f9f4"/>
-            <Setter Property="BorderBrush" Value="#4CAF50"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Padding" Value="10"/>
-        </Style>-->
-
-        <!--<Style TargetType="ListBoxItem">
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Background" Value="#ffffff"/>
-            <Setter Property="BorderBrush" Value="#4CAF50"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Foreground" Value="#333333"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#a8d5ba"/>
-                    -->
-        <!-- Легкий зелений відтінок на наведення -->
-        <!--
-                    <Setter Property="Cursor" Value="Hand"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>-->
+       
 
         <Style TargetType="ScrollViewer">
             <Setter Property="Margin" Value="5"/>

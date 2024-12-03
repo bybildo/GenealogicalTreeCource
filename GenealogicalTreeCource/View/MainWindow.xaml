@@ -18,8 +18,9 @@
         <ResourceDictionary>
             <local:PersonTree x:Key="MyPersonTree"/>
             <Style TargetType="Button">
-                <Setter Property="FontSize" Value="36"  />
                 <Setter Property="Height" Value="80" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="FontFamily" Value="Comic Sans MS"   />
                 <Setter Property="Width" Value="300" />
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Padding" Value="20" />
