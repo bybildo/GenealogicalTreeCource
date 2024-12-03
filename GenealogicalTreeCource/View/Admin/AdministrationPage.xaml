@@ -225,7 +225,7 @@
 
         <Button Content="Переглянути додавання" Width="NaN" Margin="490,42,66,106" Grid.Row="1"/>
         <Button Content="Переглянути редагування"  Width="NaN" Margin="490,272,66,60"/>
-        <Button Content="Сформувати дерево" Margin="567,84,133,248" />
+        <Button Content="Сформувати дерево" Margin="476,86,24,210" Click="ApplyButton_Click"/>
 
         <Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="852,159,0,0"

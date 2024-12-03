@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GenealogicalTreeCource.Xaml
+namespace GenealogicalTreeCource.View
 {
     /// <summary>
-    /// Interaction logic for AdministrationPage.xaml
+    /// Interaction logic for TreeGenWind.xaml
     /// </summary>
-    public partial class AdministrationPage : Window
+    public partial class TreeGenWind : Window
     {
-        public AdministrationPage()
+        public TreeGenWind()
         {
             InitializeComponent();
         }

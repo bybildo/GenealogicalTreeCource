@@ -1,0 +1,16 @@
+﻿<Window x:Class="GenealogicalTreeCource.View.TreeGenWind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GenealogicalTreeCource.View"
+        mc:Ignorable="d"
+        Title="TreeGenWind" Height="120" Width="220">
+    <Grid>
+        <TextBlock>Кількстьсімей</TextBlock>
+        <TextBox></TextBox>
+        <TextBlock>кількістьколін</TextBlock>
+        <TextBox></TextBox>
+        <Button></Button>
+    </Grid>
+</Window>
