@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GenealogicalTreeCource.Xaml"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:cmd="http://www.galasoft.ch/mvvmlight"
       mc:Ignorable="d" 
       Height="600" Width="800"
       ResizeMode="NoResize"
@@ -216,13 +218,18 @@
 
         </Canvas>
 
-        <Button Content="Переглянути додавання" Margin="428,15,72,14" Grid.Row="3" FontWeight="Bold"/>
+        <Button Content="Переглянути додавання" Margin="428,15,72,10" Grid.Row="3" FontWeight="Bold"/>
         <Button Content="Переглянути редагування"  Margin="428,45,72,45" Grid.Row="2" FontWeight="Bold"/>
         <Button Content="Сформувати дерево" Margin="428,15,72,14" Click="ApplyButton_Click" FontWeight="Bold" Grid.Row="1"/>
 
-        <Button Content="Назад" FontSize="20" Height="39" Width="118" FontWeight="Bold"
-        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="672,41,0,0"
-        Command="{Binding BackPage}" Grid.Row="4"/>
+        <Button Name="Back" Content="Назад"  Margin="836,130,44,48" Grid.Row="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding BackPage, Source={StaticResource MyPersonTree}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+
         <Image Source="/Image/leaf.png" Margin="22,43,737,53" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="2">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -254,6 +261,7 @@
             </Image.RenderTransform>
         </Image>
 
-        <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
     </Grid>
+    
 </Window>
