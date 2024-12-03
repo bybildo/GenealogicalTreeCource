@@ -6,10 +6,283 @@
       xmlns:local="clr-namespace:GenealogicalTreeCource.View.Admin"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
-      Background="White"
+      Background="#1d521f"
       Title="AddedUsers">
 
+    <Page.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="Margin" Value="0,0,0,20" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#4CAF50" Offset="0.0" />
+                            <GradientStop Color="#124213" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="15" ShadowDepth="5" Opacity="0.4" Color="Black" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}" CornerRadius="40">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0.8" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid>
-        <ListBox/>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="514*"/>
+            <ColumnDefinition Width="122*"/>
+            <ColumnDefinition Width="122*"/>
+            <ColumnDefinition Width="21*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="149*"/>
+            <RowDefinition Height="93*"/>
+            <RowDefinition Height="328*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="/Image/leaf.png" Margin="477,-22,121,75" Opacity="0.3" Grid.Column="1" Grid.ColumnSpan="3"/>
+        <Image Source="/Image/leaf.png" Margin="883,-23,-83,69" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-122.199"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="626,13,-2,-19" Grid.Row="4" Opacity="0.3"/>
+        <Image Source="/Image/leaf.png" Margin="373,75,83,261" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="3">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="37.739"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="112,66,-90,147" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-85.087"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="-27,85,719,-63" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="3" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="220.269"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="473,-123,191,76" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-166.737"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="325,19,77,233" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="253.579"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="-63,6,344,48" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="127.846"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="65,50,-43,43" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="3">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-186.024"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="188,-45,148,59" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Column="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-49.883"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="723,73,77,93" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Opacity="0.3" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="99.457"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="101,200,226,-122" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="350.362"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="137,84,663,6" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="41.095"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="67,314,-22,-63" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Opacity="0.3" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="41.095"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="-50,77,460,19" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="2" Grid.ColumnSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-2.21"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="428,194,116,-89" Opacity="0.3" Grid.Row="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-99.076"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="/Image/leaf.png" Margin="268,72,26,74" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-27.78"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <Border BorderBrush="Black" Grid.ColumnSpan="5" Margin="21,0,21,36" Grid.Row="1" Grid.RowSpan="2">
+            <ListBox AlternationCount="2" ItemsSource="{Binding Students}"  
+                     SelectedItem="{Binding SelectedPerson}" 
+                     Background="#298734" 
+                     Name="itemsControl" 
+                     ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                     SelectionMode="Extended">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="569">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="116*"/>
+                                <ColumnDefinition Width="100*"/>
+                                <ColumnDefinition Width="81*"/>
+                                <ColumnDefinition Width="106*"/>
+                                <ColumnDefinition Width="106*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Surname}" Grid.Column="1" />
+                            <TextBlock Text="{Binding Firstname}" Grid.Column="2" />
+                            <TextBlock Text="{Binding Vik}" Grid.Column="3" HorizontalAlignment="Left" />
+                            <TextBlock Text="років" Grid.Column="4" HorizontalAlignment="Left" />
+                            <TextBlock Text="{Binding Staty}" Grid.Column="5" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <TextBlock Text="Розроби своє власне генеалогічне дерево"
+   FontSize="36" FontWeight="Bold" Foreground="LightGreen"
+   FontFamily="Comic Sans MS"  
+   HorizontalAlignment="Left" VerticalAlignment="Center"
+   Margin="5,0,0,0" TextWrapping="Wrap"
+   TextAlignment="Left" LineHeight="40" Height="75" Width="760" Grid.ColumnSpan="4" Grid.Column="1">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+
+        <Border Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,7" Grid.Column="1" 
+        CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="#beebc3">
+            <ListBox x:Name="list" 
+             SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+             IsSynchronizedWithCurrentItem="True" 
+             Background="Transparent" 
+             BorderThickness="0" />
+        </Border>
+
+        <Button Content="Додати" Command="{Binding AddCommand}" Grid.Column="2" Margin="11,27,11,26" Grid.Row="1"/>
+        <Button Grid.Column="3" Content="Відхилити" Grid.Row="1" Margin="1,27,21,26" Command="{Binding RemoveCommand}" Click="Button_Click_1"/>
+
     </Grid>
 </Page>

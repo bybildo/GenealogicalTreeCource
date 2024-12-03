@@ -190,7 +190,7 @@
 
         <!-- Кнопка -->
         <Button x:Name="GenerateButton" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" Padding="5"
-                Content="Згенерувати дерево" HorizontalAlignment="Center" Click="GenerateButton_Click"/>
+                Content="Згенерувати дерево" HorizontalAlignment="Center"/>
 
     </Grid>
 </Window>
