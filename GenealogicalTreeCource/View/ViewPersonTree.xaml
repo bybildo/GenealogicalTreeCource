@@ -193,7 +193,7 @@
         </Image>
 
 
-        <TextBox Text="{Binding Path=Filter1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,31,25,27" Grid.Row="1" Grid.ColumnSpan="2" />
+        <TextBox Text="{Binding Path=Filter1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,31,25,27" Grid.Row="1" Grid.ColumnSpan="2" GotFocus="PlaceholderTextBox_GotFocus" />
 
         <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search1, Mode=OneWay}" Visibility="{Binding Path=Show1}" Height="60" VerticalAlignment="Top" Grid.Row="1" Margin="26,80,25,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <ListBox.ItemContainerStyle>

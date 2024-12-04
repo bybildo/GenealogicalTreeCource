@@ -164,7 +164,7 @@ namespace GenealogicalTreeCource.Class
                 {
                     _filter3 = value;
                     FilterPersons3();
-                    if (value == string.Empty) Show3 = Visibility.Collapsed; 
+                    if (value == string.Empty) Show3 = Visibility.Collapsed;
                     else Show3 = Visibility.Visible;
                     OnPropertyChanged(nameof(Filter3));
                 }
@@ -324,6 +324,8 @@ namespace GenealogicalTreeCource.Class
                     IgnoreSerializableAttribute = false
                 }
             };
+            string json = JsonConvert.SerializeObject(_persons, settings);
+            File.WriteAllText(FilePath, json);
         }
 
         public void LoadFromFile()
@@ -556,6 +558,97 @@ namespace GenealogicalTreeCource.Class
             set { _textbox1 = value; }
         }
 
+        private bool isGenerating = false;
+        private List<int> generatedIndexes = new(); 
+
+        //Попереджаю працює не стабільно
+        private async void GenerateMasiveF()
+        {
+            if (isGenerating)
+            {
+                MessageBox.Show("Генерація вже виконується. Будь ласка, зачекайте.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            isGenerating = true;
+            try
+            {
+                if (int.TryParse(Textbox1, out int numOfPerson) && int.TryParse(Textbox2, out int knees))
+                {
+                    if (0 < numOfPerson && numOfPerson < 10 && 0 < knees && knees < 7)
+                    {
+                        bool uspih = false;
+                        while (!uspih)
+                        {
+                            var cts = new CancellationTokenSource();
+                            try
+                            {
+                                var task = GenerateWithTimeout(numOfPerson, knees, cts.Token);
+                                if (await Task.WhenAny(task, Task.Delay(12000)) == task)
+                                {
+                                    uspih = true;
+                                    var genWind = Application.Current.Windows.OfType<TreeGenWind>().FirstOrDefault();
+                                    _addPerson = new List<Person>();
+                                    _editPerson = new List<Person>();
+                                    SaveToFile();
+
+                                    if (genWind != null) genWind.Close();
+   
+                                    MessageBox.Show("Дерево згенеровано успішно. Длякоректної роботи краще перезайти в додаток", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    return;
+                                }
+                                else
+                                {
+                                    cts.Cancel();
+                                    MessageBox.Show($"Генерація тривала занадто довго ({generatedIndexes.Count}/{numOfPerson}). Повторюємо...", "Попередження", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Помилка генерації: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            finally
+                            {
+                                cts.Dispose();
+                            }
+                        }
+                    }
+                    else
+                        MessageBox.Show("Завеликі числа", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                    MessageBox.Show("Некоректно написані значення. Введіть правильні числа.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                isGenerating = false;
+            }
+        }
+
+        private async Task GenerateWithTimeout(int numOfPerson, int knees, CancellationToken token)
+        {
+            await Task.Run(() =>
+            {
+                if (token.IsCancellationRequested) token.ThrowIfCancellationRequested();
+
+                for (int i = 0; i < numOfPerson; i++)
+                {
+                    if (generatedIndexes.Contains(i)) continue;
+
+                    try
+                    {
+                        Generate(i, knees);
+                        generatedIndexes.Add(i);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Помилка генерації для індексу {i}: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    }
+                }
+            }, token);
+        }
+
         #endregion
 
         #region команди mvvm
@@ -609,31 +702,6 @@ namespace GenealogicalTreeCource.Class
             _filter3 = motherName;
             OnPropertyChanged(nameof(Filter3));
             Show3 = Visibility.Collapsed;
-        }
-        private void GenerateMasiveF()
-        {
-            if (int.TryParse(Textbox1, out int numOfPerson) && int.TryParse(Textbox2, out int knees))
-            {
-                if (0 < numOfPerson && numOfPerson < 10 && 0 < knees && knees < 7)
-                {
-                    bool uspih = false;
-                    while (!uspih)
-                    {
-                        try
-                        {
-                            Generate(numOfPerson, knees);
-                            var genWind = Application.Current.Windows.OfType<TreeGenWind>().FirstOrDefault();
-                            if (genWind != null) genWind.Close();
-                            else MessageBox.Show("Поточного вікна не знайдено", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                            uspih = true;
-                        }
-                        catch { }
-                    }
-                    MessageBox.Show("Дерево згенеровано успішно", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else MessageBox.Show("Завеликі числа", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else MessageBox.Show("Некоректно написані значення. Введіть правильні числа.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void AddPersonPageF()
