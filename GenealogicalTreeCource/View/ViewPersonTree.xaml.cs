@@ -33,11 +33,12 @@ namespace GenealogicalTreeCource
 
                 if (selectedPerson != null)
                 {
+                    myPersonTree.Filter1 = forSearch;
+                    myPersonTree.Show1 = Visibility.Hidden;
                     GenealogyCanvas.Children.Clear();
                     graphGenerator.DrawUpTree(selectedPerson, selectedPerson.GetUpKness());
                     graphGenerator.DrawDownTree(selectedPerson, selectedPerson.GetDownKness());
                 }
-
             }
         }
 

@@ -51,7 +51,6 @@
             </Style.Triggers>
         </Style>
 
-
         <Style TargetType="ScrollViewer">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Background" Value="#beebc3"/>
@@ -196,7 +195,7 @@
 
         <TextBox Text="{Binding Path=Filter1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,31,25,27" Grid.Row="1" Grid.ColumnSpan="2" />
 
-        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search1, Mode=OneWay}" Height="60" VerticalAlignment="Top" Grid.Row="1" Margin="26,80,25,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <ListBox x:Name="listBoxItem" ItemsSource="{Binding Path=Search1, Mode=OneWay}" Visibility="{Binding Path=Show1}" Height="60" VerticalAlignment="Top" Grid.Row="1" Margin="26,80,25,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />

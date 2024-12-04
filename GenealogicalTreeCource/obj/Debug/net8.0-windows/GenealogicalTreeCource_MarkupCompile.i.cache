@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\App.xaml
-4418231218
+6140352868
 
-23140518421
+25-635433396
 207-189491844
-View\AdministrationPage.xaml;View\MainWindow.xaml;View\OperationWithPerson.xaml;View\ViewPersonTree.xaml;
+View\Admin\AddedUsers.xaml;View\Admin\AdministrationPage.xaml;View\Admin\TreeGenWind.xaml;View\MainWindow.xaml;View\OperationWithPerson.xaml;View\ViewPersonTree.xaml;
 
 False
 

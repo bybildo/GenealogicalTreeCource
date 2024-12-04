@@ -10,18 +10,12 @@
     <Compile Update="View\OperationWithPerson.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\AdministrationPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\ViewPersonTree.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\OperationWithPerson.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\AdministrationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\MainWindow.xaml">

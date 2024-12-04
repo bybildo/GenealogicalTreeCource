@@ -1,5 +1,4 @@
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.csproj.AssemblyReference.cache
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\AdministrationPage.g.cs
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\MainWindow.g.cs
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\ViewPersonTree.g.cs
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\App.g.cs
@@ -16,7 +15,6 @@ D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCou
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\OperationWithPerson.g.cs
-D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\AdministrationPage.baml
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\MainWindow.baml
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\OperationWithPerson.baml
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\ViewPersonTree.baml
@@ -48,3 +46,9 @@ D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCou
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\runtimes\win7-arm\native\libuv.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\runtimes\win7-x64\native\libuv.dll
 D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\bin\Debug\net8.0-windows\runtimes\win7-x86\native\libuv.dll
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\TreeGenWind.baml
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\AddedUsers.g.cs
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\AdministrationPage.g.cs
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\TreeGenWind.g.cs
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\AddedUsers.baml
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\AdministrationPage.baml

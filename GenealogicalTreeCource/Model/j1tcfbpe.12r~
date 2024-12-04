@@ -83,39 +83,6 @@ namespace GenealogicalTreeCource.Class
         #endregion
 
         #region Пошук mvvm
-        private Visibility _show1 = Visibility.Hidden;
-        public Visibility Show1
-        {
-            get { return _show1; }
-            set
-            {
-                _show1 = value;
-                OnPropertyChanged(nameof(Show1));
-            }
-        }
-
-        private Visibility _show2 = Visibility.Collapsed;
-        public Visibility Show2
-        {
-            get { return _show2; }
-            set
-            {
-                _show2 = value;
-                OnPropertyChanged(nameof(Show2));
-            }
-        }
-
-        private Visibility _show3 = Visibility.Collapsed;
-        public Visibility Show3
-        {
-            get { return _show3; }
-            set
-            {
-                _show3 = value;
-                OnPropertyChanged(nameof(Show3));
-            }
-        }
-
         private string _filter1 = "";
         private string _filter2 = "";
         private string _filter3 = "";
@@ -132,8 +99,6 @@ namespace GenealogicalTreeCource.Class
                 {
                     _filter1 = value;
                     FilterPersons1();
-                    if (value == string.Empty) Show1 = Visibility.Hidden;
-                    else Show1 = Visibility.Visible;
                     OnPropertyChanged(nameof(Filter1));
                 }
             }
@@ -148,8 +113,6 @@ namespace GenealogicalTreeCource.Class
                 {
                     _filter2 = value;
                     FilterPersons2();
-                    if (value == string.Empty) Show2 = Visibility.Collapsed;
-                    else Show2 = Visibility.Visible;
                     OnPropertyChanged(nameof(Filter2));
                 }
             }
@@ -164,8 +127,6 @@ namespace GenealogicalTreeCource.Class
                 {
                     _filter3 = value;
                     FilterPersons3();
-                    if (value == string.Empty) Show3 = Visibility.Collapsed; 
-                    else Show3 = Visibility.Visible;
                     OnPropertyChanged(nameof(Filter3));
                 }
             }
@@ -572,7 +533,6 @@ namespace GenealogicalTreeCource.Class
         public ICommand BackPageAdmin { get; private set; }
         public ICommand AddPerson { get; private set; }
         public ICommand AddFather { get; private set; }
-        public ICommand AddMother { get; private set; }
 
 
         private void InitializeCommands()
@@ -590,7 +550,6 @@ namespace GenealogicalTreeCource.Class
             GenerateMasive = new RelayCommand(_ => GenerateMasiveF());
             AddPerson = new RelayCommand(_ => AddPersonF());
             AddFather = new RelayCommand<string>(AddFatherF);
-            AddMother = new RelayCommand<string>(AddMotherF);
         }
 
         private void AddPersonF()
@@ -602,14 +561,8 @@ namespace GenealogicalTreeCource.Class
         {
             _filter2 = fatherName;
             OnPropertyChanged(nameof(Filter2));
-            Show2 = Visibility.Collapsed;
         }
-        private void AddMotherF(string motherName)
-        {
-            _filter3 = motherName;
-            OnPropertyChanged(nameof(Filter3));
-            Show3 = Visibility.Collapsed;
-        }
+
         private void GenerateMasiveF()
         {
             if (int.TryParse(Textbox1, out int numOfPerson) && int.TryParse(Textbox2, out int knees))

@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Xml.Linq;
 using Newtonsoft.Json;
+using System.Windows;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -87,13 +88,13 @@ namespace GenealogicalTreeCource.Class
             set
             {
                 if (value == "" || value == null) _name = "*невідомо*";
-                if (value.Length > 20) throw new Exception("Ім'я завелике");
+                if (value.Length > 20) MessageBox.Show("Ім'я завелике", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 if (Regex.IsMatch(value, pattern))
                 {
                     _name = value;
                     return;
                 }
-                throw new Exception("Ім'я не відповідає вимогам");
+                MessageBox.Show("Ім'я не відповідає вимогам", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -111,7 +112,7 @@ namespace GenealogicalTreeCource.Class
                 }
 
                 if (value.Length > 20)
-                    throw new Exception("Прізвище завелике");
+                    MessageBox.Show("Прізвище завелике", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 if (Regex.IsMatch(value, pattern))
                 {
@@ -130,7 +131,7 @@ namespace GenealogicalTreeCource.Class
                     return;
                 }
 
-                throw new Exception("Прізвище не відповідає вимогам");
+                MessageBox.Show("Прізвище не відповідає вимогам", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -147,7 +148,7 @@ namespace GenealogicalTreeCource.Class
 
                 if (value.Length > 20)
                 {
-                    throw new Exception("По батькові завелике");
+                    MessageBox.Show("По батькові завелике", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 if (Regex.IsMatch(value, pattern))
@@ -156,7 +157,7 @@ namespace GenealogicalTreeCource.Class
                     return;
                 }
 
-                throw new Exception("По батькові не відповідає вимогам");
+                MessageBox.Show("По батькові не відповідає вимогам", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -174,7 +175,7 @@ namespace GenealogicalTreeCource.Class
             {
                 if (value == null || value == "Image/PersonPhoto/absent.jpg") return;
                 string filePath = $"Image/PersonPhoto/{value}.jpg";
-                if (!File.Exists(filePath)) throw new Exception("Фото не коректне");
+                if (!File.Exists(filePath)) MessageBox.Show("Фото не коректне", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 _photo = filePath;
             }
         }
@@ -187,7 +188,7 @@ namespace GenealogicalTreeCource.Class
             }
             set
             {
-                if (value != null && value < new DateOnly(1500, 1, 1)) throw new Exception("Дата народження не коректна");
+                if (value != null && value < new DateOnly(1500, 1, 1)) MessageBox.Show("Дата народження не може бути менша 1500 року", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 _birthdayDate = value;
             }
         }
@@ -200,8 +201,8 @@ namespace GenealogicalTreeCource.Class
             }
             set
             {
-                if (_DeathDate != null && _birthdayDate != null && _birthdayDate > value) throw new Exception("Дата смерті не може бути раніше дати народження");
-                if (_DeathDate != null && value > DateOnly.FromDateTime(DateTime.Today)) throw new Exception("Дата смерті не може бути в майбутньому");
+                if (_DeathDate != null && _birthdayDate != null && _birthdayDate > value) MessageBox.Show("Дата смерті не може бути раніше дати народження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (_DeathDate != null && value > DateOnly.FromDateTime(DateTime.Today)) MessageBox.Show("Дата смерті не може бути в майбутньому", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 _DeathDate = value;
             }
         }

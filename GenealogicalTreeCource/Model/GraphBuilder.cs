@@ -91,7 +91,7 @@ namespace GenealogicalTreeCource.Class
                 Height = 60,
                 Stroke = Brushes.Black,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Fill = Brushes.LightGray,
+                Fill = new ImageBrush(new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/Image/reck.jpg"))),
             };
 
             Canvas.SetLeft(rect, x);
@@ -116,7 +116,7 @@ namespace GenealogicalTreeCource.Class
                 if (args.ClickCount == 2)
                 {
                     _personTree.ChoosePersonaId = _personTree.GetIdFromToString(text);
-                    _personTree.OpenViewPerson();
+                    _personTree.ViewPersonPageF();
                 }
             };
             _genealogyCanvas.Children.Add(tb);

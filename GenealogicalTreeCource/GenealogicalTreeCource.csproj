@@ -14,6 +14,7 @@
     <None Remove="Image\PersonPhoto\absent.jpg" />
     <None Remove="Image\PersonPhoto\adminButton.png" />
     <None Remove="Image\PersonPhoto\ph1.png" />
+    <None Remove="Image\reck.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +40,7 @@
     <Resource Include="Image\PersonPhoto\ph1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\reck.jpg" />
   </ItemGroup>
 
   <ItemGroup>

@@ -255,13 +255,13 @@
                     </i:Interaction.Triggers>
                 </ListBox>
 
-                <TextBox Tag="TextBox" Text="{Binding Path=Filter2, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Collapsed" />
-                <ListBox Tag="TextBox" ItemsSource="{Binding Path=Search2, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2"  Visibility="Collapsed">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />
-                        </Style>
-                    </ListBox.ItemContainerStyle>
+                <TextBox Tag="TextBox" Text="{Binding Path=Filter2, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Collapsed"/>
+                <ListBox x:Name="FatherListBox2" ItemsSource="{Binding Path=Search2, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2" Visibility="{Binding Path=Show2, Source={StaticResource MyPersonTree}, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding AddFather, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=FatherListBox2}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ListBox>
 
                 <TextBlock Text="Мати:" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -274,12 +274,12 @@
                 </ListBox>
 
                 <TextBox Tag="TextBox" Text="{Binding Path=Filter3, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Collapsed"/>
-                <ListBox Tag="TextBox" ItemsSource="{Binding Path=Search3, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2"  Visibility="Collapsed">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <EventSetter Event="MouseDoubleClick" Handler="ViewPerson" />
-                        </Style>
-                    </ListBox.ItemContainerStyle>
+                <ListBox x:Name="MotherListBox2" ItemsSource="{Binding Path=Search3, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2" Visibility="{Binding Path=Show3, Source={StaticResource MyPersonTree}, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <cmd:EventToCommand Command="{Binding AddMother, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MotherListBox2}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                 </ListBox>
 
                 <TextBlock Tag="View" Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>
