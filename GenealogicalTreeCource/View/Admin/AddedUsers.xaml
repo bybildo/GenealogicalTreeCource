@@ -70,13 +70,13 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="149*"/>
-            <RowDefinition Height="93*"/>
-            <RowDefinition Height="328*"/>
+            <RowDefinition Height="99*"/>
+            <RowDefinition Height="322*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
 
         <Image Source="/Image/leaf.png" Margin="477,-22,121,75" Opacity="0.3" Grid.Column="1" Grid.ColumnSpan="3"/>
-        <Image Source="/Image/leaf.png" Margin="883,-23,-83,69" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
+        <Image Source="/Image/leaf.png" Margin="104,-23,-83,69" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Column="4">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -86,7 +86,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="626,13,-2,-19" Grid.Row="4" Opacity="0.3"/>
+        <Image Source="/Image/leaf.png" Margin="91,13,31,-19" Grid.Row="3" Opacity="0.3" Grid.Column="2"/>
         <Image Source="/Image/leaf.png" Margin="373,75,83,261" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="3">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -107,7 +107,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="-27,85,719,-63" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="3" Grid.RowSpan="2">
+        <Image Source="/Image/leaf.png" Margin="-27,85,48,-63" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -117,7 +117,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="473,-123,191,76" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2">
+        <Image Source="/Image/leaf.png" Margin="452,-123,62,76" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.RowSpan="2" Grid.Column="1">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -167,7 +167,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="723,73,77,93" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Opacity="0.3" Grid.RowSpan="2">
+        <Image Source="/Image/leaf.png" Margin="66,73,56,-43" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Opacity="0.3" Grid.Column="3">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -187,7 +187,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="137,84,663,6" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="1">
+        <Image Source="/Image/leaf.png" Margin="116,84,398,6" RenderTransformOrigin="0.5,0.5" Opacity="0.3" Grid.Row="1" Grid.Column="1">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -197,7 +197,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Source="/Image/leaf.png" Margin="67,314,-22,-63" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Opacity="0.3" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <Image Source="/Image/leaf.png" Margin="67,0,-22,-63" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Opacity="0.3" Grid.Column="3" Grid.ColumnSpan="2">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="-1"/>
@@ -238,23 +238,32 @@
             </Image.RenderTransform>
         </Image>
 
-        <Border BorderBrush="Black" Grid.ColumnSpan="5" Margin="21,0,21,36" Grid.Row="1" Grid.RowSpan="2">
+        <Border BorderBrush="Black" Grid.ColumnSpan="3" Margin="0,0,0,36" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
             <ListBox AlternationCount="2" ItemsSource="{Binding Path=AddedPerson, Mode=OneWay}" Background="#298734" 
-                     Name="itemsControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended">
+             Name="itemsControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,7" Grid.Column="1" 
-                         CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="#beebc3">
-                            <WrapPanel>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Center" />
-                                <Button Content="Відхилити"/>
-                                <Button Content="Додати"/>
-                            </WrapPanel>
+                        CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="#beebc3" Width="728">
+                            <Grid Height="75">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Grid.Column="0" />
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                                    <Button Content="Відхилити" Margin="5,0,0,0" />
+                                    <Button Content="Додати" Margin="5,0,0,0" />
+                                </StackPanel>
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
+
         <TextBlock Text="Розроби своє власне генеалогічне дерево"
              FontSize="36" FontWeight="Bold" Foreground="LightGreen"
              FontFamily="Comic Sans MS"  
@@ -266,7 +275,7 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <Button Name="Edit" Tag="Viewr" Content="Назад"  Margin="34,281,9,7" RenderTransformOrigin="0.862,1.96" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2">
+        <Button Name="Edit" Tag="Viewr" Content="Назад"  Margin="34,289,9,23" RenderTransformOrigin="0.862,1.96" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <cmd:EventToCommand Command="{Binding BackPageAdmin}"/>
