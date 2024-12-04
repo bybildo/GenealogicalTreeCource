@@ -12,13 +12,14 @@ using System.Windows.Input;
 using GenealogicalTreeCource.ViewModel;
 using GenealogicalTreeCource.Xaml;
 using GenealogicalTreeCource.View;
+using GenealogicalTreeCource.View.Admin;
 
 namespace GenealogicalTreeCource.Class
 {
     public class PersonTree : INotifyPropertyChanged
     {
         private List<Person> _persons = new List<Person>();
-        private List<Person> _addPerson = new List<Person>();
+        private List<Person> _addPerson = new List<Person>() { new Person("void"), new Person("void") };
         private List<Person> _editPerson = new List<Person>();
   
 
@@ -75,6 +76,10 @@ namespace GenealogicalTreeCource.Class
             return _addPerson[_addPerson.Count - 1];
         }
 
+        public List<string> AddedPerson
+        {
+            get { return _addPerson.Select(p => p.ForSearch()).ToList(); }
+        }
         #endregion
 
         #region Пошук mvvm
@@ -442,6 +447,7 @@ namespace GenealogicalTreeCource.Class
         public ICommand AddAdministrationPage { get; private set; }
         public ICommand GenerateWinwow { get; private set; }
         public ICommand BackPage { get; private set; }
+        public ICommand BackPageAdmin { get; private set; }
 
         private void InitializeCommands()
         {
@@ -452,6 +458,7 @@ namespace GenealogicalTreeCource.Class
             AdministrationPage = new RelayCommand(_ => OpenAdministration());
             AddAdministrationPage = new RelayCommand(_ => AddAdministrationPerson());
             BackPage = new RelayCommand(_ => BackFrame());
+            BackPageAdmin = new RelayCommand(_ => BackAdminFrame());
             GenerateWinwow = new RelayCommand(_ => OpenTreeGenWind());
             MainWindow = new RelayCommand(_ => OpenMainWindow());
         }
@@ -504,9 +511,10 @@ namespace GenealogicalTreeCource.Class
 
         private void AddAdministrationPerson()
         {
-            if (Application.Current.MainWindow is AdministrationPage adminWindow)
+            var adminWindow = Application.Current.Windows.OfType<AdministrationPage>().FirstOrDefault();
+            if (adminWindow != null)
             {
-                adminWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Add));
+                adminWindow.SetWindow.Navigate(new AddedUsers());
             }
             else throw new Exception("Ви видалили frame");
         }
@@ -524,6 +532,22 @@ namespace GenealogicalTreeCource.Class
             }
             else throw new Exception("Ви видалили frame");
         }
+
+        private void BackAdminFrame()
+        {
+            var adminWindow = Application.Current.Windows.OfType<AdministrationPage>().FirstOrDefault();
+            if (adminWindow != null)
+            {
+                adminWindow.SetWindow.Navigate(new AddedUsers());
+                try
+                {
+                    adminWindow.SetWindow.GoBack();
+                }
+                catch { adminWindow.SetWindow.Navigate(null); }
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
 
         private void OpenTreeGenWind()
         {
