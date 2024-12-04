@@ -14,6 +14,10 @@ namespace GenealogicalTreeCource.ViewModel
         {
             if (value is DateOnly dateOnly)
             {
+                if (dateOnly == DateOnly.MinValue)
+                {
+                    return null;
+                }
                 return dateOnly.ToDateTime(TimeOnly.MinValue);
             }
             return DateTime.MinValue;

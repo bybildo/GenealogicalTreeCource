@@ -128,6 +128,7 @@ namespace GenealogicalTreeCource.Class
                             _surname = value.Substring(0, value.Length - 2) + "а";
                         else _surname = value;
                     }
+                    OnPropertyChanged(nameof(Surname));
                     return;
                 }
 
@@ -154,6 +155,7 @@ namespace GenealogicalTreeCource.Class
                 if (Regex.IsMatch(value, pattern))
                 {
                     _fathername = value;
+                    OnPropertyChanged(nameof(Fathername));
                     return;
                 }
 
@@ -217,7 +219,6 @@ namespace GenealogicalTreeCource.Class
             set
             {
                 _father = value;
-                _father = value;
 
                 if (_father != null)
                 {
@@ -227,11 +228,11 @@ namespace GenealogicalTreeCource.Class
                             {
                                 if (Name.EndsWith("й"))
                                 {
-                                    _fathername = Father.Name.Substring(0, Father.Name.Length - 1) + "ївна";
+                                    Fathername = Father.Name.Substring(0, Father.Name.Length - 1) + "ївна";
                                 }
                                 else
                                 {
-                                    _fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
+                                    Fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
                                         ? Father.Name.Substring(0, Father.Name.Length - 1) + "івна"
                                         : Father.Name + "івна";
                                 }
@@ -239,7 +240,7 @@ namespace GenealogicalTreeCource.Class
                             }
                         default:
                             {
-                                _fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
+                                Fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
                                     ? Father.Name.Substring(0, Father.Name.Length - 1) + "ович"
                                     : Father.Name + "ович";
                                 break;

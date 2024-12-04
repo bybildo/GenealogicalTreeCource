@@ -13,6 +13,7 @@ using GenealogicalTreeCource.ViewModel;
 using GenealogicalTreeCource.Xaml;
 using GenealogicalTreeCource.View;
 using GenealogicalTreeCource.View.Admin;
+using System.Windows.Automation;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -47,6 +48,17 @@ namespace GenealogicalTreeCource.Class
                     SaveChoosePersonId();
                     OnPropertyChanged(nameof(ChoosePersonaId));
                 }
+            }
+        }
+
+        private bool _fatherNameEnabled = true;
+        public bool FatherNameEnabled
+        {
+            get { return _fatherNameEnabled; }
+            set
+            {
+                _fatherNameEnabled = value;
+                OnPropertyChanged(nameof(FatherNameEnabled));
             }
         }
         #endregion
@@ -151,6 +163,7 @@ namespace GenealogicalTreeCource.Class
                     if (value == string.Empty) Show2 = Visibility.Collapsed;
                     else Show2 = Visibility.Visible;
                     OnPropertyChanged(nameof(Filter2));
+                    FatherNameEnabled = true;
                 }
             }
         }
@@ -662,6 +675,7 @@ namespace GenealogicalTreeCource.Class
         public ICommand GenerateWinwow { get; private set; }
         public ICommand GenerateMasive { get; private set; }
         public ICommand BackPage { get; private set; }
+        public ICommand BackAddPage { get; private set; }
         public ICommand BackPageAdmin { get; private set; }
         public ICommand AddPerson { get; private set; }
         public ICommand AddFather { get; private set; }
@@ -677,6 +691,7 @@ namespace GenealogicalTreeCource.Class
             AdministrationPage = new RelayCommand(_ => AdministrationPageF());
             AddAdministrationPage = new RelayCommand(_ => AddAdministrationPageF());
             BackPage = new RelayCommand(_ => BackPageF());
+            BackAddPage = new RelayCommand(_ => BackAddPageF());
             BackPageAdmin = new RelayCommand(_ => BackPageAdminF());
             GenerateWinwow = new RelayCommand(_ => GenerateWindowF());
             MainWindow = new RelayCommand(_ => MainWindowF());
@@ -688,7 +703,69 @@ namespace GenealogicalTreeCource.Class
 
         private void AddPersonF()
         {
-            int index = _addPerson.Count - 1;
+            Person person = _addPerson[_addPerson.Count - 1];
+
+            if (person.Name == "")
+            {
+                MessageBox.Show("Введіть ім'я", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (person.Surname == "")
+            {
+                MessageBox.Show("Введіть Прізвище", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (person.Fathername == "")
+            {   
+                MessageBox.Show("Введіть по батькові", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (Filter2 != string.Empty)
+            {
+                var father = _persons.Find(p => p.ForSearch() == Filter2);
+                if (father != null)
+                {
+                    person.Father = father;
+                    person.Surname = father.Surname;
+                }
+                else
+                {
+                    MessageBox.Show("Батька не знайдено", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
+            if (Filter3 != string.Empty)
+            {
+                var mother = _persons.Find(p => p.ForSearch() == Filter2);
+                if (mother != null)
+                {
+                    person.Mother = mother;
+                }
+                else
+                {
+                    MessageBox.Show("Матір не знайдено", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
+            if (person.BirthdayDate == null || person.BirthdayDate == DateOnly.MinValue)
+            {
+                MessageBox.Show("Введіть дату народження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            MainWindowF();
+            MessageBox.Show("Чекайте схвалення адміністратором", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void BackAddPageF()
+        {
+            _addPerson.RemoveAt(_addPerson.Count - 1);
+            MainWindowF();
         }
 
         private void AddFatherF(string fatherName)
@@ -696,6 +773,9 @@ namespace GenealogicalTreeCource.Class
             _filter2 = fatherName;
             OnPropertyChanged(nameof(Filter2));
             Show2 = Visibility.Collapsed;
+            _addPerson[_addPerson.Count - 1].Father = _persons[_persons.FindIndex(p => p.ForSearch() == fatherName)];
+            _addPerson[_addPerson.Count - 1].Surname = _addPerson[_addPerson.Count-1].Father.Surname;
+            FatherNameEnabled = false;
         }
         private void AddMotherF(string motherName)
         {
