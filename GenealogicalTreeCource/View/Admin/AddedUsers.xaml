@@ -3,7 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:GenealogicalTreeCource.View.Admin"
+      xmlns:local="clr-namespace:GenealogicalTreeCource.Class"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:cmd="http://www.galasoft.ch/mvvmlight"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Background="#1d521f"
@@ -49,8 +51,13 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <local:PersonTree x:Key="MyPersonTree"/>
         </ResourceDictionary>
     </Page.Resources>
+
+    <Page.DataContext>
+        <StaticResource ResourceKey="MyPersonTree" />
+    </Page.DataContext>
 
     <Grid>
 
@@ -232,57 +239,39 @@
         </Image>
 
         <Border BorderBrush="Black" Grid.ColumnSpan="5" Margin="21,0,21,36" Grid.Row="1" Grid.RowSpan="2">
-            <ListBox AlternationCount="2" ItemsSource="{Binding Students}"  
-                     SelectedItem="{Binding SelectedPerson}" 
-                     Background="#298734" 
-                     Name="itemsControl" 
-                     ScrollViewer.VerticalScrollBarVisibility="Hidden" 
-                     SelectionMode="Extended">
+            <ListBox AlternationCount="2" ItemsSource="{Binding Path=AddedPerson, Mode=OneWay}" Background="#298734" 
+                     Name="itemsControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="569">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30*"/>
-                                <ColumnDefinition Width="116*"/>
-                                <ColumnDefinition Width="100*"/>
-                                <ColumnDefinition Width="81*"/>
-                                <ColumnDefinition Width="106*"/>
-                                <ColumnDefinition Width="106*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Text="{Binding Surname}" Grid.Column="1" />
-                            <TextBlock Text="{Binding Firstname}" Grid.Column="2" />
-                            <TextBlock Text="{Binding Vik}" Grid.Column="3" HorizontalAlignment="Left" />
-                            <TextBlock Text="років" Grid.Column="4" HorizontalAlignment="Left" />
-                            <TextBlock Text="{Binding Staty}" Grid.Column="5" />
-                        </Grid>
+                        <Border Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,7" Grid.Column="1" 
+                         CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="#beebc3">
+                            <WrapPanel>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Center" />
+                                <Button Content="Відхилити"/>
+                                <Button Content="Додати"/>
+                            </WrapPanel>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
         <TextBlock Text="Розроби своє власне генеалогічне дерево"
-   FontSize="36" FontWeight="Bold" Foreground="LightGreen"
-   FontFamily="Comic Sans MS"  
-   HorizontalAlignment="Left" VerticalAlignment="Center"
-   Margin="5,0,0,0" TextWrapping="Wrap"
-   TextAlignment="Left" LineHeight="40" Height="75" Width="760" Grid.ColumnSpan="4" Grid.Column="1">
+             FontSize="36" FontWeight="Bold" Foreground="LightGreen"
+             FontFamily="Comic Sans MS"  
+             HorizontalAlignment="Left" VerticalAlignment="Center"
+             Margin="5,0,0,0" TextWrapping="Wrap"
+             TextAlignment="Left" LineHeight="40" Height="75" Width="760" Grid.ColumnSpan="4" Grid.Column="1">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
             </TextBlock.Effect>
         </TextBlock>
 
-
-        <Border Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,7" Grid.Column="1" 
-        CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="#beebc3">
-            <ListBox x:Name="list" 
-             SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
-             IsSynchronizedWithCurrentItem="True" 
-             Background="Transparent" 
-             BorderThickness="0" />
-        </Border>
-
-        <Button Content="Додати" Command="{Binding AddCommand}" Grid.Column="2" Margin="11,27,11,26" Grid.Row="1"/>
-        <Button Grid.Column="3" Content="Відхилити" Grid.Row="1" Margin="1,27,21,26" Command="{Binding RemoveCommand}" Click="Button_Click_1"/>
-
+        <Button Name="Edit" Tag="Viewr" Content="Назад"  Margin="34,281,9,7" RenderTransformOrigin="0.862,1.96" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding BackPageAdmin}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
     </Grid>
 </Page>

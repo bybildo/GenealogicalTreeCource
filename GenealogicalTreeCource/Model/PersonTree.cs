@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using GenealogicalTreeCource.ViewModel;
 using GenealogicalTreeCource.Xaml;
+using GenealogicalTreeCource.View;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -19,9 +20,15 @@ namespace GenealogicalTreeCource.Class
         private List<Person> _persons = new List<Person>();
         private List<Person> _addPerson = new List<Person>();
         private List<Person> _editPerson = new List<Person>();
-        public List<Person> GetPersons { get => _persons; }
+  
 
+        public PersonTree()
+        {
+            InitializeCommands();
+            LoadFromFile();
+        }
 
+        #region Обрана персона mvvm
         private int _choosePersonId;
         public int ChoosePersonaId
         {
@@ -41,7 +48,9 @@ namespace GenealogicalTreeCource.Class
                 }
             }
         }
+        #endregion
 
+        #region Додавання редагування mvvm
         public Person ChooseAdd
         {
             get
@@ -50,6 +59,7 @@ namespace GenealogicalTreeCource.Class
                 return _addPerson[_addPerson.Count - 1];
             }
         }
+
         public Person ChooseEdit
         {
             get
@@ -59,11 +69,13 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        public PersonTree()
+        public Person GetVoidPerson()
         {
-            InitializeCommands();
-            LoadFromFile();
+            _addPerson.Add(new Person("void"));
+            return _addPerson[_addPerson.Count - 1];
         }
+
+        #endregion
 
         #region Пошук mvvm
         private string _filter1 = "";
@@ -394,41 +406,41 @@ namespace GenealogicalTreeCource.Class
                 return _persons[id];
             return null;
         }
-        public int GetIdFromToString(string toString)
-        {
-            return _persons.FindIndex(p => p.ToString() == toString);
-        }
-        #endregion
 
         public int NumberOfLastElement()
         {
             return _persons.Count - 1;
         }
-
+        
+        public int GetIdFromToString(string toString)
+        {
+            return _persons.FindIndex(p => p.ToString() == toString);
+        }
+      
         public string ForSearch(int id = 0)
         {
             if (id > -1 && id < _persons.Count)
                 return _persons[id].ForSearch();
             return "";
         }
+        #endregion
 
+        #region Генерація дерева
         public void Generate(int knees = 5)
         {
             _persons = new PersonTreeGenerator().GetPersons(knees);
         }
-
-        public Person GetVoidPerson()
-        {
-            _addPerson.Add(new Person("void"));
-            return _addPerson[_addPerson.Count - 1];
-        }
+        #endregion
 
         #region команди mvvm
+        public ICommand MainWindow { get; private set; }
         public ICommand AddPersonPage { get; private set; }
         public ICommand ViewPersonPage { get; private set; }
         public ICommand EditPersonPage { get; private set; }
         public ICommand GraphPage { get; private set; }
         public ICommand AdministrationPage { get; private set; }
+        public ICommand AddAdministrationPage { get; private set; }
+        public ICommand GenerateWinwow { get; private set; }
         public ICommand BackPage { get; private set; }
 
         private void InitializeCommands()
@@ -438,7 +450,10 @@ namespace GenealogicalTreeCource.Class
             EditPersonPage = new RelayCommand(_ => OpenEditPerson());
             GraphPage = new RelayCommand(_ => OpenGraphPerson());
             AdministrationPage = new RelayCommand(_ => OpenAdministration());
+            AddAdministrationPage = new RelayCommand(_ => AddAdministrationPerson());
             BackPage = new RelayCommand(_ => BackFrame());
+            GenerateWinwow = new RelayCommand(_ => OpenTreeGenWind());
+            MainWindow = new RelayCommand(_ => OpenMainWindow());
         }
 
         private void OpenAddPerson()
@@ -487,6 +502,15 @@ namespace GenealogicalTreeCource.Class
             window.ShowDialog();  
         }
 
+        private void AddAdministrationPerson()
+        {
+            if (Application.Current.MainWindow is AdministrationPage adminWindow)
+            {
+                adminWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Add));
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
         private void BackFrame()
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
@@ -497,6 +521,20 @@ namespace GenealogicalTreeCource.Class
                     mainWindow.SetWindow.GoBack();
                 }
                 catch { mainWindow.SetWindow.Navigate(null); }
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+
+        private void OpenTreeGenWind()
+        {
+            TreeGenWind window = new TreeGenWind();
+            window.ShowDialog();
+        }
+        private void OpenMainWindow()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SetWindow.Navigate(null);
             }
             else throw new Exception("Ви видалили frame");
         }

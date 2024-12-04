@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:GenealogicalTreeCource.Xaml"
+      xmlns:local="clr-namespace:GenealogicalTreeCource.Class"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:cmd="http://www.galasoft.ch/mvvmlight"
       mc:Ignorable="d" 
@@ -58,8 +58,13 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <local:PersonTree x:Key="MyPersonTree"/>
     </Window.Resources>
 
+    <Window.DataContext>
+        <StaticResource ResourceKey="MyPersonTree" />
+    </Window.DataContext>
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -250,13 +255,11 @@
 
         </Canvas>
 
-        <Button Content="Переглянути додавання" Margin="406,15,34,14" Grid.Row="3" />
-        <Button Content="Переглянути редагування"  Margin="406,45,34,45" Grid.Row="2" />
-        <Button Content="Сформувати дерево" Margin="406,15,34,14" Click="ApplyButton_Click" Grid.Row="1"/>
+        <Button Content="Переглянути додавання" Margin="406,15,34,14" Grid.Row="3"  Command="{Binding AddAdministrationPage}"/>
+        <Button Content="Переглянути редагування"  Margin="406,45,34,45" Grid.Row="2" Command="{Binding AddAdministrationPage}"/>
+        <Button Content="Сформувати дерево" Margin="406,15,34,14" Grid.Row="1" Command="{Binding GenerateWinwow}"/>
 
-
-
-        <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden" Grid.RowSpan="5"/>
     </Grid>
 
 </Window>

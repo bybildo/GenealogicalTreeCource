@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="TreeGenWind" Height="200" Width="300" Background="#1d521f">
+        Title="TreeGenWind" Height="220" Width="310" Background="#1d521f">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="11"/>
@@ -53,6 +53,8 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
+    
+    
 
 
     <Grid Margin="7">
