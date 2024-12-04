@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\admin.png" />
     <None Remove="Image\leaf.png" />
     <None Remove="Image\MainWindow\tree_background.jpg" />
     <None Remove="Image\PersonPhoto\absent.jpg" />
@@ -25,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Image\admin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Image\leaf.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -40,7 +44,9 @@
     <Resource Include="Image\PersonPhoto\ph1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\reck.jpg" />
+    <Resource Include="Image\reck.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
