@@ -15,7 +15,7 @@ using System.Windows;
 namespace GenealogicalTreeCource.Class
 {
 
-    public class Person : INotifyPropertyChanged
+    public class Person : INotifyPropertyChanged, ICloneable
     {
         private string _name = "*невідомо*";
         private string _surname = "*невідомо*";
@@ -203,8 +203,8 @@ namespace GenealogicalTreeCource.Class
             }
             set
             {
-                if (_DeathDate != null && _birthdayDate != null && _birthdayDate > value) MessageBox.Show("Дата смерті не може бути раніше дати народження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                if (_DeathDate != null && value > DateOnly.FromDateTime(DateTime.Today)) MessageBox.Show("Дата смерті не може бути в майбутньому", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                //if (value != null && _birthdayDate != null && _birthdayDate > value) MessageBox.Show("Дата смерті не може бути раніше дати народження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                //if (value != null && value > DateOnly.FromDateTime(DateTime.Today)) MessageBox.Show("Дата смерті не може бути в майбутньому", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 _DeathDate = value;
             }
         }
@@ -405,6 +405,13 @@ namespace GenealogicalTreeCource.Class
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Клонування
+        public object Clone()
+        {
+            return new Person(_name, _surname, _fathername, _gender, null, _birthdayDate, _DeathDate, _father, _mother, _wifes, _children);
         }
         #endregion
     }

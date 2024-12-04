@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace GenealogicalTreeCource.Class
 {
-    public class GraphGenerator 
+    public class GraphGenerator
     {
         private readonly Canvas _genealogyCanvas;
         private readonly PersonTree _personTree;
@@ -38,8 +38,11 @@ namespace GenealogicalTreeCource.Class
                 {
                     DrawUpArrow(Xfirst, Yfirst, posX + 410, posY);
                     DrawRectangle(person.Children[i].ToString(), posX + 250, posY);
-                    DrawOneArrow(posX + 110 + 250, posY + 60, posX + 110 + 250, posY + 80);
-                    DrawRectangle(person.Children[i].Mother.ToString(), posX + 250, posY + 80);
+                    if (person.Children[i].Father != null && !person.Children[i].Father.ToString().Contains("*невідомо*"))
+                    {
+                        DrawOneArrow(posX + 110 + 250, posY + 60, posX + 110 + 250, posY + 80);
+                        DrawRectangle(person.Children[i].Mother.ToString(), posX + 250, posY + 80);
+                    }
                     DrawUpTree(person.Children[i], NumOfKnees - 1, posX + 250, posY);
                     posX += horizontalSpacing;
                 }
@@ -51,8 +54,11 @@ namespace GenealogicalTreeCource.Class
                 {
                     DrawUpArrow(Xfirst, Yfirst, posX - 30, posY);
                     DrawRectangle(person.Children[i].ToString(), posX - 250, posY);
-                    DrawOneArrow(posX + 110 - 250, posY + 60, posX + 110 - 250, posY + 80);
-                    DrawRectangle(person.Children[i].Father.ToString(), posX - 250, posY + 80);
+                    if (person.Children[i].Mother != null && !person.Children[i].Mother.ToString().Contains("*невідомо*"))
+                    {
+                        DrawOneArrow(posX + 110 - 250, posY + 60, posX + 110 - 250, posY + 80);
+                        DrawRectangle(person.Children[i].Father.ToString(), posX - 250, posY + 80);
+                    }
                     DrawUpTree(person.Children[i], NumOfKnees - 1, posX - 250, posY);
                     posX -= horizontalSpacing;
                 }

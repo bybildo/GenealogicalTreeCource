@@ -62,7 +62,14 @@ namespace GenealogicalTreeCource
                     }
                 default:
                     {
-                        ForView(Elements);
+                        var binding = new Binding("ChooseEdit")
+                        {
+                            Source = myPersonTree
+                        };
+
+                        elements.SetBinding(Grid.DataContextProperty, binding);
+
+                        ForEdit(Elements);
                         break;
                     }
             }
@@ -101,13 +108,15 @@ namespace GenealogicalTreeCource
             }
             else if (element is FrameworkElement frameworkElement)
             {
-                if (frameworkElement.Tag?.ToString() == "View")
-                    frameworkElement.Visibility = Visibility.Collapsed;
-
-                if (frameworkElement.Tag?.ToString() == "TextBox")
+                if (frameworkElement.Tag?.ToString() == "Add")
                     frameworkElement.Visibility = Visibility.Visible;
-
-                if (frameworkElement.Tag?.ToString() == "ListBox")
+                else if (frameworkElement.Tag?.ToString() == "View")
+                    frameworkElement.Visibility = Visibility.Collapsed;
+                else if (frameworkElement.Tag?.ToString() == "ViewB")
+                    frameworkElement.Visibility = Visibility.Collapsed;
+                else if (frameworkElement.Tag?.ToString() == "TextBox")
+                    frameworkElement.Visibility = Visibility.Visible;
+                else if (frameworkElement.Tag?.ToString() == "ListBox")
                     frameworkElement.Visibility = Visibility.Collapsed;
             }
         }
@@ -137,6 +146,54 @@ namespace GenealogicalTreeCource
                 if (frameworkElement is TextBox textBox)
                 {
                     textBox.IsEnabled = false;
+                    return;
+                }
+                else if (frameworkElement is ComboBox comboBox)
+                {
+                    comboBox.IsEnabled = false;
+                    return;
+                }
+                else if (frameworkElement is DatePicker datePicker)
+                {
+                    datePicker.IsEnabled = false;
+                    return;
+                }
+            }
+
+            DeadCheckBox.IsChecked = true;
+            DeadCheckBox.Visibility = Visibility.Hidden;
+        }
+
+        private void ForEdit(UIElement element)
+        {
+
+            if (element == null)
+                return;
+
+            if (element is Panel panel)
+            {
+                foreach (UIElement child in panel.Children)
+                {
+                    ForEdit(child);
+                }
+            }
+            else if (element is ContentControl contentControl && contentControl.Content is UIElement content)
+            {
+                ForEdit(content);
+            }
+            else if (element is Decorator decorator && decorator.Child is UIElement childElement)
+            {
+                ForEdit(childElement);
+            }
+            else if (element is FrameworkElement frameworkElement)
+            {
+                if (frameworkElement is TextBox textBox)
+                {
+                    textBox.IsEnabled = false;
+                }
+                else if (frameworkElement is ListBox listBox)
+                {
+                    listBox.IsEnabled = false;
                 }
                 else if (frameworkElement is ComboBox comboBox)
                 {
@@ -146,7 +203,21 @@ namespace GenealogicalTreeCource
                 {
                     datePicker.IsEnabled = false;
                 }
+                else if (frameworkElement.Tag?.ToString() == "edit")
+                {
+                   frameworkElement.Visibility = Visibility.Visible;
+                }
             }
+
+            NameTextBox.IsEnabled = true;
+            NameTextBox.Background = new SolidColorBrush(Colors.Yellow);
+            SurnameTextBox.IsEnabled = true;
+            SurnameTextBox.Background = new SolidColorBrush(Colors.Yellow);
+            DeadCheckBox.IsChecked = true;
+            DeadCheckBox.Visibility = Visibility.Hidden;
+            DeathDatePicker.IsEnabled = true;
+            DeathDatePicker.Background = new SolidColorBrush(Colors.Yellow);
+            Edit.Visibility = Visibility.Collapsed;
         }
 
         private void PlaceholderTextBox_GotFocus(object sender, RoutedEventArgs e)

@@ -232,7 +232,7 @@
         <Border Background="White" Opacity="0.8" CornerRadius="15" VerticalAlignment="Top" Height="190" Margin="18,10,737,0" Grid.Row="1">
             <StackPanel Margin="10">
                 <TextBlock Text="Ім'я:" FontWeight="Bold" Margin="0,0,0,2"/>
-                <TextBox Height="30" Margin="0,0,0,10" Text="{Binding Path=Name, Mode=TwoWay}" />
+                <TextBox Name="NameTextBox" Height="30" Margin="0,0,0,10" Text="{Binding Path=Name, Mode=TwoWay}" />
                 <TextBlock Text="Прізвище:" FontWeight="Bold" Margin="0,0,0,5"/>
                 <TextBox Name="SurnameTextBox" Height="30" Margin="0,0,0,10" Text="{Binding Path=Surname, Mode=TwoWay}" IsEnabled="{Binding Path=FatherNameEnabled, Source={StaticResource MyPersonTree}, Mode=OneWay}" />
                 <TextBlock Text="По-батькові:" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -330,14 +330,14 @@
         </Border>
 
         <WrapPanel Margin="300,130,0, 0" Grid.Row="1" Visibility="Visible">
-            <Button Content="Назад">
+            <Button Tag="Add" Visibility="Collapsed" Content="Назад">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding BackAddPage, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Підтвердити">
+            <Button Tag="Add" Visibility="Collapsed" Content="Підтвердити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding Path=AddPerson, Source={StaticResource MyPersonTree}}"/>
@@ -346,12 +346,29 @@
             </Button>
         </WrapPanel>
 
-        <Button Name="Edit" Tag="Viewr" Content="Змінити"  Margin="836,64,44,114" RenderTransformOrigin="0.862,1.96" Grid.Row="1">
+        <Button Name="Edit" Tag="ViewB" Content="Змінити"  Margin="568,130,312,48" RenderTransformOrigin="0.862,1.96" Grid.Row="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <cmd:EventToCommand Command="{Binding EditPersonPage, Source={StaticResource MyPersonTree}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
+
+        <WrapPanel Margin="700,130,0, 0" Grid.Row="1" Visibility="Visible">
+            <Button Tag="edit" Visibility="Collapsed" Content="Відмінити">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <cmd:EventToCommand Command="{Binding BackEditPage, Source={StaticResource MyPersonTree}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button Tag="edit" Visibility="Collapsed" Content="Підтвердити">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <cmd:EventToCommand Command="{Binding Path=NewEditPerson, Source={StaticResource MyPersonTree}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </WrapPanel>
     </Grid>
 </Page>

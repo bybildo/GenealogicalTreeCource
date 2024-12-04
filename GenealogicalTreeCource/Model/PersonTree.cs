@@ -14,13 +14,14 @@ using GenealogicalTreeCource.Xaml;
 using GenealogicalTreeCource.View;
 using GenealogicalTreeCource.View.Admin;
 using System.Windows.Automation;
+using System;
 
 namespace GenealogicalTreeCource.Class
 {
     public class PersonTree : INotifyPropertyChanged
     {
         private List<Person> _persons = new List<Person>();
-        private List<Person> _addPerson = new List<Person>() { new Person("void"), new Person("void") };
+        private List<Person> _addPerson = new List<Person>();
         private List<Person> _editPerson = new List<Person>();
 
 
@@ -77,8 +78,8 @@ namespace GenealogicalTreeCource.Class
         {
             get
             {
-                _editPerson.Add(new Person("void"));
-                return _editPerson[_addPerson.Count - 1];
+                _editPerson.Add(_persons[ChoosePersonaId].Clone() as Person);
+                return _editPerson[_editPerson.Count - 1];
             }
         }
 
@@ -343,7 +344,7 @@ namespace GenealogicalTreeCource.Class
 
         public void LoadFromFile()
         {
-            const string FilePath = "persons.json";
+            string FilePath = "persons.json";
             if (File.Exists(FilePath))
             {
                 string json = File.ReadAllText(FilePath);
@@ -353,6 +354,28 @@ namespace GenealogicalTreeCource.Class
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects
                 };
                 _persons = JsonConvert.DeserializeObject<List<Person>>(json, settings) ?? new List<Person>();
+            }
+            FilePath = "newPersons.json";
+            if (File.Exists(FilePath))
+            {
+                string json = File.ReadAllText(FilePath);
+
+                var settings = new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                };
+                _addPerson = JsonConvert.DeserializeObject<List<Person>>(json, settings) ?? new List<Person>();
+            }
+            FilePath = "editPersons.json";
+            if (File.Exists(FilePath))
+            {
+                string json = File.ReadAllText(FilePath);
+
+                var settings = new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                };
+                _editPerson = JsonConvert.DeserializeObject<List<Person>>(json, settings) ?? new List<Person>();
             }
             UpdateRefernces();
         }
@@ -404,6 +427,24 @@ namespace GenealogicalTreeCource.Class
                     IgnoreSerializableAttribute = false
                 }
             };
+            string json = JsonConvert.SerializeObject(_addPerson, settings);
+            File.WriteAllText(FilePath, json);
+        }
+
+        private void SaveEditPerson()
+        {
+            const string FilePath = "editPersons.json";
+            var settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                ContractResolver = new DefaultContractResolver
+                {
+                    IgnoreSerializableAttribute = false
+                }
+            };
+            string json = JsonConvert.SerializeObject(_editPerson, settings);
+            File.WriteAllText(FilePath, json);
         }
         #endregion
 
@@ -572,7 +613,7 @@ namespace GenealogicalTreeCource.Class
         }
 
         private bool isGenerating = false;
-        private List<int> generatedIndexes = new(); 
+        private List<int> generatedIndexes = new();
 
         //Попереджаю працює не стабільно
         private async void GenerateMasiveF()
@@ -606,7 +647,7 @@ namespace GenealogicalTreeCource.Class
                                     SaveToFile();
 
                                     if (genWind != null) genWind.Close();
-   
+
                                     MessageBox.Show("Дерево згенеровано успішно. Длякоректної роботи краще перезайти в додаток", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                                     return;
                                 }
@@ -676,12 +717,12 @@ namespace GenealogicalTreeCource.Class
         public ICommand GenerateMasive { get; private set; }
         public ICommand BackPage { get; private set; }
         public ICommand BackAddPage { get; private set; }
+        public ICommand BackEditPage { get; private set; }
         public ICommand BackPageAdmin { get; private set; }
         public ICommand AddPerson { get; private set; }
         public ICommand AddFather { get; private set; }
         public ICommand AddMother { get; private set; }
-
-
+        public ICommand NewEditPerson { get; private set; }
         private void InitializeCommands()
         {
             AddPersonPage = new RelayCommand(_ => AddPersonPageF());
@@ -692,13 +733,55 @@ namespace GenealogicalTreeCource.Class
             AddAdministrationPage = new RelayCommand(_ => AddAdministrationPageF());
             BackPage = new RelayCommand(_ => BackPageF());
             BackAddPage = new RelayCommand(_ => BackAddPageF());
+            BackEditPage = new RelayCommand(_ => BackEditPageF());
             BackPageAdmin = new RelayCommand(_ => BackPageAdminF());
             GenerateWinwow = new RelayCommand(_ => GenerateWindowF());
             MainWindow = new RelayCommand(_ => MainWindowF());
             GenerateMasive = new RelayCommand(_ => GenerateMasiveF());
             AddPerson = new RelayCommand(_ => AddPersonF());
+            NewEditPerson = new RelayCommand(_ => NewEditPersonF());
             AddFather = new RelayCommand<string>(AddFatherF);
             AddMother = new RelayCommand<string>(AddMotherF);
+        }
+
+        private void NewEditPersonF()
+        {
+            Person firstPerson = _persons[ChoosePersonaId];
+            Person editteblePerson = _editPerson[_editPerson.Count - 1];
+
+            if (editteblePerson.Name == firstPerson.Name && editteblePerson.Surname == firstPerson.Surname && editteblePerson.DeathDate == firstPerson.DeathDate)
+            {
+                MessageBox.Show("Ви не внесли ніяйких змін", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (editteblePerson.Name == "")
+            {
+                MessageBox.Show("Введіть нове ім'я", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (editteblePerson.Surname == "")
+            {
+                MessageBox.Show("Введіть нове прізвище", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if ((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.BirthdayDate > editteblePerson.DeathDate)
+            {
+                MessageBox.Show("Дата народження не може бути більшою за дату смерті", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if ((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.DeathDate > DateOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("Дата народження не може бути в майбутньому", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            SaveEditPerson();
+            MainWindowF();
+            MessageBox.Show("Чекайте схвалення адміністратором", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void AddPersonF()
@@ -718,7 +801,7 @@ namespace GenealogicalTreeCource.Class
             }
 
             if (person.Fathername == "")
-            {   
+            {
                 MessageBox.Show("Введіть по батькові", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -758,6 +841,19 @@ namespace GenealogicalTreeCource.Class
                 return;
             }
 
+            if ((person.DeathDate != null && person.DeathDate != DateOnly.MinValue) && person.BirthdayDate > person.DeathDate)
+            {
+                MessageBox.Show("Дата народження не може бути більшою за дату смерті", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if ((person.DeathDate != null && person.DeathDate != DateOnly.MinValue) && person.DeathDate > DateOnly.FromDateTime(DateTime.Now))
+            {
+                MessageBox.Show("Дата народження не може бути в майбутньому", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            SaveNewPerson();
             MainWindowF();
             MessageBox.Show("Чекайте схвалення адміністратором", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -768,13 +864,19 @@ namespace GenealogicalTreeCource.Class
             MainWindowF();
         }
 
+        private void BackEditPageF()
+        {
+            _editPerson.RemoveAt(_editPerson.Count - 1);
+            BackPageF();
+        }
+
         private void AddFatherF(string fatherName)
         {
             _filter2 = fatherName;
             OnPropertyChanged(nameof(Filter2));
             Show2 = Visibility.Collapsed;
             _addPerson[_addPerson.Count - 1].Father = _persons[_persons.FindIndex(p => p.ForSearch() == fatherName)];
-            _addPerson[_addPerson.Count - 1].Surname = _addPerson[_addPerson.Count-1].Father.Surname;
+            _addPerson[_addPerson.Count - 1].Surname = _addPerson[_addPerson.Count - 1].Father.Surname;
             FatherNameEnabled = false;
         }
         private void AddMotherF(string motherName)
@@ -869,12 +971,12 @@ namespace GenealogicalTreeCource.Class
             else throw new Exception("Ви видалили frame");
         }
 
-
         private void GenerateWindowF()
         {
             TreeGenWind window = new TreeGenWind();
             window.ShowDialog();
         }
+
         private void MainWindowF()
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
