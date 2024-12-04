@@ -204,8 +204,8 @@
         </ListBox>
 
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2" Margin="26,51,25,62" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Canvas x:Name="GenealogyCanvas" Background="FloralWhite" Height="350" Width="900">
-                <!--Focusable="True" FocusManager.IsFocusScope="True"-->
+            <Canvas x:Name="GenealogyCanvas" Height="350" Width="900">
+
                 <Canvas.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform x:Name="ScaleTransform" />
