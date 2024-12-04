@@ -9,6 +9,8 @@ namespace GenealogicalTreeCource
         public MainWindow()
         {
             InitializeComponent();
+            PersonTree personTree = DataContext as PersonTree;
+            personTree.SaveToFile();
         }
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)

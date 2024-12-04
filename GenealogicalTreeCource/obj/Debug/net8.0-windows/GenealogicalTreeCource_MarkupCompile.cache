@@ -12,8 +12,13 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\owner\Desktop\курсв\GenealogicalTreeCource\App.xaml
 6140352868
 
+<<<<<<< HEAD
 231640319615
 2072061457779
+=======
+24-1317677420
+207-189491844
+>>>>>>> Main
 View\Admin\AddedUsers.xaml;View\Admin\AdministrationPage.xaml;View\Admin\TreeGenWind.xaml;View\MainWindow.xaml;View\OperationWithPerson.xaml;View\ViewPersonTree.xaml;
 
 False

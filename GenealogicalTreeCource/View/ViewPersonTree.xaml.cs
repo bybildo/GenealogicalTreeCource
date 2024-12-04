@@ -42,6 +42,16 @@ namespace GenealogicalTreeCource
             }
         }
 
+        private void PlaceholderTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox != null)
+            {
+                textBox.Text = "";
+            }
+        }
+
         #region Переміщення на полотні
         private void ForMove()
         {

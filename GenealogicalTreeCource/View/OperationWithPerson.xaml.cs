@@ -3,6 +3,7 @@ using GenealogicalTreeCource.Model.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -148,9 +149,23 @@ namespace GenealogicalTreeCource
             }
         }
 
-        private void ForEdit(UIElement element)
+        private void PlaceholderTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
 
+            if (textBox.Name == "opt")
+            {
+                SurnameTextBox.Text = "";
+                FathernameTextBox.Text = "";
+            }
+            if (textBox != null)
+            {
+                textBox.Text = "";
+            }
+        }
+        private void DeadCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DeathDatePicker.SelectedDate = null;
         }
     }
 }
