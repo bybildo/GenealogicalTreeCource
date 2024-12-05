@@ -210,11 +210,11 @@
             </Border>
 
             <Border Background="White" Margin="10, 20, 10,0" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
-                <PasswordBox Height="30" FontSize="14" Foreground="#124213" Background="Transparent" GotFocus="PlaceholderTextBox_GotFocus" BorderThickness="0"/>
+                <TextBox Height="30" FontSize="14" Text="{Binding AcPassword}" VerticalContentAlignment="Center" Foreground="#124213" Background="Transparent" GotFocus="PlaceholderTextBox_GotFocus" BorderThickness="0"/>
             </Border>
 
-            <CheckBox Content="Я не робот" Margin="69, 40, 0, 0" FontSize="15" Foreground="White"/>
-            <Button Content="LOGIN" Margin="0, 30, 0, 10" Command="{Binding BackPageAdmin}"/>
+            <CheckBox Content="Я не робот" Margin="69, 40, 0, 0" IsChecked="{Binding Robot}" FontSize="15" Foreground="White"/>
+            <Button Content="LOGIN" Margin="0, 30, 0, 10" Command="{Binding VerifyAdmin}"/>
         </StackPanel>
 
     </Grid>

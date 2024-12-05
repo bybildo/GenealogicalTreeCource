@@ -707,15 +707,18 @@ namespace GenealogicalTreeCource.Class
 
         #region Вхід в адміна
 
-        private string _acName = "Login"; 
+        private string _acName = "Login";
         private string _acPassword = "Password";
         private bool _robot = false;
 
         public string AcName
         {
             get { return _acName; }
-            set { _acName = value; 
-            OnPropertyChanged(nameof(AcName));}
+            set
+            {
+                _acName = value;
+                OnPropertyChanged(nameof(AcName));
+            }
         }
 
         public string AcPassword
@@ -736,6 +739,23 @@ namespace GenealogicalTreeCource.Class
                 _robot = value;
                 OnPropertyChanged(nameof(Robot));
             }
+        }
+
+        private void VerifyAdminF()
+        {
+            if (Robot == false)
+            {
+                MessageBox.Show("Вхід роботам ЗАБОРОНЕНИЙ!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (AcName.ToLower() == "admin" && AcPassword.ToLower() == "admin")
+            {
+                BackPageAdminF();
+                return;
+            }
+            
+            MessageBox.Show("Неправильний логін або пароль!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         #endregion
 
@@ -763,6 +783,7 @@ namespace GenealogicalTreeCource.Class
         public ICommand AddEditPerson { get; private set; }
         public ICommand DeleteEditPerson { get; private set; }
         public ICommand OpenDetailsNewPerson { get; private set; }
+        public ICommand VerifyAdmin { get; private set; }
         private void InitializeCommands()
         {
             AddPersonPage = new RelayCommand(_ => AddPersonPageF());
@@ -788,6 +809,7 @@ namespace GenealogicalTreeCource.Class
             AddEditPerson = new RelayCommand<string>(AddEditPersonF);
             DeleteEditPerson = new RelayCommand<string>(DeleteEditPersonF);
             OpenDetailsNewPerson = new RelayCommand<string>(OpenDetailsNewPersonF);
+            VerifyAdmin = new RelayCommand(_ => VerifyAdminF());
         }
 
         private void OpenDetailsNewPersonF(string ForSearch)
@@ -924,7 +946,7 @@ namespace GenealogicalTreeCource.Class
                 return;
             }
 
-            if((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.DeathDate > firstPerson.Children.Max(child => child.BirthdayDate))
+            if ((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.DeathDate > firstPerson.Children.Max(child => child.BirthdayDate))
             {
                 MessageBox.Show("Дата народження не ранішою ніж дата народження дитини", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
