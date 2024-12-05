@@ -277,6 +277,42 @@
             </ListBox>
         </Border>
 
+        <Border BorderBrush="Black" Grid.ColumnSpan="3" Margin="0,0,0,36" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+            <ListBox AlternationCount="2" ItemsSource="{Binding Path=EditedPerson, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Background="#298734"
+        Name="itemsEditControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended" Visibility="Collapsed">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,7" Grid.Column="1" 
+                   CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="#beebc3" Width="728">
+                            <Grid Height="75">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Grid.Column="0" Margin="10,0,0,0"/>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                                    <Button x:Name="Undo" Content="Відхилити" Margin="5,0,0,0">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <cmd:EventToCommand Command="{Binding DeleteEditPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                    <Button x:Name="Accept" Content="Додати" Margin="5,0,0,0" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <cmd:EventToCommand Command="{Binding AddAddPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
         <TextBlock Text="Розроби своє власне генеалогічне дерево"
              FontSize="36" FontWeight="Bold" Foreground="LightGreen"
              FontFamily="Comic Sans MS"  

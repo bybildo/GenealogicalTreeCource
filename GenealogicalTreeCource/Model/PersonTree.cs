@@ -80,6 +80,7 @@ namespace GenealogicalTreeCource.Class
             {
                 _editPerson.Add(_persons[ChoosePersonaId].Clone() as Person);
                 return _editPerson[_editPerson.Count - 1];
+
             }
         }
 
@@ -440,6 +441,7 @@ namespace GenealogicalTreeCource.Class
         private void SaveEditPerson()
         {
             const string FilePath = "editPersons.json";
+
             var settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -622,7 +624,7 @@ namespace GenealogicalTreeCource.Class
             {
                 if (int.TryParse(_textbox1, out int knees))
                 {
-                    if (0 < knees && knees < 7)
+                    if (0 < knees && knees <= 8)
                     {
                         bool uspih = false;
                         while (!uspih)
@@ -687,7 +689,6 @@ namespace GenealogicalTreeCource.Class
                 }
             }, token);
         }
-
         #endregion
 
         #region команди mvvm
@@ -711,6 +712,8 @@ namespace GenealogicalTreeCource.Class
         public ICommand NewEditPerson { get; private set; }
         public ICommand DeleteAddPerson { get; private set; }
         public ICommand AddAddPerson { get; private set; }
+        public ICommand AddEditPerson { get; private set; }
+        public ICommand DeleteEditPerson { get; private set; }
         private void InitializeCommands()
         {
             AddPersonPage = new RelayCommand(_ => AddPersonPageF());
@@ -733,6 +736,29 @@ namespace GenealogicalTreeCource.Class
             AddMother = new RelayCommand<string>(AddMotherF);
             DeleteAddPerson = new RelayCommand<string>(DeleteAddPersonF);
             AddAddPerson = new RelayCommand<string>(AddAddPersonF);
+            AddEditPerson = new RelayCommand<string>(AddEditPersonF);
+            DeleteEditPerson = new RelayCommand<string>(DeleteEditPersonF);
+        }
+
+        private void DeleteEditPersonF(string ForSearch)
+        {
+            int index = _editPerson.FindIndex(p => p.ForSearch() == ForSearch);
+            if (index >= 0)
+            {
+                _editPerson.RemoveAt(index);
+                MessageBox.Show("Додавання відхилено", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
+                OnPropertyChanged(nameof(AddedPerson));
+                SaveEditPerson();
+            }
+            else
+            {
+                MessageBox.Show("Людину не знайдено", "Програмна помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddEditPersonF(string ForSearch)
+        {
+            throw new NotImplementedException();
         }
 
         private void DeleteAddPersonF(string ForSearch)
@@ -999,12 +1025,7 @@ namespace GenealogicalTreeCource.Class
             var adminWindow = Application.Current.Windows.OfType<AdministrationPage>().FirstOrDefault();
             if (adminWindow != null)
             {
-                adminWindow.SetWindow.Navigate(new AddedUsers());
-                try
-                {
-                    adminWindow.SetWindow.GoBack();
-                }
-                catch { adminWindow.SetWindow.Navigate(null); }
+               adminWindow.SetWindow.Navigate(null);
             }
             else throw new Exception("Ви видалили frame");
         }
