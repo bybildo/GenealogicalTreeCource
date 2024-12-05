@@ -33,14 +33,22 @@ namespace GenealogicalTreeCource
 
                 if (selectedPerson != null)
                 {
+                    ScaleTransform.ScaleX = 0.8;
+                    ScaleTransform.ScaleY = 0.8;
+                    TranslateTransform.X = 60;
+                    TranslateTransform.Y = 100;
+
                     myPersonTree.Filter1 = forSearch;
                     myPersonTree.Show1 = Visibility.Hidden;
+
                     GenealogyCanvas.Children.Clear();
+
                     graphGenerator.DrawUpTree(selectedPerson, selectedPerson.GetUpKness());
                     graphGenerator.DrawDownTree(selectedPerson, selectedPerson.GetDownKness());
                 }
             }
         }
+
 
         private void PlaceholderTextBox_GotFocus(object sender, RoutedEventArgs e)
         {

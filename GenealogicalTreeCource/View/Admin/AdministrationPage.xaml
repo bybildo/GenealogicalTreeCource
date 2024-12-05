@@ -256,7 +256,7 @@
         </Canvas>
 
         <Button Content="Переглянути додавання" Margin="406,15,34,14" Grid.Row="3"  Command="{Binding AddAdministrationPage}"/>
-        <Button Content="Переглянути редагування"  Margin="406,45,34,45" Grid.Row="2" Command="{Binding AddAdministrationPage}"/>
+        <Button Content="Переглянути редагування"  Margin="406,45,34,45" Grid.Row="2" Command="{Binding EditAdministrationPage}"/>
         <Button Content="Сформувати дерево" Margin="406,15,34,14" Grid.Row="1" Command="{Binding GenerateWinwow}"/>
 
         <Frame x:Name="SetWindow" NavigationUIVisibility="Hidden" Grid.RowSpan="5"/>

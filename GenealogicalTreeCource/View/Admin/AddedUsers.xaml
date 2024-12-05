@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GenealogicalTreeCource.Class"
+      xmlns:Convert="clr-namespace:GenealogicalTreeCource.ViewModel"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:cmd="http://www.galasoft.ch/mvvmlight"
       mc:Ignorable="d" 
@@ -13,7 +14,7 @@
 
     <Page.Resources>
         <ResourceDictionary>
-
+            <Convert:CollectionToStringCollectionConverter x:Key="CollectionToStringCollectionConverter"/>
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="Height" Value="40" />
@@ -239,7 +240,7 @@
         </Image>
 
         <Border BorderBrush="Black" Grid.ColumnSpan="3" Margin="0,0,0,36" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
-            <ListBox AlternationCount="2" ItemsSource="{Binding Path=AddedPerson, Mode=OneWay}" Background="#298734" 
+            <ListBox AlternationCount="2" ItemsSource="{Binding Path=AddedPerson, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Background="#298734"
              Name="itemsControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -254,8 +255,20 @@
                                 <TextBlock Text="{Binding}" VerticalAlignment="Center" Grid.Column="0" Margin="10,0,0,0"/>
 
                                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                                    <Button Content="Відхилити" Margin="5,0,0,0" />
-                                    <Button Content="Додати" Margin="5,0,0,0" />
+                                    <Button Content="Відхилити" Margin="5,0,0,0">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <cmd:EventToCommand Command="{Binding DeleteAddPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                    <Button Content="Додати" Margin="5,0,0,0" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <cmd:EventToCommand Command="{Binding AddAddPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
                                 </StackPanel>
                             </Grid>
                         </Border>

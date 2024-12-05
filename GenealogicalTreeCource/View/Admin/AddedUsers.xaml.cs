@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GenealogicalTreeCource.Class;
+using GenealogicalTreeCource.Model.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace GenealogicalTreeCource.View.Admin
 {
@@ -20,9 +23,21 @@ namespace GenealogicalTreeCource.View.Admin
     /// </summary>
     public partial class AddedUsers : Page
     {
-        public AddedUsers()
+        public AddedUsers(TypeOperation typeOperation = TypeOperation.Add)
         {
             InitializeComponent();
+            if (typeOperation == TypeOperation.Edit)
+            {
+                Binding binding = new Binding("EditedPerson")
+                {
+                    Mode = BindingMode.OneWay,
+                    Converter = (IValueConverter)Resources["CollectionToStringCollectionConverter"]
+                };
+
+                 // методи
+                itemsControl.SetBinding(ListBox.ItemsSourceProperty, binding);
+
+            }
         }
     }
 }

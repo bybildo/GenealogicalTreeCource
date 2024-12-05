@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "Нова",
+    "Fathername": "Вікторович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "2020-02-02",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": -1,
+      "FatherId": -1,
+      "MotherId": -1,
+      "WifesId": [],
+      "ChildrenId": []
+    },
+    "GenderPerson": 0,
+    "Surname": "Римаренко"
+  }
+]

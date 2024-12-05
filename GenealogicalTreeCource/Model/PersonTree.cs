@@ -89,9 +89,15 @@ namespace GenealogicalTreeCource.Class
             return _addPerson[_addPerson.Count - 1];
         }
 
-        public List<string> AddedPerson
+        public List<Person> AddedPerson
         {
-            get { return _addPerson.Select(p => p.ForSearch()).ToList(); }
+            get { return _addPerson; }
+            set { _addPerson = value; }
+        }
+        public List<Person> EditedPerson
+        {
+            get { return _editPerson; }
+            set { _editPerson = value; }
         }
         #endregion
 
@@ -713,6 +719,7 @@ namespace GenealogicalTreeCource.Class
         public ICommand GraphPage { get; private set; }
         public ICommand AdministrationPage { get; private set; }
         public ICommand AddAdministrationPage { get; private set; }
+        public ICommand EditAdministrationPage { get; private set; }
         public ICommand GenerateWinwow { get; private set; }
         public ICommand GenerateMasive { get; private set; }
         public ICommand BackPage { get; private set; }
@@ -723,6 +730,8 @@ namespace GenealogicalTreeCource.Class
         public ICommand AddFather { get; private set; }
         public ICommand AddMother { get; private set; }
         public ICommand NewEditPerson { get; private set; }
+        public ICommand DeleteAddPerson { get; private set; }
+        public ICommand AddAddPerson { get; private set; }
         private void InitializeCommands()
         {
             AddPersonPage = new RelayCommand(_ => AddPersonPageF());
@@ -739,9 +748,49 @@ namespace GenealogicalTreeCource.Class
             MainWindow = new RelayCommand(_ => MainWindowF());
             GenerateMasive = new RelayCommand(_ => GenerateMasiveF());
             AddPerson = new RelayCommand(_ => AddPersonF());
+            EditAdministrationPage = new RelayCommand(_ => EditAdministrationPageF());
             NewEditPerson = new RelayCommand(_ => NewEditPersonF());
             AddFather = new RelayCommand<string>(AddFatherF);
             AddMother = new RelayCommand<string>(AddMotherF);
+            DeleteAddPerson = new RelayCommand<string>(DeleteAddPersonF);
+            AddAddPerson = new RelayCommand<string>(AddAddPersonF);
+        }
+
+        private void DeleteAddPersonF(string ForSearch)
+        {
+            int index = _addPerson.FindIndex(p => p.ForSearch() == ForSearch);
+            if (index >= 0)
+            {
+                _addPerson.RemoveAt(index);
+                MessageBox.Show("Додавання відхилено", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
+                OnPropertyChanged(nameof(AddedPerson));
+                SaveNewPerson();
+            }
+            else
+            {
+                MessageBox.Show("Людину не знайдено", "Програмна помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddAddPersonF(string ForSearch)
+        {
+            int index = _addPerson.FindIndex(p => p.ForSearch() == ForSearch);
+            if (index >= 0)
+            {
+                _addPerson[index].Mother.AddChildren(new List<Person> { _addPerson[index] });
+                _addPerson[index].Father.AddChildren(new List<Person> { _addPerson[index] });
+                _addPerson[index].Father.UpdateWife(_addPerson[index].Mother);
+                _persons.Add(_addPerson[index]);
+                SaveToFile();
+                _addPerson.RemoveAt(index);
+                MessageBox.Show("Додавання прийнято", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
+                SaveNewPerson();
+                OnPropertyChanged(nameof(AddedPerson));
+            }
+            else
+            {
+                MessageBox.Show("Людину не знайдено", "Програмна помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void NewEditPersonF()
@@ -938,6 +987,16 @@ namespace GenealogicalTreeCource.Class
             if (adminWindow != null)
             {
                 adminWindow.SetWindow.Navigate(new AddedUsers());
+            }
+            else throw new Exception("Ви видалили frame");
+        }
+        
+        private void EditAdministrationPageF()
+        {
+            var adminWindow = Application.Current.Windows.OfType<AdministrationPage>().FirstOrDefault();
+            if (adminWindow != null)
+            {
+                adminWindow.SetWindow.Navigate(new AddedUsers(TypeOperation.Edit));
             }
             else throw new Exception("Ви видалили frame");
         }
