@@ -591,37 +591,24 @@ namespace GenealogicalTreeCource.Class
         #endregion
 
         #region Генерація дерева
-        public void Generate(int numOfPerson = 1, int knees = 3)
+        public void Generate(int knees = 3)
         {
-            List<Person> persons = new List<Person>();
-            for (int i = 0; i < numOfPerson; i++)
-            {
-                persons.AddRange(new PersonTreeGenerator().GetPersons(knees));
-            }
-            _persons = persons;
+            _persons = new PersonTreeGenerator().GetPersons(knees);
         }
         #endregion
 
         #region TreeGenWin
 
         private string _textbox1 = "";
-        private string _textbox2 = "";
 
         public string Textbox1
         {
             get { return _textbox1; }
             set { _textbox1 = value; }
         }
-        public string Textbox2
-        {
-            get { return _textbox1; }
-            set { _textbox1 = value; }
-        }
 
         private bool isGenerating = false;
-        private List<int> generatedIndexes = new();
 
-        //Попереджаю працює не стабільно
         private async void GenerateMasiveF()
         {
             if (isGenerating)
@@ -633,9 +620,9 @@ namespace GenealogicalTreeCource.Class
             isGenerating = true;
             try
             {
-                if (int.TryParse(Textbox1, out int numOfPerson) && int.TryParse(Textbox2, out int knees))
+                if (int.TryParse(_textbox1, out int knees))
                 {
-                    if (0 < numOfPerson && numOfPerson < 10 && 0 < knees && knees < 7)
+                    if (0 < knees && knees < 7)
                     {
                         bool uspih = false;
                         while (!uspih)
@@ -643,15 +630,15 @@ namespace GenealogicalTreeCource.Class
                             var cts = new CancellationTokenSource();
                             try
                             {
-                                var task = GenerateWithTimeout(numOfPerson, knees, cts.Token);
+                                var task = GenerateWithTimeout(knees, cts.Token);
                                 if (await Task.WhenAny(task, Task.Delay(12000)) == task)
                                 {
                                     uspih = true;
-                                    var genWind = Application.Current.Windows.OfType<TreeGenWind>().FirstOrDefault();
                                     _addPerson = new List<Person>();
                                     _editPerson = new List<Person>();
                                     SaveToFile();
 
+                                    var genWind = Application.Current.Windows.OfType<TreeGenWind>().FirstOrDefault();
                                     if (genWind != null) genWind.Close();
 
                                     MessageBox.Show("Дерево згенеровано успішно. Длякоректної роботи краще перезайти в додаток", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -660,7 +647,7 @@ namespace GenealogicalTreeCource.Class
                                 else
                                 {
                                     cts.Cancel();
-                                    MessageBox.Show($"Генерація тривала занадто довго ({generatedIndexes.Count}/{numOfPerson}). Повторюємо...", "Попередження", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show($"Генерація тривала занадто довго. Повторюємо...", "Попередження", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
                             }
                             catch (Exception ex)
@@ -685,26 +672,18 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        private async Task GenerateWithTimeout(int numOfPerson, int knees, CancellationToken token)
+        private async Task GenerateWithTimeout(int knees, CancellationToken token)
         {
             await Task.Run(() =>
             {
                 if (token.IsCancellationRequested) token.ThrowIfCancellationRequested();
-
-                for (int i = 0; i < numOfPerson; i++)
+                try
                 {
-                    if (generatedIndexes.Contains(i)) continue;
-
-                    try
-                    {
-                        Generate(i, knees);
-                        generatedIndexes.Add(i);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Помилка генерації для індексу {i}: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
-                    }
+                    Generate(knees);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Помилка генерації для індексу: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }, token);
         }
@@ -990,7 +969,7 @@ namespace GenealogicalTreeCource.Class
             }
             else throw new Exception("Ви видалили frame");
         }
-        
+
         private void EditAdministrationPageF()
         {
             var adminWindow = Application.Current.Windows.OfType<AdministrationPage>().FirstOrDefault();
