@@ -15,6 +15,7 @@ using GenealogicalTreeCource.View;
 using GenealogicalTreeCource.View.Admin;
 using System.Windows.Automation;
 using System;
+using System.Windows.Controls;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -722,7 +723,7 @@ namespace GenealogicalTreeCource.Class
             get { return _acPassword; }
             set
             {
-                _acName = value;
+                _acPassword = value;
                 OnPropertyChanged(nameof(AcPassword));
             }
         }
