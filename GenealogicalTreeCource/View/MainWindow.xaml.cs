@@ -9,7 +9,6 @@ namespace GenealogicalTreeCource
         public MainWindow()
         {
             InitializeComponent();
-            PersonTree personTree = new PersonTree();
         }
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)

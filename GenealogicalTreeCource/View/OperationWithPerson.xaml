@@ -22,7 +22,7 @@
             <Convert:IdToPersonConverter x:Key="IdToPersonConverter"/>
 
             <Style TargetType="Button">
-                <Setter Property="FontSize" Value="26" />
+                <Setter Property="FontSize" Value="20" />
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="120" />
                 <Setter Property="Foreground" Value="White" />
@@ -277,10 +277,10 @@
                 <TextBox Tag="TextBox" GotFocus="PlaceholderTextBox_GotFocus" Text="{Binding Path=Filter3, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Collapsed"/>
                 <ListBox x:Name="MotherListBox2" ItemsSource="{Binding Path=Search3, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2" Visibility="{Binding Path=Show3, Source={StaticResource MyPersonTree}, Mode=TwoWay}">
                     <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <cmd:EventToCommand Command="{Binding AddMother, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MotherListBox2}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding AddMother, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MotherListBox2}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ListBox>
 
                 <TextBlock Tag="View" Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -330,42 +330,49 @@
         </Border>
 
         <WrapPanel Margin="300,130,0, 0" Grid.Row="1" Visibility="Visible">
-            <Button Tag="Add" Visibility="Collapsed" Content="Назад">
+            <Button  Margin="0,0,10, 0" Visibility="Collapsed" Tag="Add"  Content="Назад">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding BackAddPage, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Tag="Add" Visibility="Collapsed" Content="Підтвердити">
+            <Button  Margin="10,0,5, 0" Visibility="Collapsed" Tag="Add" Content="Підтвердити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <cmd:EventToCommand Command="{Binding Path=AddPerson, Source={StaticResource MyPersonTree}}"/>
+                        <cmd:EventToCommand Command="{Binding AddPerson, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
         </WrapPanel>
 
-        <Button Name="Edit" Tag="ViewB" Content="Змінити"  Margin="568,130,312,48" RenderTransformOrigin="0.862,1.96" Grid.Row="1">
+        <Button Name="Edit" Tag="ViewB" Content="Змінити"  Margin="800,130,0,48" Grid.Row="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <cmd:EventToCommand Command="{Binding EditPersonPage, Source={StaticResource MyPersonTree}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
+        <Button Name="Back2" Tag="ViewB" Content="Назад"  Margin="0,130,280,48" Grid.Row="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding BackPage, Source={StaticResource MyPersonTree}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
 
         <WrapPanel Margin="700,130,0, 0" Grid.Row="1" Visibility="Visible">
-            <Button Tag="edit" Visibility="Collapsed" Content="Відмінити">
+            <Button Margin="10,0,10, 20" Visibility="Collapsed" Tag="cancel" Content="Відмінити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding BackEditPage, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Tag="edit" Visibility="Collapsed" Content="Підтвердити">
+            <Button Margin="10,0,0,20" Visibility="Collapsed" Tag="confirm"  Content="Підтвердити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <cmd:EventToCommand Command="{Binding Path=NewEditPerson, Source={StaticResource MyPersonTree}}"/>
+                        <cmd:EventToCommand Command="{Binding NewEditPerson, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
