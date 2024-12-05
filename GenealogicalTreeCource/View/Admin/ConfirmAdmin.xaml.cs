@@ -24,5 +24,22 @@ namespace GenealogicalTreeCource.View.Admin
         {
             InitializeComponent();
         }
+        private void PlaceholderTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (textBox != null)
+                {
+                    textBox.Text = "";
+                }
+            }
+            else if (sender is PasswordBox passwordBox)
+            {
+                if (passwordBox != null)
+                {
+                    passwordBox.Password = "";
+                }
+            }
+        }
     }
 }

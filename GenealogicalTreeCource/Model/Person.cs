@@ -415,6 +415,7 @@ namespace GenealogicalTreeCource.Class
                 return 1 + maxDepth;
             }
         }
+
         #region Забезпечення Binding
 
         public event PropertyChangedEventHandler? PropertyChanged;

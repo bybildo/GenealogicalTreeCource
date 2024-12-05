@@ -241,7 +241,8 @@
 
         <Border BorderBrush="Black" Grid.ColumnSpan="3" Margin="0,0,0,36" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
             <ListBox AlternationCount="2" ItemsSource="{Binding Path=AddedPerson, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}" Background="#298734"
-             Name="itemsControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended">
+             Name="itemsControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended">    
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Grid.Row="1" Grid.ColumnSpan="3" Margin="0,10,0,0" Grid.Column="1" 
@@ -252,7 +253,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Grid.Column="0" Margin="10,0,0,0"/>
+                                <TextBlock x:Name="Txt1" Text="{Binding}" VerticalAlignment="Center" Grid.Column="0" Margin="10,0,0,0"/>
 
                                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
                                     <Button Content="Відхилити" Margin="5,0,0,0">
@@ -301,7 +302,7 @@
                                     <Button x:Name="Accept" Content="Додати" Margin="10,0,10,0" >
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Click">
-                                                <cmd:EventToCommand Command="{Binding AddAddPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />
+                                                <cmd:EventToCommand Command="{Binding AddEditPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </Button>

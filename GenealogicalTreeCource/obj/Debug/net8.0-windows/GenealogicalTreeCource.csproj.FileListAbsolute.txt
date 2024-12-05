@@ -162,3 +162,5 @@ C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-wi
 C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\ref\GenealogicalTreeCource.dll
 C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\ConfirmAdmin.g.cs
 C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\ConfirmAdmin.baml
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\ConfirmAdmin.g.cs
+D:\Desktop\ЛH №1 Міняйло Марк\3 семестр\GenealogicalTreeCource\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\ConfirmAdmin.baml

@@ -60,10 +60,23 @@ namespace GenealogicalTreeCource
                         ForView(Elements);
                         break;
                     }
-                default:
+                case TypeOperation.Edit:
                     {
                         Back2.Visibility = Visibility.Collapsed;
                         var binding = new Binding("ChooseEdit")
+                        {
+                            Source = myPersonTree
+                        };
+
+                        elements.SetBinding(Grid.DataContextProperty, binding);
+
+                        ForEdit(Elements);
+                        break;
+                    }
+                default:
+                    {
+                        Back2.Visibility = Visibility.Collapsed;
+                        var binding = new Binding("ChooseEditView")
                         {
                             Source = myPersonTree
                         };
@@ -206,7 +219,7 @@ namespace GenealogicalTreeCource
                 }
                 else if (frameworkElement.Tag?.ToString() == "edit")
                 {
-                   frameworkElement.Visibility = Visibility.Visible;
+                    frameworkElement.Visibility = Visibility.Visible;
                 }
             }
 

@@ -80,7 +80,20 @@ namespace GenealogicalTreeCource.Class
             {
                 _editPerson.Add(_persons[ChoosePersonaId].Clone() as Person);
                 return _editPerson[_editPerson.Count - 1];
+            }
+        }
 
+        private Person _ChooseEditView;
+        public Person ChooseEditView
+        {
+            get
+            {
+                return _ChooseEditView;
+            }
+            set
+            {
+                _ChooseEditView = value;
+                OnPropertyChanged(nameof(ChooseEditView));
             }
         }
 
@@ -691,6 +704,40 @@ namespace GenealogicalTreeCource.Class
         }
         #endregion
 
+        #region Вхід в адміна
+
+        private string _acName = "Login"; 
+        private string _acPassword = "Password";
+        private bool _robot = false;
+
+        public string AcName
+        {
+            get { return _acName; }
+            set { _acName = value; 
+            OnPropertyChanged(nameof(AcName));}
+        }
+
+        public string AcPassword
+        {
+            get { return _acPassword; }
+            set
+            {
+                _acName = value;
+                OnPropertyChanged(nameof(AcPassword));
+            }
+        }
+
+        public bool Robot
+        {
+            get { return _robot; }
+            set
+            {
+                _robot = value;
+                OnPropertyChanged(nameof(Robot));
+            }
+        }
+        #endregion
+
         #region команди mvvm
         public ICommand MainWindow { get; private set; }
         public ICommand AddPersonPage { get; private set; }
@@ -714,6 +761,7 @@ namespace GenealogicalTreeCource.Class
         public ICommand AddAddPerson { get; private set; }
         public ICommand AddEditPerson { get; private set; }
         public ICommand DeleteEditPerson { get; private set; }
+        public ICommand OpenDetailsNewPerson { get; private set; }
         private void InitializeCommands()
         {
             AddPersonPage = new RelayCommand(_ => AddPersonPageF());
@@ -738,6 +786,28 @@ namespace GenealogicalTreeCource.Class
             AddAddPerson = new RelayCommand<string>(AddAddPersonF);
             AddEditPerson = new RelayCommand<string>(AddEditPersonF);
             DeleteEditPerson = new RelayCommand<string>(DeleteEditPersonF);
+            OpenDetailsNewPerson = new RelayCommand<string>(OpenDetailsNewPersonF);
+        }
+
+        private void OpenDetailsNewPersonF(string ForSearch)
+        {
+            Person person = _addPerson.Find(p => p.ForSearch() == ForSearch);
+            if (person == null)
+                person = _editPerson.Find(p => p.ForSearch() == ForSearch);
+            if (person != null)
+            {
+                ChooseEditView = person;
+                var adminWindow = Application.Current.Windows.OfType<AdministrationPage>().FirstOrDefault();
+                if (adminWindow != null)
+                {
+                    adminWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Administration));
+                }
+                else throw new Exception("Ви видалили frame");
+            }
+            else
+            {
+                MessageBox.Show($"Людину не знайдено{ForSearch}", "Програмна помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteEditPersonF(string ForSearch)
@@ -747,7 +817,7 @@ namespace GenealogicalTreeCource.Class
             {
                 _editPerson.RemoveAt(index);
                 MessageBox.Show("Додавання відхилено", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
-                OnPropertyChanged(nameof(AddedPerson));
+                OnPropertyChanged(nameof(EditedPerson));
                 SaveEditPerson();
             }
             else
@@ -758,7 +828,27 @@ namespace GenealogicalTreeCource.Class
 
         private void AddEditPersonF(string ForSearch)
         {
-            throw new NotImplementedException();
+            int index = _editPerson.FindIndex(p => p.ForSearch() == ForSearch);
+            Person editedPerson = null;
+            if (index >= 0)
+                editedPerson = _editPerson[index];
+            Person firstPerson = _persons.Find(p => p.Id.MyId == editedPerson.Id.MyId);
+
+            if (editedPerson != null && firstPerson != null)
+            {
+                firstPerson.Name = editedPerson.Name;
+                firstPerson.Surname = editedPerson.Surname;
+                firstPerson.DeathDate = editedPerson.DeathDate;
+                SaveToFile();
+                _editPerson.RemoveAt(index);
+                MessageBox.Show("Редагування прийнято", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
+                SaveEditPerson();
+                OnPropertyChanged(nameof(EditedPerson));
+            }
+            else
+            {
+                MessageBox.Show("Людину не знайдено", "Програмна помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteAddPersonF(string ForSearch)
@@ -767,7 +857,7 @@ namespace GenealogicalTreeCource.Class
             if (index >= 0)
             {
                 _addPerson.RemoveAt(index);
-                MessageBox.Show("Додавання відхилено", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Редагування відхилено", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
                 OnPropertyChanged(nameof(AddedPerson));
                 SaveNewPerson();
             }
@@ -833,9 +923,15 @@ namespace GenealogicalTreeCource.Class
                 return;
             }
 
+            if((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.DeathDate > firstPerson.Children.Max(child => child.BirthdayDate))
+            {
+                MessageBox.Show("Дата народження не ранішою ніж дата народження дитини", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             SaveEditPerson();
-            MainWindowF();
             MessageBox.Show("Чекайте схвалення адміністратором", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            MainWindowF();
         }
 
         private void AddPersonF()
@@ -1025,7 +1121,7 @@ namespace GenealogicalTreeCource.Class
             var adminWindow = Application.Current.Windows.OfType<AdministrationPage>().FirstOrDefault();
             if (adminWindow != null)
             {
-               adminWindow.SetWindow.Navigate(null);
+                adminWindow.SetWindow.Navigate(null);
             }
             else throw new Exception("Ви видалили frame");
         }

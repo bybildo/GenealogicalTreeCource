@@ -8,6 +8,6 @@ namespace GenealogicalTreeCource.Model.Enum
 {
     public enum TypeOperation
     {
-        Add, View, Edit
+        Add, View, Edit, Administration
     }
 }
