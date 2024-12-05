@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Image\admin.png" />
     <None Remove="Image\leaf.png" />
+    <None Remove="Image\leaf_icon.ico" />
     <None Remove="Image\MainWindow\tree_background.jpg" />
     <None Remove="Image\PersonPhoto\absent.jpg" />
     <None Remove="Image\PersonPhoto\adminButton.png" />
@@ -30,6 +31,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\leaf.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\leaf_icon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\MainWindow\tree_background.jpg">

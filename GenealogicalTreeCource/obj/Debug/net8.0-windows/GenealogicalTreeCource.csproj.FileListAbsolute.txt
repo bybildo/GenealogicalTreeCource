@@ -160,3 +160,5 @@ C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-wi
 C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.pdb
 C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\GenealogicalTreeCource.genruntimeconfig.cache
 C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\ref\GenealogicalTreeCource.dll
+C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\ConfirmAdmin.g.cs
+C:\Users\owner\Desktop\курсова\GenealogicalTreeCource\obj\Debug\net8.0-windows\View\Admin\ConfirmAdmin.baml

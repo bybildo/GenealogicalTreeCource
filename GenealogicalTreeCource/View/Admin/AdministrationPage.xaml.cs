@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenealogicalTreeCource.View.Admin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace GenealogicalTreeCource.Xaml
 {
@@ -23,6 +25,7 @@ namespace GenealogicalTreeCource.Xaml
         public AdministrationPage()
         {
             InitializeComponent();
+            SetWindow.Navigate(new ConfirmAdmin());
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
