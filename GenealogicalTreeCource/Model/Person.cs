@@ -48,6 +48,22 @@ namespace GenealogicalTreeCource.Class
             Children = children;
         }
 
+        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother, List<Person> wives, List<Person> children, int myId) : this(name, surname, fathername, genderPerson, photo, birthdayDate, deathDate, father, mother)
+        {
+            Name = name;
+            Surname = surname;
+            Fathername = fathername;
+            GenderPerson = genderPerson;
+            Photo = photo;
+            BirthdayDate = birthdayDate;
+            DeathDate = deathDate;
+            Father = father;
+            Mother = mother;
+            Wifes = wives;
+            Children = children;
+            _id = new PersonId(myId, -1, -1, new List<int>(), new List<int>());
+        }
+
         public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother)
         {
             Name = name;
@@ -411,7 +427,7 @@ namespace GenealogicalTreeCource.Class
         #region Клонування
         public object Clone()
         {
-            return new Person(_name, _surname, _fathername, _gender, null, _birthdayDate, _DeathDate, _father, _mother, _wifes, _children);
+            return new Person(_name, _surname, _fathername, _gender, null, _birthdayDate, _DeathDate, _father, _mother, _wifes, _children, _id.MyId);
         }
         #endregion
     }

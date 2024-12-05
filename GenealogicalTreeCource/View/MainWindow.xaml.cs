@@ -1,5 +1,4 @@
-﻿using GenealogicalTreeCource.Class;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace GenealogicalTreeCource
@@ -9,7 +8,6 @@ namespace GenealogicalTreeCource
         public MainWindow()
         {
             InitializeComponent();
-            PersonTree personTree = new PersonTree();
         }
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
