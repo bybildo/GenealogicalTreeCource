@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:local="clr-namespace:GenealogicalTreeCource.Class" ResizeMode="NoResize"
-        Title="TreeGenWind" Height="200" Width="310" Background="#1d521f">
+        Title="TreeGenWind" Height="200" Width="310" Background="#1d521f"
+        Icon="/Image/leaf_icon.ico">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="11"/>
