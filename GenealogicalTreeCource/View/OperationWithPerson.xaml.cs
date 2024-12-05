@@ -62,6 +62,7 @@ namespace GenealogicalTreeCource
                     }
                 default:
                     {
+                        Back2.Visibility = Visibility.Collapsed;
                         var binding = new Binding("ChooseEdit")
                         {
                             Source = myPersonTree

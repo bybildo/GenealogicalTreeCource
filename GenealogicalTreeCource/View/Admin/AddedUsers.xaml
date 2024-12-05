@@ -262,7 +262,7 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </Button>
-                                    <Button Content="Додати" Margin="5,0,0,0" >
+                                    <Button Content="Додати" Margin="10,0,10,0" >
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Click">
                                                 <cmd:EventToCommand Command="{Binding AddAddPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />
@@ -282,7 +282,7 @@
         Name="itemsEditControl" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionMode="Extended" Visibility="Collapsed">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,7" Grid.Column="1" 
+                        <Border Grid.Row="1" Grid.ColumnSpan="3"  Grid.Column="1" 
                    CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="#beebc3" Width="728">
                             <Grid Height="75">
                                 <Grid.ColumnDefinitions>
@@ -298,7 +298,7 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </Button>
-                                    <Button x:Name="Accept" Content="Додати" Margin="5,0,0,0" >
+                                    <Button x:Name="Accept" Content="Додати" Margin="10,0,10,0" >
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Click">
                                                 <cmd:EventToCommand Command="{Binding AddAddPerson, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding}" />

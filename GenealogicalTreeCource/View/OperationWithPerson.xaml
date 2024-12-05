@@ -362,14 +362,14 @@
         </Button>
 
         <WrapPanel Margin="700,130,0, 0" Grid.Row="1" Visibility="Visible">
-            <Button Margin="10,0,10, 20" Visibility="Collapsed" Tag="cancel" Content="Відмінити">
+            <Button Margin="10,0,10, 20" Visibility="Collapsed" Tag="edit" Content="Відмінити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding BackEditPage, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Margin="10,0,0,20" Visibility="Collapsed" Tag="confirm"  Content="Підтвердити">
+            <Button Margin="10,0,0,20" Visibility="Collapsed" Tag="edit"  Content="Підтвердити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding NewEditPerson, Source={StaticResource MyPersonTree}}"/>
