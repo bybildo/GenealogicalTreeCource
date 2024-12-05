@@ -1,5 +1,4 @@
-﻿using GenealogicalTreeCource.Class;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace GenealogicalTreeCource
