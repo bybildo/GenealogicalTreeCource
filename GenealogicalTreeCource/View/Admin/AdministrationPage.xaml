@@ -9,7 +9,9 @@
       mc:Ignorable="d" 
       Height="600" Width="800"
       ResizeMode="NoResize"
-      Title="AdministrationPage" Background="#1d521f">
+      Title="AdministrationPage" Background="#1d521f"
+      WindowStyle="SingleBorderWindow" 
+      Icon="/Image/leaf_icon.ico">
 
     <Window.Resources>
         <Style TargetType="TextBlock">

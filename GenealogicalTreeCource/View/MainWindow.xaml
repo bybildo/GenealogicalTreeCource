@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-
         xmlns:local="clr-namespace:GenealogicalTreeCource.Class"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
@@ -12,7 +11,8 @@
         Title="Генеалогічне Дерево"
         Height="640" Width="1000"
         Background="White"
-        WindowStyle="None">
+        WindowStyle="SingleBorderWindow" 
+        Icon="/Image/leaf_icon.ico">
 
     <Window.Resources>
         <ResourceDictionary>
