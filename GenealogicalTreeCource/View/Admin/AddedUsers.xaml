@@ -314,12 +314,12 @@
             </ListBox>
         </Border>
 
-        <TextBlock Text="Розроби своє власне генеалогічне дерево"
+        <TextBlock Name="option" Text="Перегляд додавання"
              FontSize="36" FontWeight="Bold" Foreground="LightGreen"
              FontFamily="Comic Sans MS"  
              HorizontalAlignment="Left" VerticalAlignment="Center"
              Margin="5,0,0,0" TextWrapping="Wrap"
-             TextAlignment="Left" LineHeight="40" Height="75" Width="760" Grid.ColumnSpan="4" Grid.Column="1">
+             TextAlignment="Center" LineHeight="40" Height="75" Width="760" Grid.ColumnSpan="4" Grid.Column="1">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
             </TextBlock.Effect>

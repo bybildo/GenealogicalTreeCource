@@ -18,11 +18,15 @@ namespace GenealogicalTreeCource.View.Admin
         public AddedUsers(TypeOperation typeOperation = TypeOperation.Add)
         {
             InitializeComponent();
+
             if (typeOperation == TypeOperation.Edit)
             {
                 itemsControl.Visibility = Visibility.Collapsed;
                 itemsEditControl.Visibility = Visibility.Visible;
+                option.Text = "Перегляд редагування";
             }
+
+
         }
     }
 }

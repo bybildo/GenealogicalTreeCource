@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Генеалогічне Дерево"
-        Height="640" Width="1000"
+        Height="670" Width="1000"
         Background="White"
         WindowStyle="SingleBorderWindow" 
         Icon="/Image/leaf_icon.ico">

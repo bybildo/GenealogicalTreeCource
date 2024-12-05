@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\ЛH №1 Міняйло Марк\\3 семестр\\GenealogicalTreeCource\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj": {}
+    "C:\\Users\\owner\\Desktop\\Новая папка (2)\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\ЛH №1 Міняйло Марк\\3 семестр\\GenealogicalTreeCource\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj": {
+    "C:\\Users\\owner\\Desktop\\Новая папка (2)\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\ЛH №1 Міняйло Марк\\3 семестр\\GenealogicalTreeCource\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj",
+        "projectUniqueName": "C:\\Users\\owner\\Desktop\\Новая папка (2)\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj",
         "projectName": "GenealogicalTreeCource",
-        "projectPath": "D:\\Desktop\\ЛH №1 Міняйло Марк\\3 семестр\\GenealogicalTreeCource\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj",
-        "packagesPath": "C:\\Users\\mpro2\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\ЛH №1 Міняйло Марк\\3 семестр\\GenealogicalTreeCource\\GenealogicalTreeCource\\obj\\",
+        "projectPath": "C:\\Users\\owner\\Desktop\\Новая папка (2)\\GenealogicalTreeCource\\GenealogicalTreeCource.csproj",
+        "packagesPath": "C:\\Users\\owner\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\owner\\Desktop\\Новая папка (2)\\GenealogicalTreeCource\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mpro2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -76,7 +82,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

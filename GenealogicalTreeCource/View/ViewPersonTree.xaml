@@ -224,10 +224,10 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <Button Name="Back" Content="Назад"  Margin="59,376,27,7" Grid.Row="3" Grid.Column="1">
+        <Button Name="Back" Content="Назад"  Margin="3,308,3,80" Grid.Row="3" Grid.Column="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <cmd:EventToCommand Command="{Binding BackPage, Source={StaticResource MyPersonTree}}"/>
+                    <cmd:EventToCommand Command="{Binding MainWindow, Source={StaticResource MyPersonTree}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>

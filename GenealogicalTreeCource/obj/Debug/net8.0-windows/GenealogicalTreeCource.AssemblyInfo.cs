@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GenealogicalTreeCource")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24e617664e3099ffb765c57672d81d3c42446edf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac5b375d4f5d242521a2968c3c8cb974177f7ffb")]
 [assembly: System.Reflection.AssemblyProductAttribute("GenealogicalTreeCource")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GenealogicalTreeCource")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
