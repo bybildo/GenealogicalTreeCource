@@ -206,16 +206,25 @@
 
         <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#4CAF50" Width="236" Margin="0,10,0,0" Height="273" >
 
+<<<<<<< HEAD
             <Border Background="White" Margin="10" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
                 <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#124213" Text="{Binding AcName}" GotFocus="PlaceholderTextBox_GotFocus" Background="Transparent" BorderThickness="0"/>
             </Border>
 
             <Border Background="White" Margin="10" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
                 <PasswordBox Height="30" FontSize="14" Foreground="#124213" Password="Password" Background="Transparent" BorderThickness="0" GotFocus="PlaceholderTextBox_GotFocus"/>
+=======
+            <Border Background="White" Margin="10, 30, 10, 0" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
+                <TextBox Height="30" FontSize="14" VerticalContentAlignment="Center" Foreground="#124213" Text="Login" Background="Transparent" BorderThickness="0"/>
             </Border>
 
-            <CheckBox Content="Я не робот" Margin="5" FontSize="15" Foreground="White"/>
-            <Button Content="LOGIN" Margin="0, 80, 0, 10"/>
+            <Border Background="White" Margin="10, 20, 10,0" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
+                <PasswordBox Height="30" FontSize="14" Foreground="#124213" Password="password" Background="Transparent" BorderThickness="0"/>
+>>>>>>> 47438618e4d58e9c8a112d910552f3f44b96e690
+            </Border>
+
+            <CheckBox Content="Я не робот" Margin="69, 40, 0, 0" FontSize="15" Foreground="White"/>
+            <Button Content="LOGIN" Margin="0, 30, 0, 10"/>
 
         </StackPanel>
 
