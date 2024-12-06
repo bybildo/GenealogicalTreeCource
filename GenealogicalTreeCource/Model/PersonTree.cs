@@ -16,6 +16,7 @@ using GenealogicalTreeCource.View.Admin;
 using System.Windows.Automation;
 using System;
 using System.Windows.Controls;
+using System.Diagnostics.Metrics;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -283,6 +284,7 @@ namespace GenealogicalTreeCource.Class
             string textForSearch2 = Filter2?.Trim();
 
             var yearMatch2 = Regex.Match(textForSearch2, @"\b(\d{4})\b");
+            var today = DateOnly.FromDateTime(DateTime.Now);
 
             if (yearMatch2.Success)
             {
@@ -295,10 +297,12 @@ namespace GenealogicalTreeCource.Class
             else searchYear2 = DateTime.Now.Year;
 
             var filteredPersons2 = _persons
-                .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
-                            p.GenderPerson == Enum.Gender.male &&
-                            (string.IsNullOrEmpty(textForSearch2) || p.ForSearch().Contains(textForSearch2, StringComparison.OrdinalIgnoreCase)))
-                .Reverse()
+            .Where(p =>
+            !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
+            p.GenderPerson == Enum.Gender.male &&
+            (string.IsNullOrEmpty(textForSearch2) || p.ForSearch().Contains(textForSearch2, StringComparison.OrdinalIgnoreCase)) &&
+            p.BirthdayDate != default &&
+            today.Year - ((DateOnly)p.BirthdayDate).Year - (today < ((DateOnly)p.BirthdayDate).AddYears(today.Year - ((DateOnly)p.BirthdayDate).Year) ? 1 : 0) > 16)
                 .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear2.Value ?? 0))
                 .Take(5)
                 .ToList();
@@ -316,6 +320,7 @@ namespace GenealogicalTreeCource.Class
             string textForSearch3 = Filter3?.Trim();
 
             var yearMatch3 = Regex.Match(textForSearch3, @"\b(\d{4})\b");
+            var today = DateOnly.FromDateTime(DateTime.Now);
 
             if (yearMatch3.Success)
             {
@@ -330,7 +335,9 @@ namespace GenealogicalTreeCource.Class
             var filteredPersons3 = _persons
                 .Where(p => !string.Equals(p.Fathername, "*невідомо*", StringComparison.OrdinalIgnoreCase) &&
                             p.GenderPerson == Enum.Gender.female &&
-                            (string.IsNullOrEmpty(textForSearch3) || p.ForSearch().Contains(textForSearch3, StringComparison.OrdinalIgnoreCase)))
+                            (string.IsNullOrEmpty(textForSearch3) || p.ForSearch().Contains(textForSearch3, StringComparison.OrdinalIgnoreCase)) &&
+                            p.BirthdayDate != default &&
+                            today.Year - ((DateOnly)p.BirthdayDate).Year - (today < ((DateOnly)p.BirthdayDate).AddYears(today.Year - ((DateOnly)p.BirthdayDate).Year) ? 1 : 0) > 16)
                 .Reverse()
                 .OrderBy(p => Math.Abs(p.BirthdayDate?.Year - searchYear3.Value ?? 0))
                 .Take(5)
@@ -504,6 +511,7 @@ namespace GenealogicalTreeCource.Class
 
             me.Id = new PersonId(me.Id.MyId, fatherID, motherID, new List<int>(), new List<int>());
         }
+
         // Відновлення посилань через ID
         private void UpdateRefernces()
         {
@@ -569,26 +577,23 @@ namespace GenealogicalTreeCource.Class
 
         public void UpdateIdNewPerson(Person person)
         {
-            person.Mother.AddChildren(new List<Person>() { person });
-            person.Father.AddChildren(new List<Person>() { person });
-
-            int indx = _persons.FindIndex(el => el == person.Mother);
-            if (indx >= 0)
+            int indxm = person.Id.MotherId;
+            if (indxm >= 0)
             {
-                Person mother = _persons[indx];
-                List<int> childID = new List<int> { _persons.Count - 1 };
-                childID.AddRange(mother.Id.ChildrenId);
-                mother.Id = new PersonId(mother.Id.MyId, mother.Id.FatherId, mother.Id.MotherId, mother.Id.WifesId, childID);
+                Person mother = _persons[indxm];
+                mother.AddChildren(new List<Person>() { person });
+                mother.Id.AddChild(person.Id.MyId);
             }
 
-            indx = _persons.FindIndex(el => el == person.Father);
-            if (indx >= 0)
+            int indxf = person.Id.FatherId;
+            if (indxf >= 0)
             {
-                Person father = _persons[indx];
-                List<int> childID = new List<int> { _persons.Count - 1 };
-                childID.AddRange(father.Id.ChildrenId);
-                father.Id = new PersonId(father.Id.MyId, father.Id.FatherId, father.Id.MotherId, father.Id.WifesId, childID);
+                Person father = _persons[indxf];
+                father.AddChildren(new List<Person>() { person });
+                father.Id.AddChild(person.Id.MyId);
+                if (indxm >= 0) father.UpdateWife(_persons[indxm]);
             }
+
         }
         #endregion
 
@@ -920,7 +925,7 @@ namespace GenealogicalTreeCource.Class
             {
                 Person me = _addPerson[indexf];
                 _persons.Add(me);
-                _persons[_persons.Count - 1].Id = new PersonId(-1, me.Id.FatherId, me.Id.MotherId, new List<int>(), new List<int>());
+                _persons[_persons.Count - 1].Id = new PersonId(_persons.Count - 1, me.Id.FatherId, me.Id.MotherId, new List<int>(), new List<int>());
 
                 UpdateIdNewPerson(_persons[_persons.Count - 1]);
                 SaveToFile();
@@ -1032,6 +1037,36 @@ namespace GenealogicalTreeCource.Class
                 }
             }
 
+            if (person.Mother != null)
+            {
+                int ageDifference = ((DateOnly)person.BirthdayDate).Year - ((DateOnly)person.Mother.BirthdayDate).Year;
+                if (ageDifference > 50)
+                {
+                    MessageBox.Show("Завелика різниця у віці", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (ageDifference < 16)
+                {
+                    MessageBox.Show("Замаленька різниця у віці", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
+            if (person.Father != null)
+            {
+                int ageDifference = ((DateOnly)person.BirthdayDate).Year - ((DateOnly)person.Father.BirthdayDate).Year;
+                if (ageDifference > 50)
+                {
+                    MessageBox.Show("Завелика різниця у віці", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (ageDifference < 16)
+                {
+                    MessageBox.Show("Замаленька різниця у віці", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             if (person.BirthdayDate == null || person.BirthdayDate == DateOnly.MinValue)
             {
                 MessageBox.Show("Введіть дату народження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -1104,7 +1139,7 @@ namespace GenealogicalTreeCource.Class
 
         public void ViewPersonPageF(string personForSearch = "*")
         {
-            if (personForSearch.Contains("*невідомо*")) return;
+            if (string.IsNullOrEmpty(personForSearch) || personForSearch.Contains("*невідомо*")) return;
             if (personForSearch != "*")
                 ChoosePersonaId = _persons.FindIndex(p => p.ForSearch() == personForSearch);
 

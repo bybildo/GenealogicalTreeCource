@@ -11,15 +11,16 @@ using System.Windows.Navigation;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using System.Windows;
+using GenealogicalTreeCource.Class;
 
-namespace GenealogicalTreeCource.Class
+namespace GenealogicalTreeCource.Model
 {
     public class Person : INotifyPropertyChanged, ICloneable
     {
         private string _name = "*невідомо*";
         private string _surname = "*невідомо*";
         private string _fathername = "*невідомо*";
-        private Gender _gender = Gender.male;
+        private Gender _gender = Gender.unknown;
         private string _photo = "Image/PersonPhoto/absent.jpg";
         private DateOnly? _birthdayDate;
         private DateOnly? _DeathDate;
@@ -92,7 +93,7 @@ namespace GenealogicalTreeCource.Class
             _name = "";
             _surname = "";
             _fathername = "";
-            _gender = Gender.unknown;
+            _gender = Gender.female;
         }
         #endregion
 
@@ -247,7 +248,7 @@ namespace GenealogicalTreeCource.Class
                                 }
                                 else
                                 {
-                                    Fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
+                                    Fathername = Father.Name.EndsWith("о") || Father.Name.EndsWith("а")
                                         ? Father.Name.Substring(0, Father.Name.Length - 1) + "івна"
                                         : Father.Name + "івна";
                                 }
@@ -255,7 +256,7 @@ namespace GenealogicalTreeCource.Class
                             }
                         default:
                             {
-                                Fathername = (Father.Name.EndsWith("о") || Father.Name.EndsWith("а"))
+                                Fathername = Father.Name.EndsWith("о") || Father.Name.EndsWith("а")
                                     ? Father.Name.Substring(0, Father.Name.Length - 1) + "ович"
                                     : Father.Name + "ович";
                                 break;
@@ -357,7 +358,7 @@ namespace GenealogicalTreeCource.Class
         }
         public void AddChildren(List<Person> newChildren)
         {
-            Wifes.AddRange(newChildren);
+            Children.AddRange(newChildren);
         }
         #endregion
 
@@ -369,7 +370,7 @@ namespace GenealogicalTreeCource.Class
 
         public override string ToString()
         {
-            if (this.DeathDate == DateOnly.MinValue)
+            if (DeathDate == DateOnly.MinValue)
                 return $"{_surname} {_name} {_fathername}\n{((DateOnly)BirthdayDate).Year}";
             return $"{_surname} {_name} {_fathername}\n{((DateOnly)BirthdayDate).Year}-{((DateOnly)DeathDate).Year}";
         }

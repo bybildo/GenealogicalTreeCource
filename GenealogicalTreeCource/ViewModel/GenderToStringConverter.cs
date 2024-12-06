@@ -6,10 +6,10 @@ namespace GenealogicalTreeCource.ViewModel
 {
     public class GenderToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+   public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return string.Empty;
+            if (value == null || (Gender)value == Gender.unknown)
+                return null;
 
             var gender = (Gender)value;
             return gender == Gender.male ? "Чоловіча" : "Жіноча";
@@ -17,7 +17,11 @@ namespace GenealogicalTreeCource.ViewModel
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.ToString().ToLower() == "чоловіча" ? Gender.male : Gender.female;
+            if (value == null)
+                return Gender.unknown;
+
+            var str = value.ToString().ToLower();
+            return str == "чоловіча" ? Gender.male : Gender.female;
         }
     }
 }

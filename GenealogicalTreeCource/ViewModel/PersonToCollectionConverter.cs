@@ -1,4 +1,5 @@
 ﻿using GenealogicalTreeCource.Class;
+using GenealogicalTreeCource.Model;
 using System.Windows.Data;
 
 namespace GenealogicalTreeCource.ViewModel

@@ -4,7 +4,7 @@
     {
         public int MyId { get; }
         public int FatherId { get; }
-        public int MotherId { get; }
+        public int MotherId { get;}
 
         public List<int> WifesId { get; }
         public List<int> ChildrenId { get; }
@@ -17,5 +17,7 @@
             WifesId = wifesId;
             ChildrenId = childrenId;
         }
+
+        public void AddChild(int newChildId) => ChildrenId.Add(newChildId);
     }
 }

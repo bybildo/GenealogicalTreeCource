@@ -303,7 +303,8 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Стать:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <ComboBox Name="GenderComboBox" Width="169" Margin="0,0,10,0" SelectedItem="{Binding GenderPerson, Mode=TwoWay}">
+                    <ComboBox Name="GenderComboBox" Width="169" Margin="0,0,10,0" 
+          SelectedItem="{Binding GenderPerson, Mode=TwoWay, FallbackValue={x:Static enum:Gender.unknown}}">
                         <ComboBox.ItemsSource>
                             <x:Array Type="{x:Type enum:Gender}">
                                 <enum:Gender>male</enum:Gender>

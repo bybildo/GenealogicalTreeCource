@@ -34,7 +34,7 @@ namespace GenealogicalTreeCource
                     TranslateTransform.Y = 100;
 
                     myPersonTree.Filter1 = forSearch;
-                    myPersonTree.Show1 = Visibility.Hidden;
+                    myPersonTree.Show1 = Visibility.Collapsed;
 
                     GenealogyCanvas.Children.Clear();
 

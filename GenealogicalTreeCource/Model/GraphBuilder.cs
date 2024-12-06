@@ -1,9 +1,9 @@
-﻿using GenealogicalTreeCource.Class;
-using GenealogicalTreeCource.Enum;
+﻿using GenealogicalTreeCource.Enum;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows;
+using GenealogicalTreeCource.Model;
 
 namespace GenealogicalTreeCource.Class
 {

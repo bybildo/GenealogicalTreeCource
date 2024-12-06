@@ -1,4 +1,5 @@
 ﻿using GenealogicalTreeCource.Class;
+using GenealogicalTreeCource.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
