@@ -14,13 +14,12 @@ using System.Windows;
 
 namespace GenealogicalTreeCource.Class
 {
-
     public class Person : INotifyPropertyChanged, ICloneable
     {
         private string _name = "*невідомо*";
         private string _surname = "*невідомо*";
         private string _fathername = "*невідомо*";
-        private Gender _gender = Gender.unknown;
+        private Gender _gender = Gender.male;
         private string _photo = "Image/PersonPhoto/absent.jpg";
         private DateOnly? _birthdayDate;
         private DateOnly? _DeathDate;

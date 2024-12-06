@@ -478,16 +478,6 @@ namespace GenealogicalTreeCource.Class
             {
                 UpdateID(person);
             }
-
-            foreach (var person in _addPerson)
-            {
-                UpdateID(person);
-            }
-
-            foreach (var person in _editPerson)
-            {
-                UpdateID(person);
-            }
         }
 
         private void UpdateID(Person me)
@@ -507,6 +497,13 @@ namespace GenealogicalTreeCource.Class
             me.Id = new PersonId(me.Id.MyId, fatherID, motherID, wifeID, childrenID);
         }
 
+        private void UpdateNewPersonID(Person me)
+        {
+            int fatherID = _persons.FindIndex(el => el == me.Father);
+            int motherID = _persons.FindIndex(el => el == me.Mother);
+
+            me.Id = new PersonId(me.Id.MyId, fatherID, motherID, new List<int>(), new List<int>());
+        }
         // Відновлення посилань через ID
         private void UpdateRefernces()
         {
@@ -567,6 +564,30 @@ namespace GenealogicalTreeCource.Class
                     .Where(childId => childId >= 0 && childId < _persons.Count)
                     .Select(childId => _persons[childId])
                     .ToList() ?? new List<Person>();
+            }
+        }
+
+        public void UpdateIdNewPerson(Person person)
+        {
+            person.Mother.AddChildren(new List<Person>() { person });
+            person.Father.AddChildren(new List<Person>() { person });
+
+            int indx = _persons.FindIndex(el => el == person.Mother);
+            if (indx >= 0)
+            {
+                Person mother = _persons[indx];
+                List<int> childID = new List<int> { _persons.Count - 1 };
+                childID.AddRange(mother.Id.ChildrenId);
+                mother.Id = new PersonId(mother.Id.MyId, mother.Id.FatherId, mother.Id.MotherId, mother.Id.WifesId, childID);
+            }
+
+            indx = _persons.FindIndex(el => el == person.Father);
+            if (indx >= 0)
+            {
+                Person father = _persons[indx];
+                List<int> childID = new List<int> { _persons.Count - 1 };
+                childID.AddRange(father.Id.ChildrenId);
+                father.Id = new PersonId(father.Id.MyId, father.Id.FatherId, father.Id.MotherId, father.Id.WifesId, childID);
             }
         }
         #endregion
@@ -650,9 +671,11 @@ namespace GenealogicalTreeCource.Class
                                 if (await Task.WhenAny(task, Task.Delay(12000)) == task)
                                 {
                                     uspih = true;
-                                    _addPerson = new List<Person>();
-                                    _editPerson = new List<Person>();
+                                    _addPerson.Clear();
+                                    _editPerson.Clear();
                                     SaveToFile();
+                                    SaveEditPerson();
+                                    SaveNewPerson();
 
                                     var genWind = Application.Current.Windows.OfType<TreeGenWind>().FirstOrDefault();
                                     if (genWind != null) genWind.Close();
@@ -754,7 +777,7 @@ namespace GenealogicalTreeCource.Class
                 BackPageAdminF();
                 return;
             }
-            
+
             MessageBox.Show("Неправильний логін або пароль!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         #endregion
@@ -892,16 +915,17 @@ namespace GenealogicalTreeCource.Class
 
         private void AddAddPersonF(string ForSearch)
         {
-            int index = _addPerson.FindIndex(p => p.ForSearch() == ForSearch);
-            if (index >= 0)
+            int indexf = _addPerson.FindIndex(p => p.ForSearch() == ForSearch);
+            if (indexf >= 0)
             {
-                _addPerson[index].Mother.AddChildren(new List<Person> { _addPerson[index] });
-                _addPerson[index].Father.AddChildren(new List<Person> { _addPerson[index] });
-                _addPerson[index].Father.UpdateWife(_addPerson[index].Mother);
-                _persons.Add(_addPerson[index]);
+                Person me = _addPerson[indexf];
+                _persons.Add(me);
+                _persons[_persons.Count - 1].Id = new PersonId(-1, me.Id.FatherId, me.Id.MotherId, new List<int>(), new List<int>());
+
+                UpdateIdNewPerson(_persons[_persons.Count - 1]);
                 SaveToFile();
-                _addPerson.RemoveAt(index);
                 MessageBox.Show("Додавання прийнято", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
+                _addPerson.RemoveAt(indexf);
                 SaveNewPerson();
                 OnPropertyChanged(nameof(AddedPerson));
             }
@@ -996,7 +1020,7 @@ namespace GenealogicalTreeCource.Class
 
             if (Filter3 != string.Empty)
             {
-                var mother = _persons.Find(p => p.ForSearch() == Filter2);
+                var mother = _persons.Find(p => p.ForSearch() == Filter3);
                 if (mother != null)
                 {
                     person.Mother = mother;
@@ -1026,6 +1050,7 @@ namespace GenealogicalTreeCource.Class
                 return;
             }
 
+            UpdateNewPersonID(person);
             SaveNewPerson();
             MainWindowF();
             MessageBox.Show("Чекайте схвалення адміністратором", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
