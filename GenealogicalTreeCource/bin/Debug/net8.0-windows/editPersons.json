@@ -1,1 +1,158 @@
-[]
+[
+  {
+    "Name": "Едуард",
+    "Fathername": "Маркович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "2024-11-10",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": 621,
+      "FatherId": -1,
+      "MotherId": -1,
+      "WifesId": [],
+      "ChildrenId": []
+    },
+    "GenderPerson": 1,
+    "Surname": "Артемчук"
+  },
+  {
+    "Name": "Артур",
+    "Fathername": "Борисович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "2012-03-16",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": 417,
+      "FatherId": -1,
+      "MotherId": -1,
+      "WifesId": [],
+      "ChildrenId": []
+    },
+    "GenderPerson": 1,
+    "Surname": "Мірошник"
+  },
+  {
+    "Name": "Артур",
+    "Fathername": "Борисович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "2012-03-16",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": 417,
+      "FatherId": -1,
+      "MotherId": -1,
+      "WifesId": [],
+      "ChildrenId": []
+    },
+    "GenderPerson": 1,
+    "Surname": "Мірошник"
+  },
+  {
+    "Name": "Артур",
+    "Fathername": "Борисович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "2012-03-16",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": 417,
+      "FatherId": -1,
+      "MotherId": -1,
+      "WifesId": [],
+      "ChildrenId": []
+    },
+    "GenderPerson": 1,
+    "Surname": "Мірошник"
+  },
+  {
+    "Name": "Марк",
+    "Fathername": "Русланович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "2007-08-12",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": 38,
+      "FatherId": -1,
+      "MotherId": -1,
+      "WifesId": [],
+      "ChildrenId": []
+    },
+    "GenderPerson": 1,
+    "Surname": "Артемчук"
+  },
+  {
+    "Name": "Герман",
+    "Fathername": "Дмитрович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "1937-03-22",
+    "DeathDate": "1968-01-12",
+    "Id": {
+      "MyId": 169,
+      "FatherId": 147,
+      "MotherId": 168,
+      "WifesId": [
+        203
+      ],
+      "ChildrenId": [
+        416
+      ]
+    },
+    "GenderPerson": 1,
+    "Surname": "Цимбалюк"
+  },
+  {
+    "Name": "Едуард",
+    "Fathername": "Маркович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "2024-11-10",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": 621,
+      "FatherId": 38,
+      "MotherId": 620,
+      "WifesId": [],
+      "ChildrenId": []
+    },
+    "GenderPerson": 1,
+    "Surname": "Артемчук"
+  },
+  {
+    "Name": "Данило",
+    "Fathername": "Анатолійович",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "1957-10-18",
+    "DeathDate": "0001-01-01",
+    "Id": {
+      "MyId": 27,
+      "FatherId": 23,
+      "MotherId": 26,
+      "WifesId": [
+        36
+      ],
+      "ChildrenId": [
+        37
+      ]
+    },
+    "GenderPerson": 1,
+    "Surname": "Камінський"
+  },
+  {
+    "Name": "Другий",
+    "Fathername": "Перший",
+    "Photo": "Image/PersonPhoto/absent.jpg",
+    "BirthdayDate": "1990-01-01",
+    "DeathDate": "2021-01-01",
+    "Id": {
+      "MyId": 622,
+      "FatherId": -1,
+      "MotherId": -1,
+      "WifesId": [
+        623
+      ],
+      "ChildrenId": [
+        624
+      ]
+    },
+    "GenderPerson": 1,
+    "Surname": "Другий"
+  }
+]

@@ -25,8 +25,6 @@ namespace GenealogicalTreeCource.View.Admin
                 itemsEditControl.Visibility = Visibility.Visible;
                 option.Text = "Перегляд редагування";
             }
-
-
         }
     }
 }

@@ -48,7 +48,7 @@ namespace GenealogicalTreeCource.Model
             Children = children;
         }
 
-        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother, List<Person> wives, List<Person> children, int myId) : this(name, surname, fathername, genderPerson, photo, birthdayDate, deathDate, father, mother)
+        public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother, List<Person> wives, List<Person> children, PersonId myId) : this(name, surname, fathername, genderPerson, photo, birthdayDate, deathDate, father, mother)
         {
             Name = name;
             Surname = surname;
@@ -61,7 +61,7 @@ namespace GenealogicalTreeCource.Model
             Mother = mother;
             Wifes = wives;
             Children = children;
-            _id = new PersonId(myId, -1, -1, new List<int>(), new List<int>());
+            _id = myId;
         }
 
         public Person(string name, string surname, string fathername, Gender genderPerson, string photo, DateOnly? birthdayDate, DateOnly? deathDate, Person? father, Person? mother)
@@ -103,7 +103,16 @@ namespace GenealogicalTreeCource.Model
             get { return _name; }
             set
             {
-                if (value == "" || value == null) _name = "*невідомо*";
+                if (value == null)
+                {
+                    _name = "*невідомо*";
+                    return;
+                }
+                if (value == "")
+                {
+                    _name = "";
+                    return;
+                }
                 if (value.Length > 20) MessageBox.Show("Ім'я завелике", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 if (Regex.IsMatch(value, pattern))
                 {
@@ -121,12 +130,16 @@ namespace GenealogicalTreeCource.Model
             get { return _surname; }
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value == null)
                 {
                     _surname = "*невідомо*";
                     return;
                 }
-
+                if (value == "")
+                {
+                    _surname = "";
+                    return;
+                }
                 if (value.Length > 20)
                     MessageBox.Show("Прізвище завелике", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -157,12 +170,16 @@ namespace GenealogicalTreeCource.Model
             get { return _fathername; }
             set
             {
-                if (value == null || value == "")
+                if (value == null)
                 {
                     _fathername = "*невідомо*";
                     return;
                 }
-
+                if (value == "")
+                {
+                    _fathername = "";
+                    return;
+                }
                 if (value.Length > 20)
                 {
                     MessageBox.Show("По батькові завелике", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -183,7 +200,11 @@ namespace GenealogicalTreeCource.Model
         public Gender GenderPerson
         {
             get { return _gender; }
-            set { _gender = value; }
+            set
+            {
+                _gender = value;
+                Surname = Surname;
+            }
         }
 
         public string Photo
@@ -206,7 +227,7 @@ namespace GenealogicalTreeCource.Model
             }
             set
             {
-                if (value != null && value < new DateOnly(1500, 1, 1)) MessageBox.Show("Дата народження не може бути менша 1500 року", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (value != null && value != DateOnly.MinValue && value < new DateOnly(1500, 1, 1)) MessageBox.Show("Дата народження не може бути менша 1500 року", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 _birthdayDate = value;
             }
         }
@@ -230,7 +251,7 @@ namespace GenealogicalTreeCource.Model
         {
             get
             {
-                return _father ?? new Person();
+                return _father;
             }
             set
             {
@@ -277,7 +298,7 @@ namespace GenealogicalTreeCource.Model
         {
             get
             {
-                return _mother ?? new Person();
+                return _mother;
             }
             set
             {
@@ -382,7 +403,7 @@ namespace GenealogicalTreeCource.Model
 
             int GetGenerationsDepth(Person? person)
             {
-                if (person.Fathername == "*невідомо*")
+                if (person == null || person.Fathername == "*невідомо*")
                 {
                     return 0;
                 }
@@ -428,7 +449,7 @@ namespace GenealogicalTreeCource.Model
         #region Клонування
         public object Clone()
         {
-            return new Person(_name, _surname, _fathername, _gender, null, _birthdayDate, _DeathDate, _father, _mother, _wifes, _children, _id.MyId);
+            return new Person(_name, _surname, _fathername, _gender, null, _birthdayDate, _DeathDate, _father, _mother, _wifes, _children, _id);
         }
         #endregion
     }

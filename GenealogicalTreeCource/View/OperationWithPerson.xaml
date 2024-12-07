@@ -66,7 +66,7 @@
         <StaticResource ResourceKey="MyPersonTree" />
     </Page.DataContext>
 
-    <Grid Name="Elements" DataContext="{Binding ChoosePersonaId, Converter={StaticResource IdToPersonConverter}}">
+    <Grid Name="Elements" DataContext="{Binding ForView}">
         <Grid.RowDefinitions>
             <RowDefinition Height="103*"/>
             <RowDefinition Height="57*"/>
@@ -228,15 +228,14 @@
             </Image.RenderTransform>
         </Image>
 
-
         <Border Background="White" Opacity="0.8" CornerRadius="15" VerticalAlignment="Top" Height="190" Margin="18,10,737,0" Grid.Row="1">
             <StackPanel Margin="10">
                 <TextBlock Text="Ім'я:" FontWeight="Bold" Margin="0,0,0,2"/>
-                <TextBox Name="NameTextBox" Height="30" Margin="0,0,0,10" Text="{Binding Path=Name, Mode=TwoWay}" />
+                <TextBox Name="NameTextBox" IsEnabled="{Binding Path=IsEnabledEdit, Source={StaticResource MyPersonTree}}" Height="30" Margin="0,0,0,10" Text="{Binding Path=Name, Mode=TwoWay}"/>
                 <TextBlock Text="Прізвище:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox Name="SurnameTextBox" Height="30" Margin="0,0,0,10" Text="{Binding Path=Surname, Mode=TwoWay}" IsEnabled="{Binding Path=FatherNameEnabled, Source={StaticResource MyPersonTree}, Mode=OneWay}" />
+                <TextBox Name="SurnameTextBox" Height="30" Margin="0,0,0,10" Text="{Binding Path=Surname, Mode=TwoWay}" IsEnabled="{Binding Path=FatherNameEnabled1, Source={StaticResource MyPersonTree}, Mode=OneWay}" />
                 <TextBlock Text="По-батькові:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="FathernameTextBox" Height="30" Text="{Binding Path=Fathername, Mode=TwoWay}" IsEnabled="{Binding Path=FatherNameEnabled, Source={StaticResource MyPersonTree}, Mode=OneWay}" />
+                <TextBox x:Name="FathernameTextBox"  Height="30" Text="{Binding Path=Fathername, Mode=TwoWay}" IsEnabled="{Binding Path=FatherNameEnabled, Source={StaticResource MyPersonTree}, Mode=OneWay}" />
             </StackPanel>
         </Border>
 
@@ -244,11 +243,10 @@
         </Border>
         <Image Source="/Image/PersonPhoto/ph1.png" Opacity="1" Margin="18,30,737,19"/>
 
-
         <Border Background="white" Opacity="0.8" CornerRadius="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" Height="584" Margin="287,28,0,0" Grid.RowSpan="2">
             <StackPanel Name="Family" Margin="10">
                 <TextBlock Text="Батько:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Tag="ListBox" Name="FatherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Father, Converter={StaticResource PersonToCollectionConverter}}">
+                <ListBox  IsEnabled="{Binding IsEnabledBox, Source={StaticResource MyPersonTree}}" Visibility="{Binding ViewEl,Source={StaticResource MyPersonTree}}" Name="FatherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Father, Converter={StaticResource PersonToCollectionConverter}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=FatherListBox}"/>
@@ -256,7 +254,7 @@
                     </i:Interaction.Triggers>
                 </ListBox>
 
-                <TextBox Name="opt" Tag="TextBox" GotFocus="PlaceholderTextBox_GotFocus" Text="{Binding Path=Filter2, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Collapsed"/>
+                <TextBox Name="opt" Visibility="{Binding AddEl,Source={StaticResource MyPersonTree}}" GotFocus="PlaceholderTextBox_GotFocus" Text="{Binding Path=Filter2, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"/>
                 <ListBox x:Name="FatherListBox2" ItemsSource="{Binding Path=Search2, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2" Visibility="{Binding Path=Show2, Source={StaticResource MyPersonTree}, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
@@ -266,7 +264,7 @@
                 </ListBox>
 
                 <TextBlock Text="Мати:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Tag="ListBox" Name="MotherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}">
+                <ListBox  IsEnabled="{Binding IsEnabledBox, Source={StaticResource MyPersonTree}}" Visibility="{Binding ViewEl,Source={StaticResource MyPersonTree}}" Name="MotherListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Mother, Converter={StaticResource PersonToCollectionConverter}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MotherListBox}"/>
@@ -274,7 +272,7 @@
                     </i:Interaction.Triggers>
                 </ListBox>
 
-                <TextBox Tag="TextBox" GotFocus="PlaceholderTextBox_GotFocus" Text="{Binding Path=Filter3, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Collapsed"/>
+                <TextBox Visibility="{Binding AddEl,Source={StaticResource MyPersonTree}}" GotFocus="PlaceholderTextBox_GotFocus" Text="{Binding Path=Filter3, Mode=TwoWay,Source={StaticResource MyPersonTree}, UpdateSourceTrigger=PropertyChanged}" Margin="26,39,25,19" Grid.Row="1" Grid.ColumnSpan="2"/>
                 <ListBox x:Name="MotherListBox2" ItemsSource="{Binding Path=Search3, Source={StaticResource MyPersonTree}, Mode=OneWay}" Height="60" VerticalAlignment="Center" Grid.Row="2" Margin="26,0,25,0" Grid.ColumnSpan="2" Visibility="{Binding Path=Show3, Source={StaticResource MyPersonTree}, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
@@ -283,8 +281,8 @@
                     </i:Interaction.Triggers>
                 </ListBox>
 
-                <TextBlock Tag="View" Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Tag="View" Name="MarriageListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Wifes, Converter={StaticResource LastElementCollectionToCollectionConverter}}">
+                <TextBlock  Visibility="{Binding ViewEl,Source={StaticResource MyPersonTree}}" Text="Шлюб з:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ListBox   IsEnabled="{Binding IsEnabledBox, Source={StaticResource MyPersonTree}}" Visibility="{Binding ViewEl,Source={StaticResource MyPersonTree}}" Name="MarriageListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Path=Wifes, Converter={StaticResource LastElementCollectionToCollectionConverter}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=MarriageListBox}"/>
@@ -292,8 +290,8 @@
                     </i:Interaction.Triggers>
                 </ListBox>
 
-                <TextBlock Tag="View" Text="Діти:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ListBox Tag="View" Name="ChildrenListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Children, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}">
+                <TextBlock  Visibility="{Binding ViewEl,Source={StaticResource MyPersonTree}}" Text="Діти:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ListBox  IsEnabled="{Binding IsEnabledBox, Source={StaticResource MyPersonTree}}" Visibility="{Binding ViewEl,Source={StaticResource MyPersonTree}}" Name="ChildrenListBox" Height="50" Margin="0,0,0,10" ItemsSource="{Binding Children, Mode=OneWay, Converter={StaticResource CollectionToStringCollectionConverter}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <cmd:EventToCommand Command="{Binding ViewPersonPage, Source={StaticResource MyPersonTree}}" CommandParameter="{Binding SelectedItem, ElementName=ChildrenListBox}"/>
@@ -303,8 +301,8 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Стать:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <ComboBox Name="GenderComboBox" Width="169" Margin="0,0,10,0" 
-          SelectedItem="{Binding GenderPerson, Mode=TwoWay, FallbackValue={x:Static enum:Gender.unknown}}">
+                    <ComboBox  IsEnabled="{Binding IsEnabled, Source={StaticResource MyPersonTree}}" Name="GenderComboBox" Width="169" Margin="0,0,10,0" 
+                      SelectedItem="{Binding GenderPerson, Mode=TwoWay, FallbackValue={x:Static enum:Gender.unknown}}">
                         <ComboBox.ItemsSource>
                             <x:Array Type="{x:Type enum:Gender}">
                                 <enum:Gender>male</enum:Gender>
@@ -320,25 +318,25 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Дата нарождення:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <DatePicker Name="BirthDatePicker" SelectedDate="{Binding Path=BirthdayDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}"/>
+                    <DatePicker  IsEnabled="{Binding IsEnabled, Source={StaticResource MyPersonTree}}" Name="BirthDatePicker" SelectedDate="{Binding Path=BirthdayDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Дата смерті:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center" Visibility="{Binding ElementName=DeadCheckBox, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    <DatePicker Visibility="{Binding ElementName=DeadCheckBox, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="DeathDatePicker" SelectedDate="{Binding Path=DeathDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Width="393"/>
+                    <DatePicker Visibility="{Binding ElementName=DeadCheckBox, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="DeathDatePicker" IsEnabled="{Binding Path=IsEnabledEdit, Source={StaticResource MyPersonTree}}" SelectedDate="{Binding Path=DeathDate, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}" Width="393"/>
                     <CheckBox Name="DeadCheckBox" VerticalAlignment="Center" Unchecked="DeadCheckBox_Unchecked">Людина померла</CheckBox>
                 </StackPanel>
             </StackPanel>
         </Border>
 
-        <WrapPanel Margin="300,130,0, 0" Grid.Row="1" Visibility="Visible">
-            <Button  Margin="0,0,10, 0" Visibility="Collapsed" Tag="Add"  Content="Назад">
+        <WrapPanel Visibility="{Binding AddEl,Source={StaticResource MyPersonTree}}" Margin="300,130,0, 0" Grid.Row="1">
+            <Button  Margin="0,0,10, 0" Content="Назад">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding BackAddPage, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button  Margin="10,0,5, 0" Visibility="Collapsed" Tag="Add" Content="Підтвердити">
+            <Button  Margin="10,0,5, 0" Content="Підтвердити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding AddPerson, Source={StaticResource MyPersonTree}}"/>
@@ -347,14 +345,14 @@
             </Button>
         </WrapPanel>
 
-        <Button Name="Edit" Tag="ViewB" Content="Змінити"  Margin="800,130,0,48" Grid.Row="1">
+        <Button Name="Edit" Visibility="{Binding ViewBEl,Source={StaticResource MyPersonTree}}" Content="Змінити"  Margin="800,130,0,48" Grid.Row="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <cmd:EventToCommand Command="{Binding EditPersonPage, Source={StaticResource MyPersonTree}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <Button Name="Back2" Tag="ViewB" Content="Назад"  Margin="0,130,280,48" Grid.Row="1">
+        <Button Name="Back2" Visibility="{Binding ViewBEl,Source={StaticResource MyPersonTree}}" Content="Назад"  Margin="0,130,280,48" Grid.Row="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <cmd:EventToCommand Command="{Binding BackPage, Source={StaticResource MyPersonTree}}"/>
@@ -362,15 +360,15 @@
             </i:Interaction.Triggers>
         </Button>
 
-        <WrapPanel Margin="700,130,0, 0" Grid.Row="1" Visibility="Visible">
-            <Button Margin="10,0,10, 20" Visibility="Collapsed" Tag="edit" Content="Відмінити">
+        <WrapPanel  Margin="700,130,0, 0" Grid.Row="1" Visibility="{Binding EditEl,Source={StaticResource MyPersonTree}}">
+            <Button Margin="10,0,10, 20" Tag="edit" Content="Відмінити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding BackEditPage, Source={StaticResource MyPersonTree}}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Margin="10,0,0,20" Visibility="Collapsed" Tag="edit"  Content="Підтвердити">
+            <Button Margin="10,0,0,20" Content="Підтвердити">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cmd:EventToCommand Command="{Binding NewEditPerson, Source={StaticResource MyPersonTree}}"/>

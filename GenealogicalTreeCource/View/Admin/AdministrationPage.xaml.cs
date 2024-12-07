@@ -27,10 +27,5 @@ namespace GenealogicalTreeCource.Xaml
             InitializeComponent();
             SetWindow.Navigate(new ConfirmAdmin());
         }
-
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show($"Ви ввели: ", "Інформація", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
     }
 }

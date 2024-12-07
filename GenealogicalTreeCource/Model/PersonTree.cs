@@ -17,6 +17,7 @@ using System.Windows.Automation;
 using System;
 using System.Windows.Controls;
 using System.Diagnostics.Metrics;
+using System.Windows.Media;
 
 namespace GenealogicalTreeCource.Class
 {
@@ -55,6 +56,7 @@ namespace GenealogicalTreeCource.Class
         }
 
         private bool _fatherNameEnabled = true;
+        private bool _fatherNameEnabled1 = true;
         public bool FatherNameEnabled
         {
             get { return _fatherNameEnabled; }
@@ -64,26 +66,18 @@ namespace GenealogicalTreeCource.Class
                 OnPropertyChanged(nameof(FatherNameEnabled));
             }
         }
+        public bool FatherNameEnabled1
+        {
+            get { return _fatherNameEnabled1; }
+            set
+            {
+                _fatherNameEnabled1 = value;
+                OnPropertyChanged(nameof(FatherNameEnabled1));
+            }
+        }
         #endregion
 
         #region Додавання редагування mvvm
-        public Person ChooseAdd
-        {
-            get
-            {
-                _addPerson.Add(new Person("void"));
-                return _addPerson[_addPerson.Count - 1];
-            }
-        }
-
-        public Person ChooseEdit
-        {
-            get
-            {
-                _editPerson.Add(_persons[ChoosePersonaId].Clone() as Person);
-                return _editPerson[_editPerson.Count - 1];
-            }
-        }
 
         private Person _ChooseEditView;
         public Person ChooseEditView
@@ -99,12 +93,6 @@ namespace GenealogicalTreeCource.Class
             }
         }
 
-        public Person GetVoidPerson()
-        {
-            _addPerson.Add(new Person("void"));
-            return _addPerson[_addPerson.Count - 1];
-        }
-
         public List<Person> AddedPerson
         {
             get { return _addPerson; }
@@ -114,6 +102,21 @@ namespace GenealogicalTreeCource.Class
         {
             get { return _editPerson; }
             set { _editPerson = value; }
+        }
+
+        private Person _ForView;
+        public Person ForView
+        {
+            get
+            {
+                LoadForViewId();
+                return _ForView;
+            }
+            set
+            {
+                _ForView = value;
+                OnPropertyChanged(nameof(ForView));
+            }
         }
         #endregion
 
@@ -187,6 +190,7 @@ namespace GenealogicalTreeCource.Class
                     else Show2 = Visibility.Visible;
                     OnPropertyChanged(nameof(Filter2));
                     FatherNameEnabled = true;
+                    FatherNameEnabled1 = true;
                 }
             }
         }
@@ -474,6 +478,80 @@ namespace GenealogicalTreeCource.Class
             };
             string json = JsonConvert.SerializeObject(_editPerson, settings);
             File.WriteAllText(FilePath, json);
+        }
+
+        private void SaveForViewId(string type, int id)
+        {
+            try
+            {
+                var json = System.Text.Json.JsonSerializer.Serialize(new
+                {
+                    Type = type,
+                    ForView = id
+                });
+                File.WriteAllText("ForView.json", json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void LoadForViewId()
+        {
+            try
+            {
+                if (File.Exists("ForView.json"))
+                {
+                    var json = File.ReadAllText("ForView.json");
+                    var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+
+                    if (data != null && data.TryGetValue("Type", out var typeObj) && data.TryGetValue("ForView", out var idObj))
+                    {
+                        var type = typeObj?.ToString();
+
+                        if (int.TryParse(idObj?.ToString(), out var id))
+                        {
+                            switch (type)
+                            {
+                                case "edit":
+                                    _ForView = _editPerson[id];
+                                    EditEl = Visibility.Visible;
+                                    ViewEl = Visibility.Visible;
+                                    ViewBEl = Visibility.Collapsed;
+                                    _isEnabled = false;
+                                    _fatherNameEnabled = false;
+                                    _fatherNameEnabled1 = true;
+                                    break;
+
+                                case "add":
+                                    _ForView = new Person("void");
+                                    AddEl = Visibility.Visible;
+                                    break;
+
+                                case "view":
+                                    _ForView = _persons[id];
+                                    ViewEl = Visibility.Visible;
+                                    ViewBEl = Visibility.Visible;
+                                    _fatherNameEnabled = false;
+                                    _fatherNameEnabled1 = false;
+                                    _isEnabled = false;
+                                    _isEnabledEdit = false;
+                                    _isEnabledBox = true;
+                                    break;
+
+                                default:
+                                    throw new Exception("Невідомий тип операції.");
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                throw new Exception();
+            }
         }
         #endregion
 
@@ -784,6 +862,91 @@ namespace GenealogicalTreeCource.Class
             }
 
             MessageBox.Show("Неправильний логін або пароль!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
+        #endregion
+
+        #region Вікно View mvvm
+        private Visibility _AddEl = Visibility.Collapsed;
+        private Visibility _EditEl = Visibility.Collapsed;
+        private Visibility _ViewEl = Visibility.Collapsed;
+        private Visibility _ViewBEl = Visibility.Collapsed;
+        private bool _isEnabled = true;
+        private bool _isEnabledEdit = true;
+        private bool _isEnabledBox = false;
+
+        public Visibility AddEl
+        {
+            get { return _AddEl; }
+            set
+            {
+                _AddEl = value;
+                OnPropertyChanged(nameof(AddEl));
+            }
+        }
+
+        public Visibility EditEl
+        {
+            get { return _EditEl; }
+            set
+            {
+                _EditEl = value;
+                OnPropertyChanged(nameof(EditEl));
+            }
+        }
+
+        public Visibility ViewEl
+        {
+            get { return _ViewEl; }
+            set
+            {
+                _ViewEl = value;
+                OnPropertyChanged(nameof(ViewEl));
+            }
+        }
+        public Visibility ViewBEl
+        {
+            get { return _ViewBEl; }
+            set
+            {
+                _ViewBEl = value;
+                OnPropertyChanged(nameof(ViewBEl));
+            }
+        }
+
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                _isEnabled = value;
+                OnPropertyChanged(nameof(IsEnabled));
+            }
+        }
+
+        public bool IsEnabledEdit
+        {
+            get
+            {
+                return _isEnabledEdit;
+            }
+            set
+            {
+                _isEnabledEdit = value;
+                OnPropertyChanged(nameof(IsEnabledEdit));
+            }
+        }
+        public bool IsEnabledBox
+        {
+            get
+            {
+                return _isEnabledBox;
+            }
+            set
+            {
+                _isEnabledBox = value;
+                OnPropertyChanged(nameof(IsEnabledBox));
+            }
         }
         #endregion
 
@@ -971,14 +1134,18 @@ namespace GenealogicalTreeCource.Class
 
             if ((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.DeathDate > DateOnly.FromDateTime(DateTime.Now))
             {
-                MessageBox.Show("Дата народження не може бути в майбутньому", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Дата смерті не може бути в майбутньому", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if ((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.DeathDate > firstPerson.Children.Max(child => child.BirthdayDate))
+            if (firstPerson.Children.Any() == true)
             {
-                MessageBox.Show("Дата народження не ранішою ніж дата народження дитини", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                var maxChildBirthday = firstPerson.Children.Max(child => child.BirthdayDate);
+                if ((editteblePerson.DeathDate != null && editteblePerson.DeathDate != DateOnly.MinValue) && editteblePerson.DeathDate < maxChildBirthday)
+                {
+                    MessageBox.Show("Дата смерті не може бути ранішою ніж дата народження дитини", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
 
             SaveEditPerson();
@@ -988,7 +1155,7 @@ namespace GenealogicalTreeCource.Class
 
         private void AddPersonF()
         {
-            Person person = _addPerson[_addPerson.Count - 1];
+            Person person = _ForView;
 
             if (person.Name == "")
             {
@@ -1037,6 +1204,12 @@ namespace GenealogicalTreeCource.Class
                 }
             }
 
+            if (person.BirthdayDate == null || person.BirthdayDate == DateOnly.MinValue)
+            {
+                MessageBox.Show("Введіть дату народження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (person.Mother != null)
             {
                 int ageDifference = ((DateOnly)person.BirthdayDate).Year - ((DateOnly)person.Mother.BirthdayDate).Year;
@@ -1067,12 +1240,6 @@ namespace GenealogicalTreeCource.Class
                 }
             }
 
-            if (person.BirthdayDate == null || person.BirthdayDate == DateOnly.MinValue)
-            {
-                MessageBox.Show("Введіть дату народження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             if ((person.DeathDate != null && person.DeathDate != DateOnly.MinValue) && person.BirthdayDate > person.DeathDate)
             {
                 MessageBox.Show("Дата народження не може бути більшою за дату смерті", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -1085,6 +1252,7 @@ namespace GenealogicalTreeCource.Class
                 return;
             }
 
+            _addPerson.Add(person);
             UpdateNewPersonID(person);
             SaveNewPerson();
             MainWindowF();
@@ -1093,13 +1261,14 @@ namespace GenealogicalTreeCource.Class
 
         private void BackAddPageF()
         {
-            _addPerson.RemoveAt(_addPerson.Count - 1);
+            ForView = null;
             MainWindowF();
         }
 
         private void BackEditPageF()
         {
             _editPerson.RemoveAt(_editPerson.Count - 1);
+            SaveEditPerson();
             BackPageF();
         }
 
@@ -1108,9 +1277,13 @@ namespace GenealogicalTreeCource.Class
             _filter2 = fatherName;
             OnPropertyChanged(nameof(Filter2));
             Show2 = Visibility.Collapsed;
-            _addPerson[_addPerson.Count - 1].Father = _persons[_persons.FindIndex(p => p.ForSearch() == fatherName)];
-            _addPerson[_addPerson.Count - 1].Surname = _addPerson[_addPerson.Count - 1].Father.Surname;
-            FatherNameEnabled = false;
+            _ForView.Father = _persons[_persons.FindIndex(p => p.ForSearch() == fatherName)];
+            _ForView.Surname = _ForView.Father.Surname;
+            if (AddEl == Visibility.Visible)
+            {
+                FatherNameEnabled = false;
+                FatherNameEnabled1 = false;
+            }
         }
         private void AddMotherF(string motherName)
         {
@@ -1123,6 +1296,7 @@ namespace GenealogicalTreeCource.Class
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
+                SaveForViewId("add", 0);
                 mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Add));
             }
             else throw new Exception("Ви видалили frame");
@@ -1132,6 +1306,9 @@ namespace GenealogicalTreeCource.Class
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
+                _editPerson.Add(_persons[ChoosePersonaId].Clone() as Person);
+                SaveEditPerson();
+                SaveForViewId("edit", _editPerson.Count - 1);
                 mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.Edit));
             }
             else throw new Exception("Ви видалили frame");
@@ -1145,6 +1322,7 @@ namespace GenealogicalTreeCource.Class
 
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
+                SaveForViewId("view", ChoosePersonaId);
                 mainWindow.SetWindow.Navigate(new OperationWithPerson(TypeOperation.View));
             }
             else throw new Exception("Ви видалили frame");

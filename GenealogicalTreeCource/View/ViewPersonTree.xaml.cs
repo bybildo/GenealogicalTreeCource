@@ -8,14 +8,9 @@ namespace GenealogicalTreeCource
 {
     public partial class ViewPersonTree : Page
     {
-        private PersonTree myPersonTree;
-        private GraphGenerator graphGenerator;
-
         public ViewPersonTree()
         {
             InitializeComponent();
-            myPersonTree = DataContext as PersonTree;
-            graphGenerator = new GraphGenerator(GenealogyCanvas);
             ForMove();
         }
 
@@ -23,6 +18,9 @@ namespace GenealogicalTreeCource
         {
             if (sender is ListBoxItem listBoxItem)
             {
+                PersonTree myPersonTree = DataContext as PersonTree;
+                GraphGenerator graphGenerator = new GraphGenerator(GenealogyCanvas);
+
                 var forSearch = listBoxItem.DataContext as string;
                 var selectedPerson = myPersonTree.GetPersonFromSearch(forSearch);
 
