@@ -68,20 +68,33 @@
         </Grid.Background>
 
 
-        <Rectangle Fill="Black" Opacity="0.4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Rectangle Fill="Black" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
-        <TextBlock Text="Розроби своє власне генеалогічне дерево"
-                   FontSize="36" FontWeight="Bold" Foreground="LightGreen"
-                   FontFamily="Comic Sans MS"  
-                   HorizontalAlignment="Center" VerticalAlignment="Top"
-                   Margin="0,123,0,0" TextWrapping="Wrap"
-                   TextAlignment="Left" LineHeight="40">
+        <Image Source="/Image/leaf.png" Margin="444,37,444,483"/>
+
+        <TextBlock Text="GENEALOGICAL TREE"
+           FontSize="40" FontWeight="UltraBold" Foreground="LightGreen"
+           FontFamily="Comic Sans MS"  
+           HorizontalAlignment="Center" VerticalAlignment="Top"
+           Margin="0,160,0,0" TextWrapping="Wrap"
+           TextAlignment="Center" LineHeight="40" Width="748">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
             </TextBlock.Effect>
         </TextBlock>
 
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Text="Твоє власне генеалогічне дерево"
+                   FontSize="36"  Foreground="LightGreen"
+                   FontFamily="Comic Sans MS"  
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Margin="0,215,0,0" TextWrapping="Wrap"
+                   TextAlignment="Center" LineHeight="40" Width="748">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="5" Color="Black" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,303,0,0">
 
             <Button Content="ТВОЄ ДЕРЕВО"  Command="{Binding GraphPage}" />
             <Button Content="ДОДАТИ" Command="{Binding AddPersonPage}" />
